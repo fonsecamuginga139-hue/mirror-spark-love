@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import AuthRoute from "@/components/AuthRoute";
+import LocaleSetupPage from "@/pages/LocaleSetupPage";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/locale-setup")({
   ssr: false,
   component: RouteComponent,
 });
 
 function RouteComponent() {
   return (
-    <AuthRoute />
+    <LocaleSetupPage />
   );
 }

@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import AuthRoute from "@/components/AuthRoute";
+import TermsPage from "@/pages/TermsPage";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/terms")({
   ssr: false,
   component: RouteComponent,
 });
 
 function RouteComponent() {
   return (
-    <AuthRoute />
+    <TermsPage />
   );
 }

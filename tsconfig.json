@@ -26,7 +26,9 @@
     "exactOptionalPropertyTypes": false,
     "noUncheckedSideEffectImports": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "react-router-dom": ["./src/lib/compat/router.tsx"],
+      "react-helmet-async": ["./src/lib/compat/helmet.tsx"]
     }
   }
 }

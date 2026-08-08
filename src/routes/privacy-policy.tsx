@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import AuthRoute from "@/components/AuthRoute";
+import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/privacy-policy")({
   ssr: false,
   component: RouteComponent,
 });
 
 function RouteComponent() {
   return (
-    <AuthRoute />
+    <PrivacyPolicyPage />
   );
 }

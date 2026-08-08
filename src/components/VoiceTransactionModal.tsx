@@ -44,6 +44,7 @@ const getRecognition = (): Recognition | null => {
 };
 
 const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
+  const parseVoiceTransactionFn = useServerFn(parseVoiceTransaction);
   const { categories, addCategory } = useCategories();
   const { cards, addCard } = useCards();
   const { addTransaction } = useTransactions();

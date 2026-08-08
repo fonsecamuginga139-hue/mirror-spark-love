@@ -29,6 +29,7 @@ const BUCKET = "financial-documents";
 const ScanPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const scanReceiptFn = useServerFn(scanReceipt);
   const { cards } = useCards();
   const { categories, addCategory } = useCategories();
   const { addTransaction } = useTransactions();

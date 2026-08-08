@@ -119,10 +119,9 @@ const ScanPage = () => {
       });
       if (up.error) throw up.error;
 
-      const { data, error } = await supabase.functions.invoke("ai-scan-receipt", {
-        body: { file_path: path, mime_type: blob.type, file_name: "receipt.jpg" },
+      const data = await scanReceiptFn({
+        data: { file_path: path, mime_type: blob.type, file_name: "receipt.jpg" },
       });
-      if (error) throw error;
       const extracted = (data as any)?.extracted as Extracted | undefined;
       if (!extracted) throw new Error("Could not read this document.");
       setResult(extracted);

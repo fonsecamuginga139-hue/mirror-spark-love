@@ -80,12 +80,8 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
     setError(null);
     try {
       const catNames = Array.from(new Set(categories.map((c) => c.name)));
-      const { data, error } = await supabase.functions.invoke("ai-voice-transaction", {
-        body: { text, categories: catNames },
-      });
-      if (error) throw error;
-      if ((data as any)?.error) throw new Error((data as any).error);
-      const p = data as Parsed;
+      const data = await parseVoiceTransactionFn({ data: { text, categories: catNames } });
+      const p = data as unknown as Parsed;
       setParsed(p);
       setEditType(p.type);
       setEditAmount(String(p.amount));

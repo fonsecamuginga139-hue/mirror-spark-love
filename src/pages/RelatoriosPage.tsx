@@ -244,7 +244,7 @@ const RelatoriosPage = () => {
     const currentMonth = now.getMonth();
     const currentYear = now.getFullYear();
 
-    const months = [];
+    const months: { month: string; monthNum: number; yearNum: number }[] = [];
     for (let i = 5; i >= 0; i--) {
       const monthDate = new Date(currentYear, currentMonth - i, 1);
       months.push({

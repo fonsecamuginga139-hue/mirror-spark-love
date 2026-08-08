@@ -30,7 +30,7 @@ export const useOfflineSync = () => {
 
     for (const op of operations) {
       try {
-        let error = null;
+        let error: { message: string } | null = null;
         
         // Handle sync based on table type
         if (op.table === 'transactions') {

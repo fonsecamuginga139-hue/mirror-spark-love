@@ -54,7 +54,7 @@ const PlansPage = () => {
   const handleContinue = () => {
     const url = selected === "yearly" ? yearlyCheckoutUrl || monthlyCheckoutUrl : monthlyCheckoutUrl;
     setSubmitting(true);
-    openCheckout(url, profile?.email);
+    openCheckout(url, profile?.email ?? undefined);
     setTimeout(() => setSubmitting(false), 1200);
   };
 

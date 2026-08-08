@@ -47,7 +47,7 @@ const ExpiredPaywall = ({ children }: ExpiredPaywallProps) => {
             <Button
               onClick={() => {
                 setShowModal(false);
-                openCheckout(checkoutUrl, profile?.email);
+                openCheckout(checkoutUrl, profile?.email ?? undefined);
               }}
               className="w-full h-14 text-lg font-bold rounded-2xl bg-gradient-to-r from-primary to-primary/70 hover:from-primary/90 hover:to-primary/60 shadow-lg shadow-primary/30 transition-all"
             >

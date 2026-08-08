@@ -159,7 +159,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
     setPhase("saving");
 
     // Auto-provision a default wallet so the user never has to create one.
-    let cardId = cards[0]?.id;
+    let cardId: string | undefined = cards[0]?.id;
     if (!cardId) {
       const newCard = await addCard({ name: "Wallet", number: null, color: "#10B981", icon: "wallet" });
       cardId = newCard?.id;

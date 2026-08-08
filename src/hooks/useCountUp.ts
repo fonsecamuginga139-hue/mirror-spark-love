@@ -12,7 +12,7 @@ export const useCountUp = (
   const { duration = 1000, decimals = 2 } = options;
   const [displayValue, setDisplayValue] = useState(0);
   const previousValue = useRef(0);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const startValue = previousValue.current;

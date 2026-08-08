@@ -72,12 +72,12 @@ export function useLocation() {
     search: location.searchStr ?? "",
     hash: location.hash ? `#${location.hash}` : "",
     state: (location.state ?? {}) as Record<string, unknown>,
-    key: location.key ?? "default",
+    key: (location as unknown as { key?: string }).key ?? "default",
   };
 }
 
 export function useParams<T extends Record<string, string | undefined> = Record<string, string>>() {
-  return useTSParams({ strict: false }) as T;
+  return useTSParams({ strict: false } as never) as T;
 }
 
 export function useSearchParams(): [URLSearchParams, (next: URLSearchParams) => void] {

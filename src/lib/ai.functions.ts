@@ -49,7 +49,8 @@ Hard rules:
   "recebi/got/received/salary/salário" → income.
 - Output ONLY raw JSON.`;
 
-function parseJsonLoose(raw: string): Record<string, unknown> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parseJsonLoose(raw: string): Record<string, any> {
   try {
     return JSON.parse(raw);
   } catch {

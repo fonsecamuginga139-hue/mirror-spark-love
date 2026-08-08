@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import BackButton from "@/components/BackButton";
 import BottomNav from "@/components/BottomNav";
 import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { scanReceipt } from "@/lib/ai.functions";
 import { useAuth } from "@/context/AuthContext";
 import { useCards } from "@/hooks/useCards";
 import { useCategories } from "@/hooks/useCategories";

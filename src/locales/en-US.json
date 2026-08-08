@@ -1,0 +1,359 @@
+{
+  "common": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "save": "Save",
+    "create": "Create",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "close": "Close",
+    "loading": "Loading...",
+    "send": "Send",
+    "edit": "Edit",
+    "yes": "Yes",
+    "no": "No",
+    "today": "Today",
+    "currency": "Currency",
+    "category": "Category",
+    "card": "Card",
+    "cards": "Cards",
+    "amount": "Amount",
+    "description": "Description",
+    "date": "Date",
+    "type": "Type",
+    "income": "Income",
+    "expense": "Expense",
+    "incomes": "Income",
+    "expenses": "Expenses",
+    "balance": "Balance",
+    "all": "All",
+    "filters": "Filters",
+    "search": "Search",
+    "active": "Active",
+    "inactive": "Inactive",
+    "completed": "Completed",
+    "user": "User",
+    "logout": "Sign out",
+    "tryAgain": "Please try again.",
+    "error": "Error",
+    "success": "Success",
+    "continue": "Continue",
+    "add": "Add",
+    "remove": "Remove",
+    "update": "Update",
+    "none": "None",
+    "total": "Total",
+    "from": "From",
+    "to": "To",
+    "month": "Month",
+    "year": "Year",
+    "week": "Week",
+    "day": "Day",
+    "name": "Name",
+    "notes": "Notes",
+    "optional": "Optional",
+    "required": "Required",
+    "empty": "Nothing here yet",
+    "retry": "Retry",
+    "next": "Next",
+    "previous": "Previous",
+    "done": "Done",
+    "skip": "Skip",
+    "settings": "Settings",
+    "language": "Language",
+    "processing": "Processing...",
+    "saved": "Saved",
+    "deleted": "Deleted",
+    "updated": "Updated",
+    "noResults": "No results found",
+    "other": "Other"
+  },
+  "nav": {
+    "scan": "Scan receipt",
+    "shopping": "Shopping list",
+    "search": "Search",
+    "installments": "Installments",
+    "voice": "Voice",
+    "emergency": "Emergency fund"
+  },
+  "landing": {
+    "badge": "Built for financial clarity",
+    "heroTitle1": "Take Full Control",
+    "heroTitle2": "of Your Money.",
+    "heroSub": "Track income, expenses, goals, recurring payments and financial growth — all in one intelligent system.",
+    "startFree": "Start Free Trial",
+    "howItWorks": "See How It Works",
+    "trialHint": "7 days free · Cancel anytime",
+    "painsTitle": "Sound familiar?",
+    "pains": [
+      "Don't know where your money goes?",
+      "Living paycheck to paycheck?",
+      "No real financial clarity?",
+      "Too many subscriptions to track?",
+      "No control over your cash flow?"
+    ],
+    "featuresTitle": "Everything you need.",
+    "featuresSub": "One app. Total clarity. Zero spreadsheets.",
+    "features": [
+      {
+        "title": "Smart expense tracking",
+        "desc": "Every dollar tagged, organized, and visible."
+      },
+      {
+        "title": "Goal management",
+        "desc": "Set targets and watch them grow in real time."
+      },
+      {
+        "title": "Financial analytics",
+        "desc": "Beautiful charts that turn data into insight."
+      },
+      {
+        "title": "Recurring automation",
+        "desc": "Salary, rent, subscriptions — handled for you."
+      },
+      {
+        "title": "Real-time dashboard",
+        "desc": "Always know exactly where you stand."
+      },
+      {
+        "title": "Future planning",
+        "desc": "Schedule what's coming and never get caught off guard."
+      }
+    ],
+    "clarityTitle": "Built for people who want financial clarity.",
+    "clarityBullets": [
+      "Simple enough for personal finance.",
+      "Powerful enough for full cash-flow control.",
+      "Bank-grade security, your data stays private."
+    ],
+    "ctaTitle1": "Start your",
+    "ctaTitle2": "7-day free trial.",
+    "ctaSub": "Full access. Cancel anytime.",
+    "signIn": "Sign in"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "total": "Total",
+    "thisMonth": "this month",
+    "allTime": "all time",
+    "in": "in",
+    "allCards": "All Cards",
+    "settings": "Settings",
+    "byCategory": "By category",
+    "expenses": "Expenses",
+    "income": "Income",
+    "noData": "No transactions in this period"
+  },
+  "profile": {
+    "title": "Profile",
+    "subscription": "Subscription",
+    "currentPlan": "Current plan",
+    "price": "Price",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "currency": "Currency",
+    "language": "Language",
+    "adminPanel": "Admin Panel",
+    "answerSupport": "Answer Support",
+    "support": "Support",
+    "logout": "Sign out",
+    "version": "Version 1.0.0"
+  },
+  "trial": {
+    "oneDayLeft": "1 day left in your free trial",
+    "daysLeft": "{{days}} days left in your free trial",
+    "tapToSee": "Tap to view plans"
+  },
+  "paywall": {
+    "eyebrow": "Vault Premium",
+    "title": "The day you take control of your money is today.",
+    "aida": "You've seen where your money goes. You've felt the leaks. Now decide: keep guessing — or unlock the clarity, control and growth Vault was built to give you.",
+    "chooseYourPlan": "Choose your plan",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "perMonth": "/month",
+    "perYear": "/year",
+    "monthlySub": "Billed monthly",
+    "yearlySub": "Just {{price}}/mo · billed yearly",
+    "bestValue": "BEST VALUE",
+    "saveLabel": "Save {{pct}}%",
+    "benefits": [
+      "Unlimited transactions & AI voice logging",
+      "Real-time dashboards & smart alerts",
+      "Receipt scanning with AI",
+      "Custom categories, goals & recurring bills",
+      "Priority support"
+    ],
+    "ctaTrial": "Try for $0.00 · 7 days free",
+    "ctaHint": "Card required · Cancel anytime · $0.00 today, {{price}} on day 8",
+    "restore": "Restore purchase",
+    "expiredTitle": "Your free trial has ended.",
+    "expiredSub": "Stay in full control of your money with clarity, control and growth.",
+    "expiredCta": "Subscribe Now — {{price}}/month"
+  },
+  "locale": {
+    "chooseLanguage": "Choose your language",
+    "chooseLanguageSub": "Vault will speak your language across the whole app.",
+    "chooseCurrency": "Choose your currency",
+    "chooseCurrencySub": "All balances, charts and reports will use this currency.",
+    "searchCurrency": "Search currency",
+    "continue": "Continue",
+    "changeLater": "You can change this anytime in Settings."
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signingIn": "Signing in...",
+    "welcome": "Welcome back",
+    "createTitle": "Create your Vault"
+  },
+  "scan": {
+    "title": "Scan receipt",
+    "subtitle": "Point at a receipt, invoice or statement",
+    "capture": "Capture",
+    "retake": "Retake",
+    "analyzing": "Analyzing with AI...",
+    "detected": "Detected",
+    "saveTransaction": "Save transaction",
+    "cameraError": "Could not access the camera",
+    "upload": "Upload image",
+    "differentCurrency": "This receipt seems to be in {{code}}. Keep your currency?",
+    "keepMine": "Keep {{code}}",
+    "useReceipt": "Use {{code}}"
+  },
+  "voice": {
+    "title": "Voice transaction",
+    "listening": "Listening...",
+    "tapToSpeak": "Tap to speak",
+    "speakNow": "Say something like \"I spent 15 on coffee\"",
+    "confirm": "Confirm transaction",
+    "notSupported": "Voice is not supported on this browser",
+    "tag": "Tag",
+    "debit": "Debit",
+    "credit": "Credit"
+  },
+  "shopping": {
+    "title": "Shopping list",
+    "newList": "New list",
+    "listName": "List name",
+    "addItem": "Add item",
+    "itemName": "Item",
+    "quantity": "Qty",
+    "unitPrice": "Unit price",
+    "checked": "Checked",
+    "estimatedTotal": "Estimated total",
+    "emptyList": "Your list is empty"
+  },
+  "search": {
+    "title": "Transactions",
+    "placeholder": "Search transactions...",
+    "filters": "Filters",
+    "allTypes": "All types",
+    "allCategories": "All categories",
+    "period": "Period",
+    "results": "{{count}} results"
+  },
+  "installments": {
+    "title": "Installments",
+    "new": "New installment",
+    "payingOut": "I will pay",
+    "receiving": "I will receive",
+    "totalAmount": "Total amount",
+    "count": "Number of installments",
+    "monthly": "Monthly amount",
+    "paid": "{{paid}} of {{total}} paid",
+    "startDate": "Start date",
+    "markPaid": "Mark as paid"
+  },
+  "transactions": {
+    "new": "New transaction",
+    "edit": "Edit transaction",
+    "deleteConfirm": "Delete this transaction?",
+    "noneYet": "No transactions yet"
+  },
+  "goals": {
+    "title": "Goals",
+    "new": "New goal",
+    "target": "Target",
+    "saved": "Saved",
+    "deadline": "Deadline",
+    "progress": "Progress"
+  },
+  "reports": {
+    "title": "Reports",
+    "export": "Export PDF",
+    "byCategory": "By category",
+    "cashflow": "Cash flow",
+    "trend": "Trend"
+  },
+  "months": {
+    "long": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "short": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ]
+  },
+  "days": {
+    "short": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ]
+  },
+  "errors": {
+    "generic": "Something went wrong.",
+    "network": "Network error. Check your connection.",
+    "required": "This field is required.",
+    "invalidAmount": "Enter a valid amount.",
+    "invalidEmail": "Enter a valid email."
+  },
+  "emergency": {
+    "title": "Emergency fund",
+    "subtitle": "Your financial shield against the unexpected",
+    "of": "of",
+    "remaining": "Remaining",
+    "monthlyCost": "Monthly cost of living",
+    "useAverage": "Use my 3-month average ({{value}})",
+    "adjustBalance": "Adjust balance",
+    "deposit": "Deposit",
+    "withdraw": "Withdraw",
+    "months": "{{count}} months of expenses",
+    "plan": {
+      "basic": "Essential",
+      "shielded": "Fully shielded"
+    }
+  }
+}

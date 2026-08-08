@@ -1,0 +1,359 @@
+{
+  "common": {
+    "back": "Voltar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "create": "Criar",
+    "delete": "Excluir",
+    "confirm": "Confirmar",
+    "close": "Fechar",
+    "loading": "A carregar...",
+    "send": "Enviar",
+    "edit": "Editar",
+    "yes": "Sim",
+    "no": "Não",
+    "today": "Hoje",
+    "currency": "Moeda",
+    "category": "Categoria",
+    "card": "Cartão",
+    "cards": "Cartões",
+    "amount": "Valor",
+    "description": "Descrição",
+    "date": "Data",
+    "type": "Tipo",
+    "income": "Receita",
+    "expense": "Despesa",
+    "incomes": "Receitas",
+    "expenses": "Despesas",
+    "balance": "Saldo",
+    "all": "Todos",
+    "filters": "Filtros",
+    "search": "Buscar",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "completed": "Concluído",
+    "user": "Utilizador",
+    "logout": "Sair",
+    "tryAgain": "Tente novamente.",
+    "error": "Erro",
+    "success": "Sucesso",
+    "continue": "Continuar",
+    "add": "Adicionar",
+    "remove": "Remover",
+    "update": "Atualizar",
+    "none": "Nenhum",
+    "total": "Total",
+    "from": "De",
+    "to": "Até",
+    "month": "Mês",
+    "year": "Ano",
+    "week": "Semana",
+    "day": "Dia",
+    "name": "Nome",
+    "notes": "Notas",
+    "optional": "Opcional",
+    "required": "Obrigatório",
+    "empty": "Ainda não há nada aqui",
+    "retry": "Tentar novamente",
+    "next": "Seguinte",
+    "previous": "Anterior",
+    "done": "Concluir",
+    "skip": "Ignorar",
+    "settings": "Definições",
+    "language": "Idioma",
+    "processing": "A processar...",
+    "saved": "Guardado",
+    "deleted": "Eliminado",
+    "updated": "Atualizado",
+    "noResults": "Sem resultados",
+    "other": "Outros"
+  },
+  "nav": {
+    "scan": "Escanear recibo",
+    "shopping": "Lista de compras",
+    "search": "Pesquisar",
+    "installments": "Parcelas",
+    "voice": "Voz",
+    "emergency": "Fundo de emergência"
+  },
+  "landing": {
+    "badge": "Feito para clareza financeira",
+    "heroTitle1": "Assuma o controle",
+    "heroTitle2": "do seu dinheiro.",
+    "heroSub": "Acompanhe receitas, despesas, metas, pagamentos recorrentes e crescimento — tudo em um sistema inteligente.",
+    "startFree": "Começar Teste Grátis",
+    "howItWorks": "Ver como funciona",
+    "trialHint": "7 dias grátis · Cancele quando quiser",
+    "painsTitle": "Soa familiar?",
+    "pains": [
+      "Não sabe para onde vai o seu dinheiro?",
+      "Vive do salário ao salário?",
+      "Sem clareza financeira real?",
+      "Assinaturas demais para acompanhar?",
+      "Sem controle sobre o seu fluxo de caixa?"
+    ],
+    "featuresTitle": "Tudo o que você precisa.",
+    "featuresSub": "Um app. Clareza total. Zero planilhas.",
+    "features": [
+      {
+        "title": "Controle inteligente de gastos",
+        "desc": "Cada real etiquetado, organizado e visível."
+      },
+      {
+        "title": "Gestão de metas",
+        "desc": "Defina alvos e veja o progresso em tempo real."
+      },
+      {
+        "title": "Analytics financeiro",
+        "desc": "Gráficos lindos que viram insight."
+      },
+      {
+        "title": "Automação de recorrentes",
+        "desc": "Salário, aluguel e assinaturas — resolvidos."
+      },
+      {
+        "title": "Painel em tempo real",
+        "desc": "Saiba sempre onde você está."
+      },
+      {
+        "title": "Planejamento futuro",
+        "desc": "Agende o que vem e nunca seja pego de surpresa."
+      }
+    ],
+    "clarityTitle": "Feito para quem quer clareza financeira.",
+    "clarityBullets": [
+      "Simples o suficiente para finanças pessoais.",
+      "Poderoso para controle total do fluxo de caixa.",
+      "Segurança bancária, seus dados são privados."
+    ],
+    "ctaTitle1": "Comece seu",
+    "ctaTitle2": "teste grátis de 7 dias.",
+    "ctaSub": "Acesso completo. Cancele quando quiser.",
+    "signIn": "Entrar"
+  },
+  "dashboard": {
+    "title": "Painel",
+    "total": "Total",
+    "thisMonth": "este mês",
+    "allTime": "todo o período",
+    "in": "em",
+    "allCards": "Todos os Cartões",
+    "settings": "Configurações",
+    "byCategory": "Por categoria",
+    "expenses": "Despesas",
+    "income": "Receitas",
+    "noData": "Sem transações neste período"
+  },
+  "profile": {
+    "title": "Perfil",
+    "subscription": "Assinatura",
+    "currentPlan": "Plano atual",
+    "price": "Preço",
+    "status": "Status",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "currency": "Moeda",
+    "language": "Idioma",
+    "adminPanel": "Painel Admin",
+    "answerSupport": "Responder Suporte",
+    "support": "Suporte",
+    "logout": "Sair da conta",
+    "version": "Versão 1.0.0"
+  },
+  "trial": {
+    "oneDayLeft": "Falta 1 dia do seu teste gratuito",
+    "daysLeft": "Faltam {{days}} dias do seu teste gratuito",
+    "tapToSee": "Toque para ver os planos"
+  },
+  "paywall": {
+    "eyebrow": "Vault Premium",
+    "title": "O dia de organizar suas finanças é agora.",
+    "aida": "Você já viu para onde o dinheiro vai. Já sentiu os vazamentos. Agora decida: continuar no escuro — ou desbloquear a clareza, o controle e o crescimento que o Vault foi feito para te dar.",
+    "chooseYourPlan": "Escolha seu plano",
+    "monthly": "Mensal",
+    "yearly": "Anual",
+    "perMonth": "/mês",
+    "perYear": "/ano",
+    "monthlySub": "Cobrança mensal",
+    "yearlySub": "Apenas {{price}}/mês · cobrança anual",
+    "bestValue": "MELHOR VALOR",
+    "saveLabel": "Economize {{pct}}%",
+    "benefits": [
+      "Transações ilimitadas e voz por IA",
+      "Painéis em tempo real e alertas inteligentes",
+      "Leitura de recibos com IA",
+      "Categorias, metas e contas recorrentes",
+      "Suporte prioritário"
+    ],
+    "ctaTrial": "Teste por US$0,00 · 7 dias grátis",
+    "ctaHint": "Cartão obrigatório · Cancele quando quiser · US$0,00 hoje, {{price}} no 8º dia",
+    "restore": "Restaurar compra",
+    "expiredTitle": "Seu teste gratuito terminou.",
+    "expiredSub": "Continue com controle total do seu dinheiro — clareza, controle e crescimento.",
+    "expiredCta": "Assinar Agora — {{price}}/mês"
+  },
+  "locale": {
+    "chooseLanguage": "Escolha o seu idioma",
+    "chooseLanguageSub": "O Vault vai falar o seu idioma em toda a aplicação.",
+    "chooseCurrency": "Escolha a sua moeda",
+    "chooseCurrencySub": "Todos os saldos, gráficos e relatórios usarão esta moeda.",
+    "searchCurrency": "Procurar moeda",
+    "continue": "Continuar",
+    "changeLater": "Pode alterar isto a qualquer momento nas Definições."
+  },
+  "auth": {
+    "signIn": "Entrar",
+    "signUp": "Criar conta",
+    "email": "Email",
+    "password": "Palavra-passe",
+    "forgot": "Esqueceu a palavra-passe?",
+    "noAccount": "Ainda não tem conta?",
+    "hasAccount": "Já tem conta?",
+    "signingIn": "A entrar...",
+    "welcome": "Bem-vindo de volta",
+    "createTitle": "Crie o seu Vault"
+  },
+  "scan": {
+    "title": "Digitalizar recibo",
+    "subtitle": "Aponte para um recibo, fatura ou extrato",
+    "capture": "Capturar",
+    "retake": "Repetir",
+    "analyzing": "A analisar com IA...",
+    "detected": "Detetado",
+    "saveTransaction": "Guardar transação",
+    "cameraError": "Não foi possível aceder à câmara",
+    "upload": "Carregar imagem",
+    "differentCurrency": "Este recibo parece estar em {{code}}. Manter a sua moeda?",
+    "keepMine": "Manter {{code}}",
+    "useReceipt": "Usar {{code}}"
+  },
+  "voice": {
+    "title": "Transação por voz",
+    "listening": "A ouvir...",
+    "tapToSpeak": "Toque para falar",
+    "speakNow": "Diga algo como \"gastei 15 em café\"",
+    "confirm": "Confirmar transação",
+    "notSupported": "A voz não é suportada neste navegador",
+    "tag": "Etiqueta",
+    "debit": "Débito",
+    "credit": "Crédito"
+  },
+  "shopping": {
+    "title": "Lista de compras",
+    "newList": "Nova lista",
+    "listName": "Nome da lista",
+    "addItem": "Adicionar item",
+    "itemName": "Item",
+    "quantity": "Qtd",
+    "unitPrice": "Preço unitário",
+    "checked": "Marcados",
+    "estimatedTotal": "Total estimado",
+    "emptyList": "A sua lista está vazia"
+  },
+  "search": {
+    "title": "Transações",
+    "placeholder": "Procurar transações...",
+    "filters": "Filtros",
+    "allTypes": "Todos os tipos",
+    "allCategories": "Todas as categorias",
+    "period": "Período",
+    "results": "{{count}} resultados"
+  },
+  "installments": {
+    "title": "Prestações",
+    "new": "Nova prestação",
+    "payingOut": "Vou pagar",
+    "receiving": "Vou receber",
+    "totalAmount": "Valor total",
+    "count": "Número de prestações",
+    "monthly": "Valor mensal",
+    "paid": "{{paid}} de {{total}} pagas",
+    "startDate": "Data de início",
+    "markPaid": "Marcar como paga"
+  },
+  "transactions": {
+    "new": "Nova transação",
+    "edit": "Editar transação",
+    "deleteConfirm": "Eliminar esta transação?",
+    "noneYet": "Ainda sem transações"
+  },
+  "goals": {
+    "title": "Metas",
+    "new": "Nova meta",
+    "target": "Objetivo",
+    "saved": "Guardado",
+    "deadline": "Prazo",
+    "progress": "Progresso"
+  },
+  "reports": {
+    "title": "Relatórios",
+    "export": "Exportar PDF",
+    "byCategory": "Por categoria",
+    "cashflow": "Fluxo de caixa",
+    "trend": "Tendência"
+  },
+  "months": {
+    "long": [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro"
+    ],
+    "short": [
+      "Jan",
+      "Fev",
+      "Mar",
+      "Abr",
+      "Mai",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Set",
+      "Out",
+      "Nov",
+      "Dez"
+    ]
+  },
+  "days": {
+    "short": [
+      "Dom",
+      "Seg",
+      "Ter",
+      "Qua",
+      "Qui",
+      "Sex",
+      "Sáb"
+    ]
+  },
+  "errors": {
+    "generic": "Algo correu mal.",
+    "network": "Erro de rede. Verifique a ligação.",
+    "required": "Este campo é obrigatório.",
+    "invalidAmount": "Introduza um valor válido.",
+    "invalidEmail": "Introduza um email válido."
+  },
+  "emergency": {
+    "title": "Fundo de emergência",
+    "subtitle": "O teu escudo financeiro contra imprevistos",
+    "of": "de",
+    "remaining": "Em falta",
+    "monthlyCost": "Custo de vida mensal",
+    "useAverage": "Usar a minha média de 3 meses ({{value}})",
+    "adjustBalance": "Ajustar saldo",
+    "deposit": "Depositar",
+    "withdraw": "Levantar",
+    "months": "{{count}} meses de despesas",
+    "plan": {
+      "basic": "Essencial",
+      "shielded": "Totalmente protegido"
+    }
+  }
+}

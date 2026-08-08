@@ -1,0 +1,266 @@
+
+@layer base {
+  :root {
+    --background: 220 20% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 15% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 12% 15%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 160 84% 39%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 98%;
+
+    --border: 220 15% 16%;
+    --input: 220 15% 12%;
+    --ring: 160 84% 39%;
+
+    --radius: 1rem;
+
+    --income: 160 84% 39%;
+    --expense: 0 72% 51%;
+    --balance-card: 160 60% 12%;
+
+    --glass-bg: 220 15% 8% / 0.6;
+    --glass-border: 220 15% 20% / 0.5;
+    --glow-primary: 160 84% 39% / 0.3;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+    touch-action: pan-x pan-y;
+  }
+
+  * {
+    @apply border-border;
+    -webkit-touch-callout: none;
+  }
+
+  html {
+    touch-action: pan-x pan-y;
+  }
+
+  input, textarea, select {
+    font-size: 16px; /* prevent iOS zoom on focus */
+  }
+
+  /* Safe area for iOS */
+  html {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+}
+
+@layer components {
+  .finance-card {
+    @apply relative overflow-hidden rounded-2xl p-5 border;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-bg)) 0%,
+      hsl(220 15% 6% / 0.8) 100%
+    );
+    border-color: hsl(var(--glass-border));
+    backdrop-filter: blur(12px);
+  }
+
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl p-5 border;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-bg)) 0%,
+      hsl(220 15% 6% / 0.8) 100%
+    );
+    border-color: hsl(var(--glass-border));
+    backdrop-filter: blur(12px);
+  }
+
+  .balance-highlight {
+    @apply relative rounded-2xl p-5 overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--balance-card)) 0%,
+      hsl(160 50% 8% / 0.8) 100%
+    );
+    border: 1px solid hsl(160 60% 20% / 0.4);
+  }
+
+  .card-glow {
+    box-shadow: 0 0 30px hsl(var(--glow-primary));
+  }
+
+  /* Green-outlined "glass ring" — Total hero pill, month/card selectors */
+  .glow-ring {
+    background: linear-gradient(180deg, hsl(220 15% 6% / 0.75) 0%, hsl(220 15% 3% / 0.85) 100%);
+    border: 1px solid hsl(var(--primary) / 0.55);
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.08),
+      0 0 24px -6px hsl(var(--primary) / 0.35),
+      inset 0 0 20px hsl(var(--primary) / 0.06);
+    backdrop-filter: blur(10px);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground rounded-full px-8 py-3 font-medium transition-all;
+    box-shadow: 0 0 20px hsl(var(--glow-primary));
+  }
+
+  .btn-outline {
+    @apply bg-transparent border border-primary text-primary rounded-full px-8 py-3 font-medium transition-all;
+  }
+
+  .input-field {
+    @apply w-full bg-muted border border-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50;
+  }
+
+  /* Bottom Navigation */
+  .bottom-nav-item {
+    @apply flex flex-col items-center justify-center py-3 px-2 relative text-muted-foreground transition-colors;
+  }
+
+  .bottom-nav-item.active {
+    @apply text-primary;
+  }
+
+  /* Testimonial Card */
+  .testimonial-card {
+    @apply relative rounded-2xl p-6 border;
+    background: linear-gradient(
+      135deg,
+      hsl(220 15% 10% / 0.8) 0%,
+      hsl(220 15% 6% / 0.9) 100%
+    );
+    border-color: hsl(var(--border) / 0.5);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Page container with bottom nav spacing */
+  .page-container {
+    @apply min-h-screen pb-24;
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Quiz Animations */
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(5deg);
+    }
+  }
+
+  @keyframes float-medium {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(-5deg);
+    }
+  }
+
+  @keyframes float-fast {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(3deg);
+    }
+  }
+
+  @keyframes progress-glow {
+    0%, 100% {
+      box-shadow: 0 0 8px hsl(var(--primary) / 0.5);
+    }
+    50% {
+      box-shadow: 0 0 16px hsl(var(--primary) / 0.8);
+    }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
+  }
+
+  .animate-float-medium {
+    animation: float-medium 4s ease-in-out infinite;
+  }
+
+  .animate-float-fast {
+    animation: float-fast 3s ease-in-out infinite;
+  }
+
+  .animate-progress-glow {
+    animation: progress-glow 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-income {
+    color: hsl(var(--income));
+  }
+
+  .text-expense {
+    color: hsl(var(--expense));
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(160 84% 60%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Mobile safe area bottom padding */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 3px;
+}
+
+/* Hide scrollbar on mobile for cleaner look */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

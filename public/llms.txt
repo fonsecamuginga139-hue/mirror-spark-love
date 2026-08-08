@@ -1,0 +1,14 @@
+# Vault
+
+> Vault is a mobile-first personal finance app for individuals in Brazil and Portugal. It helps users track transactions, manage cards, set goals, and automate recurring bills with a premium dark UI.
+
+## Pages
+
+- [Home](/): Marketing landing page for the Vault personal finance app.
+- [Get started](/pre-onboarding): Introduction and PWA install prompt for new users.
+- [Sign in or sign up](/auth): Account creation and login screen.
+- [Plans and pricing](/plans): Trial, monthly and yearly subscription plans.
+
+## Optional
+
+- [Help and support](/support): Support ticket form for signed-in users.

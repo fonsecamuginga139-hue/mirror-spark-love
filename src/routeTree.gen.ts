@@ -10,33 +10,674 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SplatRouteImport } from './routes/$'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BuscaRouteImport } from './routes/busca'
+import { Route as CardsRouteImport } from './routes/cards'
+import { Route as CartoesRouteImport } from './routes/cartoes'
+import { Route as CategoriasRouteImport } from './routes/categorias'
+import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as EmergencyRouteImport } from './routes/emergency'
+import { Route as FundoRouteImport } from './routes/fundo'
+import { Route as FuturasRouteImport } from './routes/futuras'
+import { Route as FutureRouteImport } from './routes/future'
+import { Route as GoalsRouteImport } from './routes/goals'
+import { Route as HistoricoRouteImport } from './routes/historico'
+import { Route as ListaRouteImport } from './routes/lista'
+import { Route as LocaleSetupRouteImport } from './routes/locale-setup'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as MetasRouteImport } from './routes/metas'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as ParcelasRouteImport } from './routes/parcelas'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as PlansRouteImport } from './routes/plans'
+import { Route as PreOnboardingRouteImport } from './routes/pre-onboarding'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as RecorrentesRouteImport } from './routes/recorrentes'
+import { Route as RecurringRouteImport } from './routes/recurring'
+import { Route as RelatoriosRouteImport } from './routes/relatorios'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SelectCurrencyRouteImport } from './routes/select-currency'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SetupRouteImport } from './routes/setup'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SubscribeRouteImport } from './routes/subscribe'
+import { Route as SupportRouteImport } from './routes/support'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
+import { Route as TransacoesRouteImport } from './routes/transacoes'
+import { Route as TransactionsRouteImport } from './routes/transactions'
+import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
+import { Route as AdminSupportRouteImport } from './routes/admin/support'
+import { Route as CategoriaIdRouteImport } from './routes/categoria/$id'
+import { Route as ScanIndexRouteImport } from './routes/scan/index'
+import { Route as ScanHistoryRouteImport } from './routes/scan/history'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuscaRoute = BuscaRouteImport.update({
+  id: '/busca',
+  path: '/busca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CardsRoute = CardsRouteImport.update({
+  id: '/cards',
+  path: '/cards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartoesRoute = CartoesRouteImport.update({
+  id: '/cartoes',
+  path: '/cartoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriasRoute = CategoriasRouteImport.update({
+  id: '/categorias',
+  path: '/categorias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesRoute = CategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmergencyRoute = EmergencyRouteImport.update({
+  id: '/emergency',
+  path: '/emergency',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FundoRoute = FundoRouteImport.update({
+  id: '/fundo',
+  path: '/fundo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FuturasRoute = FuturasRouteImport.update({
+  id: '/futuras',
+  path: '/futuras',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FutureRoute = FutureRouteImport.update({
+  id: '/future',
+  path: '/future',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoalsRoute = GoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoricoRoute = HistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ListaRoute = ListaRouteImport.update({
+  id: '/lista',
+  path: '/lista',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocaleSetupRoute = LocaleSetupRouteImport.update({
+  id: '/locale-setup',
+  path: '/locale-setup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetasRoute = MetasRouteImport.update({
+  id: '/metas',
+  path: '/metas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParcelasRoute = ParcelasRouteImport.update({
+  id: '/parcelas',
+  path: '/parcelas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlansRoute = PlansRouteImport.update({
+  id: '/plans',
+  path: '/plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreOnboardingRoute = PreOnboardingRouteImport.update({
+  id: '/pre-onboarding',
+  path: '/pre-onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecorrentesRoute = RecorrentesRouteImport.update({
+  id: '/recorrentes',
+  path: '/recorrentes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecurringRoute = RecurringRouteImport.update({
+  id: '/recurring',
+  path: '/recurring',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RelatoriosRoute = RelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SelectCurrencyRoute = SelectCurrencyRouteImport.update({
+  id: '/select-currency',
+  path: '/select-currency',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupRoute = SetupRouteImport.update({
+  id: '/setup',
+  path: '/setup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscribeRoute = SubscribeRouteImport.update({
+  id: '/subscribe',
+  path: '/subscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransacoesRoute = TransacoesRouteImport.update({
+  id: '/transacoes',
+  path: '/transacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransactionsRoute = TransactionsRouteImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyRoute = VerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSupportRoute = AdminSupportRouteImport.update({
+  id: '/admin/support',
+  path: '/admin/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriaIdRoute = CategoriaIdRouteImport.update({
+  id: '/categoria/$id',
+  path: '/categoria/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScanIndexRoute = ScanIndexRouteImport.update({
+  id: '/scan/',
+  path: '/scan/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScanHistoryRoute = ScanHistoryRouteImport.update({
+  id: '/scan/history',
+  path: '/scan/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
+  '/auth': typeof AuthRoute
+  '/busca': typeof BuscaRoute
+  '/cards': typeof CardsRoute
+  '/cartoes': typeof CartoesRoute
+  '/categorias': typeof CategoriasRoute
+  '/categories': typeof CategoriesRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
+  '/emergency': typeof EmergencyRoute
+  '/fundo': typeof FundoRoute
+  '/futuras': typeof FuturasRoute
+  '/future': typeof FutureRoute
+  '/goals': typeof GoalsRoute
+  '/historico': typeof HistoricoRoute
+  '/lista': typeof ListaRoute
+  '/locale-setup': typeof LocaleSetupRoute
+  '/login': typeof LoginRoute
+  '/metas': typeof MetasRoute
+  '/onboarding': typeof OnboardingRoute
+  '/parcelas': typeof ParcelasRoute
+  '/perfil': typeof PerfilRoute
+  '/plans': typeof PlansRoute
+  '/pre-onboarding': typeof PreOnboardingRoute
+  '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/quiz': typeof QuizRoute
+  '/recorrentes': typeof RecorrentesRoute
+  '/recurring': typeof RecurringRoute
+  '/relatorios': typeof RelatoriosRoute
+  '/reports': typeof ReportsRoute
+  '/select-currency': typeof SelectCurrencyRoute
+  '/settings': typeof SettingsRoute
+  '/setup': typeof SetupRoute
+  '/signup': typeof SignupRoute
+  '/subscribe': typeof SubscribeRoute
+  '/support': typeof SupportRoute
+  '/terms': typeof TermsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
+  '/transacoes': typeof TransacoesRoute
+  '/transactions': typeof TransactionsRoute
+  '/verify': typeof VerifyRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/support': typeof AdminSupportRoute
+  '/categoria/$id': typeof CategoriaIdRoute
+  '/scan/history': typeof ScanHistoryRoute
+  '/admin/': typeof AdminIndexRoute
+  '/scan/': typeof ScanIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
+  '/auth': typeof AuthRoute
+  '/busca': typeof BuscaRoute
+  '/cards': typeof CardsRoute
+  '/cartoes': typeof CartoesRoute
+  '/categorias': typeof CategoriasRoute
+  '/categories': typeof CategoriesRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
+  '/emergency': typeof EmergencyRoute
+  '/fundo': typeof FundoRoute
+  '/futuras': typeof FuturasRoute
+  '/future': typeof FutureRoute
+  '/goals': typeof GoalsRoute
+  '/historico': typeof HistoricoRoute
+  '/lista': typeof ListaRoute
+  '/locale-setup': typeof LocaleSetupRoute
+  '/login': typeof LoginRoute
+  '/metas': typeof MetasRoute
+  '/onboarding': typeof OnboardingRoute
+  '/parcelas': typeof ParcelasRoute
+  '/perfil': typeof PerfilRoute
+  '/plans': typeof PlansRoute
+  '/pre-onboarding': typeof PreOnboardingRoute
+  '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/quiz': typeof QuizRoute
+  '/recorrentes': typeof RecorrentesRoute
+  '/recurring': typeof RecurringRoute
+  '/relatorios': typeof RelatoriosRoute
+  '/reports': typeof ReportsRoute
+  '/select-currency': typeof SelectCurrencyRoute
+  '/settings': typeof SettingsRoute
+  '/setup': typeof SetupRoute
+  '/signup': typeof SignupRoute
+  '/subscribe': typeof SubscribeRoute
+  '/support': typeof SupportRoute
+  '/terms': typeof TermsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
+  '/transacoes': typeof TransacoesRoute
+  '/transactions': typeof TransactionsRoute
+  '/verify': typeof VerifyRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/support': typeof AdminSupportRoute
+  '/categoria/$id': typeof CategoriaIdRoute
+  '/scan/history': typeof ScanHistoryRoute
+  '/admin': typeof AdminIndexRoute
+  '/scan': typeof ScanIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
+  '/auth': typeof AuthRoute
+  '/busca': typeof BuscaRoute
+  '/cards': typeof CardsRoute
+  '/cartoes': typeof CartoesRoute
+  '/categorias': typeof CategoriasRoute
+  '/categories': typeof CategoriesRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
+  '/emergency': typeof EmergencyRoute
+  '/fundo': typeof FundoRoute
+  '/futuras': typeof FuturasRoute
+  '/future': typeof FutureRoute
+  '/goals': typeof GoalsRoute
+  '/historico': typeof HistoricoRoute
+  '/lista': typeof ListaRoute
+  '/locale-setup': typeof LocaleSetupRoute
+  '/login': typeof LoginRoute
+  '/metas': typeof MetasRoute
+  '/onboarding': typeof OnboardingRoute
+  '/parcelas': typeof ParcelasRoute
+  '/perfil': typeof PerfilRoute
+  '/plans': typeof PlansRoute
+  '/pre-onboarding': typeof PreOnboardingRoute
+  '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/quiz': typeof QuizRoute
+  '/recorrentes': typeof RecorrentesRoute
+  '/recurring': typeof RecurringRoute
+  '/relatorios': typeof RelatoriosRoute
+  '/reports': typeof ReportsRoute
+  '/select-currency': typeof SelectCurrencyRoute
+  '/settings': typeof SettingsRoute
+  '/setup': typeof SetupRoute
+  '/signup': typeof SignupRoute
+  '/subscribe': typeof SubscribeRoute
+  '/support': typeof SupportRoute
+  '/terms': typeof TermsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
+  '/transacoes': typeof TransacoesRoute
+  '/transactions': typeof TransactionsRoute
+  '/verify': typeof VerifyRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/support': typeof AdminSupportRoute
+  '/categoria/$id': typeof CategoriaIdRoute
+  '/scan/history': typeof ScanHistoryRoute
+  '/admin/': typeof AdminIndexRoute
+  '/scan/': typeof ScanIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/$'
+    | '/auth'
+    | '/busca'
+    | '/cards'
+    | '/cartoes'
+    | '/categorias'
+    | '/categories'
+    | '/configuracoes'
+    | '/contact'
+    | '/dashboard'
+    | '/emergency'
+    | '/fundo'
+    | '/futuras'
+    | '/future'
+    | '/goals'
+    | '/historico'
+    | '/lista'
+    | '/locale-setup'
+    | '/login'
+    | '/metas'
+    | '/onboarding'
+    | '/parcelas'
+    | '/perfil'
+    | '/plans'
+    | '/pre-onboarding'
+    | '/privacy'
+    | '/privacy-policy'
+    | '/quiz'
+    | '/recorrentes'
+    | '/recurring'
+    | '/relatorios'
+    | '/reports'
+    | '/select-currency'
+    | '/settings'
+    | '/setup'
+    | '/signup'
+    | '/subscribe'
+    | '/support'
+    | '/terms'
+    | '/terms-of-service'
+    | '/transacoes'
+    | '/transactions'
+    | '/verify'
+    | '/admin/settings'
+    | '/admin/support'
+    | '/categoria/$id'
+    | '/scan/history'
+    | '/admin/'
+    | '/scan/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/$'
+    | '/auth'
+    | '/busca'
+    | '/cards'
+    | '/cartoes'
+    | '/categorias'
+    | '/categories'
+    | '/configuracoes'
+    | '/contact'
+    | '/dashboard'
+    | '/emergency'
+    | '/fundo'
+    | '/futuras'
+    | '/future'
+    | '/goals'
+    | '/historico'
+    | '/lista'
+    | '/locale-setup'
+    | '/login'
+    | '/metas'
+    | '/onboarding'
+    | '/parcelas'
+    | '/perfil'
+    | '/plans'
+    | '/pre-onboarding'
+    | '/privacy'
+    | '/privacy-policy'
+    | '/quiz'
+    | '/recorrentes'
+    | '/recurring'
+    | '/relatorios'
+    | '/reports'
+    | '/select-currency'
+    | '/settings'
+    | '/setup'
+    | '/signup'
+    | '/subscribe'
+    | '/support'
+    | '/terms'
+    | '/terms-of-service'
+    | '/transacoes'
+    | '/transactions'
+    | '/verify'
+    | '/admin/settings'
+    | '/admin/support'
+    | '/categoria/$id'
+    | '/scan/history'
+    | '/admin'
+    | '/scan'
+  id:
+    | '__root__'
+    | '/'
+    | '/$'
+    | '/auth'
+    | '/busca'
+    | '/cards'
+    | '/cartoes'
+    | '/categorias'
+    | '/categories'
+    | '/configuracoes'
+    | '/contact'
+    | '/dashboard'
+    | '/emergency'
+    | '/fundo'
+    | '/futuras'
+    | '/future'
+    | '/goals'
+    | '/historico'
+    | '/lista'
+    | '/locale-setup'
+    | '/login'
+    | '/metas'
+    | '/onboarding'
+    | '/parcelas'
+    | '/perfil'
+    | '/plans'
+    | '/pre-onboarding'
+    | '/privacy'
+    | '/privacy-policy'
+    | '/quiz'
+    | '/recorrentes'
+    | '/recurring'
+    | '/relatorios'
+    | '/reports'
+    | '/select-currency'
+    | '/settings'
+    | '/setup'
+    | '/signup'
+    | '/subscribe'
+    | '/support'
+    | '/terms'
+    | '/terms-of-service'
+    | '/transacoes'
+    | '/transactions'
+    | '/verify'
+    | '/admin/settings'
+    | '/admin/support'
+    | '/categoria/$id'
+    | '/scan/history'
+    | '/admin/'
+    | '/scan/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SplatRoute: typeof SplatRoute
+  AuthRoute: typeof AuthRoute
+  BuscaRoute: typeof BuscaRoute
+  CardsRoute: typeof CardsRoute
+  CartoesRoute: typeof CartoesRoute
+  CategoriasRoute: typeof CategoriasRoute
+  CategoriesRoute: typeof CategoriesRoute
+  ConfiguracoesRoute: typeof ConfiguracoesRoute
+  ContactRoute: typeof ContactRoute
+  DashboardRoute: typeof DashboardRoute
+  EmergencyRoute: typeof EmergencyRoute
+  FundoRoute: typeof FundoRoute
+  FuturasRoute: typeof FuturasRoute
+  FutureRoute: typeof FutureRoute
+  GoalsRoute: typeof GoalsRoute
+  HistoricoRoute: typeof HistoricoRoute
+  ListaRoute: typeof ListaRoute
+  LocaleSetupRoute: typeof LocaleSetupRoute
+  LoginRoute: typeof LoginRoute
+  MetasRoute: typeof MetasRoute
+  OnboardingRoute: typeof OnboardingRoute
+  ParcelasRoute: typeof ParcelasRoute
+  PerfilRoute: typeof PerfilRoute
+  PlansRoute: typeof PlansRoute
+  PreOnboardingRoute: typeof PreOnboardingRoute
+  PrivacyRoute: typeof PrivacyRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  QuizRoute: typeof QuizRoute
+  RecorrentesRoute: typeof RecorrentesRoute
+  RecurringRoute: typeof RecurringRoute
+  RelatoriosRoute: typeof RelatoriosRoute
+  ReportsRoute: typeof ReportsRoute
+  SelectCurrencyRoute: typeof SelectCurrencyRoute
+  SettingsRoute: typeof SettingsRoute
+  SetupRoute: typeof SetupRoute
+  SignupRoute: typeof SignupRoute
+  SubscribeRoute: typeof SubscribeRoute
+  SupportRoute: typeof SupportRoute
+  TermsRoute: typeof TermsRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
+  TransacoesRoute: typeof TransacoesRoute
+  TransactionsRoute: typeof TransactionsRoute
+  VerifyRoute: typeof VerifyRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminSupportRoute: typeof AdminSupportRoute
+  CategoriaIdRoute: typeof CategoriaIdRoute
+  ScanHistoryRoute: typeof ScanHistoryRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  ScanIndexRoute: typeof ScanIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +689,404 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/busca': {
+      id: '/busca'
+      path: '/busca'
+      fullPath: '/busca'
+      preLoaderRoute: typeof BuscaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cards': {
+      id: '/cards'
+      path: '/cards'
+      fullPath: '/cards'
+      preLoaderRoute: typeof CardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cartoes': {
+      id: '/cartoes'
+      path: '/cartoes'
+      fullPath: '/cartoes'
+      preLoaderRoute: typeof CartoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categorias': {
+      id: '/categorias'
+      path: '/categorias'
+      fullPath: '/categorias'
+      preLoaderRoute: typeof CategoriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories': {
+      id: '/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracoes': {
+      id: '/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof ConfiguracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emergency': {
+      id: '/emergency'
+      path: '/emergency'
+      fullPath: '/emergency'
+      preLoaderRoute: typeof EmergencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fundo': {
+      id: '/fundo'
+      path: '/fundo'
+      fullPath: '/fundo'
+      preLoaderRoute: typeof FundoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/futuras': {
+      id: '/futuras'
+      path: '/futuras'
+      fullPath: '/futuras'
+      preLoaderRoute: typeof FuturasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/future': {
+      id: '/future'
+      path: '/future'
+      fullPath: '/future'
+      preLoaderRoute: typeof FutureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/goals': {
+      id: '/goals'
+      path: '/goals'
+      fullPath: '/goals'
+      preLoaderRoute: typeof GoalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historico': {
+      id: '/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof HistoricoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lista': {
+      id: '/lista'
+      path: '/lista'
+      fullPath: '/lista'
+      preLoaderRoute: typeof ListaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/locale-setup': {
+      id: '/locale-setup'
+      path: '/locale-setup'
+      fullPath: '/locale-setup'
+      preLoaderRoute: typeof LocaleSetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/metas': {
+      id: '/metas'
+      path: '/metas'
+      fullPath: '/metas'
+      preLoaderRoute: typeof MetasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parcelas': {
+      id: '/parcelas'
+      path: '/parcelas'
+      fullPath: '/parcelas'
+      preLoaderRoute: typeof ParcelasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plans': {
+      id: '/plans'
+      path: '/plans'
+      fullPath: '/plans'
+      preLoaderRoute: typeof PlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pre-onboarding': {
+      id: '/pre-onboarding'
+      path: '/pre-onboarding'
+      fullPath: '/pre-onboarding'
+      preLoaderRoute: typeof PreOnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recorrentes': {
+      id: '/recorrentes'
+      path: '/recorrentes'
+      fullPath: '/recorrentes'
+      preLoaderRoute: typeof RecorrentesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recurring': {
+      id: '/recurring'
+      path: '/recurring'
+      fullPath: '/recurring'
+      preLoaderRoute: typeof RecurringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/relatorios': {
+      id: '/relatorios'
+      path: '/relatorios'
+      fullPath: '/relatorios'
+      preLoaderRoute: typeof RelatoriosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/select-currency': {
+      id: '/select-currency'
+      path: '/select-currency'
+      fullPath: '/select-currency'
+      preLoaderRoute: typeof SelectCurrencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup': {
+      id: '/setup'
+      path: '/setup'
+      fullPath: '/setup'
+      preLoaderRoute: typeof SetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscribe': {
+      id: '/subscribe'
+      path: '/subscribe'
+      fullPath: '/subscribe'
+      preLoaderRoute: typeof SubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transacoes': {
+      id: '/transacoes'
+      path: '/transacoes'
+      fullPath: '/transacoes'
+      preLoaderRoute: typeof TransacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transactions': {
+      id: '/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof TransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify': {
+      id: '/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/support': {
+      id: '/admin/support'
+      path: '/admin/support'
+      fullPath: '/admin/support'
+      preLoaderRoute: typeof AdminSupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categoria/$id': {
+      id: '/categoria/$id'
+      path: '/categoria/$id'
+      fullPath: '/categoria/$id'
+      preLoaderRoute: typeof CategoriaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scan/': {
+      id: '/scan/'
+      path: '/scan'
+      fullPath: '/scan/'
+      preLoaderRoute: typeof ScanIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scan/history': {
+      id: '/scan/history'
+      path: '/scan/history'
+      fullPath: '/scan/history'
+      preLoaderRoute: typeof ScanHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SplatRoute: SplatRoute,
+  AuthRoute: AuthRoute,
+  BuscaRoute: BuscaRoute,
+  CardsRoute: CardsRoute,
+  CartoesRoute: CartoesRoute,
+  CategoriasRoute: CategoriasRoute,
+  CategoriesRoute: CategoriesRoute,
+  ConfiguracoesRoute: ConfiguracoesRoute,
+  ContactRoute: ContactRoute,
+  DashboardRoute: DashboardRoute,
+  EmergencyRoute: EmergencyRoute,
+  FundoRoute: FundoRoute,
+  FuturasRoute: FuturasRoute,
+  FutureRoute: FutureRoute,
+  GoalsRoute: GoalsRoute,
+  HistoricoRoute: HistoricoRoute,
+  ListaRoute: ListaRoute,
+  LocaleSetupRoute: LocaleSetupRoute,
+  LoginRoute: LoginRoute,
+  MetasRoute: MetasRoute,
+  OnboardingRoute: OnboardingRoute,
+  ParcelasRoute: ParcelasRoute,
+  PerfilRoute: PerfilRoute,
+  PlansRoute: PlansRoute,
+  PreOnboardingRoute: PreOnboardingRoute,
+  PrivacyRoute: PrivacyRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  QuizRoute: QuizRoute,
+  RecorrentesRoute: RecorrentesRoute,
+  RecurringRoute: RecurringRoute,
+  RelatoriosRoute: RelatoriosRoute,
+  ReportsRoute: ReportsRoute,
+  SelectCurrencyRoute: SelectCurrencyRoute,
+  SettingsRoute: SettingsRoute,
+  SetupRoute: SetupRoute,
+  SignupRoute: SignupRoute,
+  SubscribeRoute: SubscribeRoute,
+  SupportRoute: SupportRoute,
+  TermsRoute: TermsRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
+  TransacoesRoute: TransacoesRoute,
+  TransactionsRoute: TransactionsRoute,
+  VerifyRoute: VerifyRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminSupportRoute: AdminSupportRoute,
+  CategoriaIdRoute: CategoriaIdRoute,
+  ScanHistoryRoute: ScanHistoryRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  ScanIndexRoute: ScanIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

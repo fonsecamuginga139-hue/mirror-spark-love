@@ -974,33 +974,42 @@ export type Database = {
           created_at: string
           email: string | null
           error: string | null
+          error_message: string | null
+          event_id: string | null
           evento: string | null
           id: string
           payload: Json
           plano_aplicado: string | null
           provider: string
+          source: string
           success: boolean
         }
         Insert: {
           created_at?: string
           email?: string | null
           error?: string | null
+          error_message?: string | null
+          event_id?: string | null
           evento?: string | null
           id?: string
           payload?: Json
           plano_aplicado?: string | null
           provider?: string
+          source?: string
           success?: boolean
         }
         Update: {
           created_at?: string
           email?: string | null
           error?: string | null
+          error_message?: string | null
+          event_id?: string | null
           evento?: string | null
           id?: string
           payload?: Json
           plano_aplicado?: string | null
           provider?: string
+          source?: string
           success?: boolean
         }
         Relationships: []

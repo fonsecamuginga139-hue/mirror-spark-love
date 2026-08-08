@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, Check, X, Loader2, RefreshCw, TrendingDown, TrendingUp } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { parseVoiceTransaction } from "@/lib/ai.functions";
 import { useCategories } from "@/hooks/useCategories";
 import { useCards } from "@/hooks/useCards";
 import { useTransactions } from "@/hooks/useTransactions";
@@ -43,6 +45,7 @@ const getRecognition = (): Recognition | null => {
 };
 
 const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
+  const parseVoiceTransactionFn = useServerFn(parseVoiceTransaction);
   const { categories, addCategory } = useCategories();
   const { cards, addCard } = useCards();
   const { addTransaction } = useTransactions();
@@ -80,12 +83,8 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
     setError(null);
     try {
       const catNames = Array.from(new Set(categories.map((c) => c.name)));
-      const { data, error } = await supabase.functions.invoke("ai-voice-transaction", {
-        body: { text, categories: catNames },
-      });
-      if (error) throw error;
-      if ((data as any)?.error) throw new Error((data as any).error);
-      const p = data as Parsed;
+      const data = await parseVoiceTransactionFn({ data: { text, categories: catNames } });
+      const p = data as unknown as Parsed;
       setParsed(p);
       setEditType(p.type);
       setEditAmount(String(p.amount));

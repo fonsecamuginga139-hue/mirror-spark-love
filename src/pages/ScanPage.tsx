@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import BackButton from "@/components/BackButton";
 import BottomNav from "@/components/BottomNav";
 import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { scanReceipt } from "@/lib/ai.functions";
 import { useAuth } from "@/context/AuthContext";
 import { useCards } from "@/hooks/useCards";
 import { useCategories } from "@/hooks/useCategories";
@@ -27,6 +29,7 @@ const BUCKET = "financial-documents";
 const ScanPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const scanReceiptFn = useServerFn(scanReceipt);
   const { cards } = useCards();
   const { categories, addCategory } = useCategories();
   const { addTransaction } = useTransactions();
@@ -119,10 +122,9 @@ const ScanPage = () => {
       });
       if (up.error) throw up.error;
 
-      const { data, error } = await supabase.functions.invoke("ai-scan-receipt", {
-        body: { file_path: path, mime_type: blob.type, file_name: "receipt.jpg" },
+      const data = await scanReceiptFn({
+        data: { file_path: path, mime_type: blob.type, file_name: "receipt.jpg" },
       });
-      if (error) throw error;
       const extracted = (data as any)?.extracted as Extracted | undefined;
       if (!extracted) throw new Error("Could not read this document.");
       setResult(extracted);

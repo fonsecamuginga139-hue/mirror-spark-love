@@ -59,6 +59,7 @@ import { Route as AdminSupportRouteImport } from './routes/admin/support'
 import { Route as CategoriaIdRouteImport } from './routes/categoria/$id'
 import { Route as ScanIndexRouteImport } from './routes/scan/index'
 import { Route as ScanHistoryRouteImport } from './routes/scan/history'
+import { Route as ApiPublicHotmartWebhookRouteImport } from './routes/api/public/hotmart-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -310,6 +311,11 @@ const ScanHistoryRoute = ScanHistoryRouteImport.update({
   path: '/scan/history',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHotmartWebhookRoute = ApiPublicHotmartWebhookRouteImport.update({
+  id: '/api/public/hotmart-webhook',
+  path: '/api/public/hotmart-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -362,6 +368,7 @@ export interface FileRoutesByFullPath {
   '/scan/history': typeof ScanHistoryRoute
   '/admin/': typeof AdminIndexRoute
   '/scan/': typeof ScanIndexRoute
+  '/api/public/hotmart-webhook': typeof ApiPublicHotmartWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -414,6 +421,7 @@ export interface FileRoutesByTo {
   '/scan/history': typeof ScanHistoryRoute
   '/admin': typeof AdminIndexRoute
   '/scan': typeof ScanIndexRoute
+  '/api/public/hotmart-webhook': typeof ApiPublicHotmartWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -467,6 +475,7 @@ export interface FileRoutesById {
   '/scan/history': typeof ScanHistoryRoute
   '/admin/': typeof AdminIndexRoute
   '/scan/': typeof ScanIndexRoute
+  '/api/public/hotmart-webhook': typeof ApiPublicHotmartWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -521,6 +530,7 @@ export interface FileRouteTypes {
     | '/scan/history'
     | '/admin/'
     | '/scan/'
+    | '/api/public/hotmart-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -573,6 +583,7 @@ export interface FileRouteTypes {
     | '/scan/history'
     | '/admin'
     | '/scan'
+    | '/api/public/hotmart-webhook'
   id:
     | '__root__'
     | '/'
@@ -625,6 +636,7 @@ export interface FileRouteTypes {
     | '/scan/history'
     | '/admin/'
     | '/scan/'
+    | '/api/public/hotmart-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -678,6 +690,7 @@ export interface RootRouteChildren {
   ScanHistoryRoute: typeof ScanHistoryRoute
   AdminIndexRoute: typeof AdminIndexRoute
   ScanIndexRoute: typeof ScanIndexRoute
+  ApiPublicHotmartWebhookRoute: typeof ApiPublicHotmartWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1032,6 +1045,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScanHistoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hotmart-webhook': {
+      id: '/api/public/hotmart-webhook'
+      path: '/api/public/hotmart-webhook'
+      fullPath: '/api/public/hotmart-webhook'
+      preLoaderRoute: typeof ApiPublicHotmartWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1086,6 +1106,7 @@ const rootRouteChildren: RootRouteChildren = {
   ScanHistoryRoute: ScanHistoryRoute,
   AdminIndexRoute: AdminIndexRoute,
   ScanIndexRoute: ScanIndexRoute,
+  ApiPublicHotmartWebhookRoute: ApiPublicHotmartWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

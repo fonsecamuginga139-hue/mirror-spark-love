@@ -29,11 +29,11 @@ const AuthPage = () => {
 
     if (mode === "signup") {
       if (!name.trim()) {
-        toast({ title: "Name required", description: "Please enter your full name.", variant: "destructive" });
+        toast({ title: "Nome obrigatório", description: "Escreva o seu nome completo.", variant: "destructive" });
         return;
       }
       if (password.length < 6) {
-        toast({ title: "Password too short", description: "Use at least 6 characters.", variant: "destructive" });
+        toast({ title: "Senha muito curta", description: "Use pelo menos 6 caracteres.", variant: "destructive" });
         return;
       }
     }
@@ -51,24 +51,24 @@ const AuthPage = () => {
           },
         });
         if (error) {
-          toast({ title: "Sign up failed", description: error.message, variant: "destructive" });
+          toast({ title: "Não foi possível criar a conta", description: error.message, variant: "destructive" });
           setLoading(false);
           return;
         }
-        toast({ title: "Welcome to Vault", description: "Your account is ready." });
-        navigate("/onboarding");
+        toast({ title: "Bem-vindo ao Vault", description: "A sua conta está pronta." });
+        navigate("/", { replace: true });
       } else {
         const { error } = await signIn(email, password);
         if (error) {
-          toast({ title: "Sign in failed", description: error.message, variant: "destructive" });
+          toast({ title: "Não foi possível entrar", description: error.message, variant: "destructive" });
           setLoading(false);
           return;
         }
-        toast({ title: "Welcome back" });
-        navigate("/dashboard");
+        toast({ title: "Bem-vindo de volta" });
+        navigate("/", { replace: true });
       }
     } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: "Erro", description: error.message, variant: "destructive" });
     } finally {
       setLoading(false);
     }
@@ -80,8 +80,8 @@ const AuthPage = () => {
 
       <div className="relative z-10 p-4">
         <SEO
-          title="Sign in or create your Vault account"
-          description="Access Vault to manage your personal finances. Sign in or create a free account to start your 7-day trial."
+          title="Entrar ou criar a sua conta Vault"
+          description="Acede ao Vault para gerir as tuas finanças pessoais. Entra ou cria uma conta grátis e começa os 7 dias de teste."
           path="/auth"
         />
         <button
@@ -89,7 +89,7 @@ const AuthPage = () => {
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>Back</span>
+          <span>Voltar</span>
         </button>
       </div>
 
@@ -102,23 +102,23 @@ const AuthPage = () => {
               className="w-16 h-16 rounded-2xl mx-auto object-cover shadow-[0_0_40px_rgba(34,197,94,0.3)]"
             />
             <h1 className="text-3xl font-bold tracking-wider text-foreground">
-              VAULT — Secure Financial Access
+              VAULT — Acesso financeiro seguro
             </h1>
             <p className="text-muted-foreground">
-              {mode === "signup" ? "Create your account" : "Welcome back"}
+              {mode === "signup" ? "Criar a sua conta" : "Bem-vindo de volta"}
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode === "signup" && (
               <div className="space-y-2">
-                <Label htmlFor="name">Full name</Label>
+                <Label htmlFor="name">Nome completo</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="name"
                     type="text"
-                    placeholder="Jane Doe"
+                    placeholder="Maria Silva"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="pl-10 h-12 bg-card/50 border-border/50 focus:border-primary"
@@ -135,7 +135,7 @@ const AuthPage = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="you@email.com"
+                  placeholder="voce@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10 h-12 bg-card/50 border-border/50 focus:border-primary"
@@ -145,7 +145,7 @@ const AuthPage = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Senha</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <Input
@@ -169,21 +169,21 @@ const AuthPage = () => {
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : mode === "signup" ? (
-                "Create Account"
+                "Criar conta"
               ) : (
-                "Sign In"
+                "Entrar"
               )}
             </Button>
           </form>
 
           <div className="text-center">
             <p className="text-muted-foreground text-sm">
-              {mode === "signup" ? "Already have an account?" : "New to Vault?"}
+              {mode === "signup" ? "Já tem conta?" : "Novo no Vault?"}
               <button
                 onClick={() => setMode(mode === "signup" ? "signin" : "signup")}
                 className="text-primary hover:underline font-medium ml-1"
               >
-                {mode === "signup" ? "Sign in" : "Create account"}
+                {mode === "signup" ? "Entrar" : "Criar conta"}
               </button>
             </p>
           </div>

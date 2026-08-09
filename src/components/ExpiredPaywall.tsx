@@ -11,7 +11,7 @@ interface ExpiredPaywallProps {
 }
 
 const ExpiredPaywall = ({ children }: ExpiredPaywallProps) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const { checkoutUrl } = useCheckoutUrl();
   const { profile } = useAuth();
   const { t } = useLanguage();
@@ -25,7 +25,7 @@ const ExpiredPaywall = ({ children }: ExpiredPaywallProps) => {
     setShowModal(true);
   }, []);
 
-  const price = "$4.99";
+  const price = "US$ 4,99";
 
   return (
     <div className="relative">

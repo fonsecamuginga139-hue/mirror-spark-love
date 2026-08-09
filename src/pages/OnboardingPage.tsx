@@ -722,11 +722,12 @@ const OnboardingPage = () => {
                 <h1 className="text-3xl font-bold">{t.summaryTitle}</h1>
                 <p className="text-muted-foreground px-2">{t.summarySub}</p>
                 <div className="rounded-2xl border border-border bg-card/40 p-4 text-left space-y-2 text-sm">
-                  <Row label="Name" value={state.name} />
-                  <Row label="Currency" value={`${symbol} ${userCurrency}`} />
-                  <Row label="Monthly income" value={`${symbol} ${state.monthlyIncome.toFixed(2)}`} />
-                  <Row label="Savings target" value={`${symbol} ${state.savingsTarget.toFixed(2)}`} />
-                  <Row label="Categories" value={String(state.categories.length)} />
+                  <Row label="Nome" value={state.name} />
+                  <Row label="Moeda" value={`${symbol} ${userCurrency}`} />
+                  <Row label="Renda mensal" value={`${symbol} ${state.monthlyIncome.toFixed(2)}`} />
+                  <Row label="Meta de poupança" value={`${symbol} ${state.savingsTarget.toFixed(2)}`} />
+                  <Row label="Categorias" value={String(state.categories.length)} />
+
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs">
                   <Check className="w-3.5 h-3.5" /> {t.summaryReady}
@@ -852,45 +853,27 @@ const OnboardingPage = () => {
       {/* Footer CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-30 px-5 pb-6 pt-4 bg-gradient-to-t from-background via-background/95 to-transparent">
         <div className="max-w-md mx-auto space-y-2">
-          {current === "paywall" ? (() => {
-            const sym = CURRENCIES.find((c) => c.id === (userCurrency as Currency))?.symbol ?? "$";
-            const priceOnDay8 = selectedPlan === "yearly" ? "9.99" : "4.99";
-            const ctaMap = {
-              en: `Try for ${sym}0.00 · 7 days free`,
-              pt: `Teste por ${sym}0,00 · 7 dias grátis`,
-              es: `Prueba por ${sym}0,00 · 7 días gratis`,
-            } as const;
-            const hintMap = {
-              en: `Card required · Cancel anytime · ${sym}0.00 today, ${sym}${priceOnDay8} on day 8`,
-              pt: `Cartão obrigatório · Cancele quando quiser · ${sym}0,00 hoje, ${sym}${priceOnDay8.replace(".",",")} no 8º dia`,
-              es: `Tarjeta requerida · Cancela cuando quieras · ${sym}0,00 hoy, ${sym}${priceOnDay8.replace(".",",")} el día 8`,
-            } as const;
-            return (
-              <>
-                <motion.button
-                  whileTap={{ scale: 0.97 }}
-                  onClick={handleStartTrial}
-                  disabled={submitting || loadingCheckout}
-                  className="w-full h-14 rounded-2xl font-bold text-base text-black bg-gradient-to-r from-primary to-[#16a34a] shadow-[0_10px_40px_-10px_rgba(34,197,94,0.7)] flex items-center justify-center gap-2 disabled:opacity-60"
-                >
-                  {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (<><Crown className="w-5 h-5" /> {ctaMap[shortLang]}</>)}
-                </motion.button>
-                <p className="text-center text-[11px] text-muted-foreground/80">{hintMap[shortLang]}</p>
-                <button onClick={handleRestore} className="w-full text-center text-xs text-muted-foreground underline underline-offset-2">
-                  {t.paywallRestore}
-                </button>
-              </>
-            );
-          })() : current === "summary" ? (
-            <Button onClick={next} className="w-full h-14 rounded-2xl text-base font-semibold bg-gradient-to-r from-primary to-[#16a34a] text-black shadow-[0_10px_40px_-10px_rgba(34,197,94,0.6)]">
-              {t.next} <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
+          {current === "summary" ? (
+            <>
+              <motion.button
+                whileTap={{ scale: 0.97 }}
+                onClick={handleFinish}
+                disabled={submitting}
+                className="w-full h-14 rounded-2xl font-bold text-base text-black bg-gradient-to-r from-primary to-[#16a34a] shadow-[0_10px_40px_-10px_rgba(34,197,94,0.7)] flex items-center justify-center gap-2 disabled:opacity-60"
+              >
+                {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (<>Começar os 7 dias grátis <ArrowRight className="w-4 h-4" /></>)}
+              </motion.button>
+              <p className="text-center text-[11px] text-muted-foreground/80">
+                Sem cartão · Acesso completo durante 7 dias
+              </p>
+            </>
           ) : (
             <Button onClick={next} disabled={!canContinue()}
               className="w-full h-14 rounded-2xl text-base font-semibold bg-gradient-to-r from-primary to-[#16a34a] text-black shadow-[0_10px_40px_-10px_rgba(34,197,94,0.6)] disabled:opacity-40 disabled:shadow-none">
-              {current === "welcome" ? t.next : t.next} <ArrowRight className="w-4 h-4 ml-2" />
+              {t.next} <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           )}
+
         </div>
       </div>
     </div>

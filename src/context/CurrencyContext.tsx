@@ -67,7 +67,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
           currency_symbol: m.symbol,
           currency: m.code,
         } as any)
-        .eq("user_id", user.id);
+        .eq("id", user.id);
       if (error) {
         console.error("Failed to persist currency", error);
         return;

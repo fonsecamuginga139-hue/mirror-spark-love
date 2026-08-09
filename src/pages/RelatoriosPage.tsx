@@ -161,7 +161,7 @@ const RelatoriosPage = () => {
   // Monthly data for bar chart
   const monthlyDate = useMemo(() => {
     const grouped = filteredTransactions.reduce((acc: Record<string, { income: number; expense: number }>, t) => {
-      const month = new Date(t.date).toLocaleDateString("en-US", { month: "short", year: "2-digit" });
+      const month = new Date(t.date).toLocaleDateString("pt-PT", { month: "short", year: "2-digit" });
       if (!acc[month]) {
         acc[month] = { income: 0, expense: 0 };
       }
@@ -191,7 +191,7 @@ const RelatoriosPage = () => {
     const grouped: Record<string, { income: number; expense: number }> = {};
 
     sorted.forEach((t) => {
-      const date = new Date(t.date).toLocaleDateString("en-US", { day: "2-digit", month: "short" });
+      const date = new Date(t.date).toLocaleDateString("pt-PT", { day: "2-digit", month: "short" });
       if (!grouped[date]) {
         grouped[date] = { income: cumulativeIncome, expense: cumulativeExpense };
       }
@@ -222,7 +222,7 @@ const RelatoriosPage = () => {
       .filter(t => t.type === "expense")
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
       .forEach((t) => {
-        const date = new Date(t.date).toLocaleDateString("en-US", { day: "2-digit", month: "short" });
+        const date = new Date(t.date).toLocaleDateString("pt-PT", { day: "2-digit", month: "short" });
         const categoryName = t.category_name || "Outros";
         
         if (!dateGroups[date]) {
@@ -248,7 +248,7 @@ const RelatoriosPage = () => {
     for (let i = 5; i >= 0; i--) {
       const monthDate = new Date(currentYear, currentMonth - i, 1);
       months.push({
-        month: monthDate.toLocaleDateString("en-US", { month: "short", year: "2-digit" }),
+        month: monthDate.toLocaleDateString("pt-PT", { month: "short", year: "2-digit" }),
         monthNum: monthDate.getMonth(),
         yearNum: monthDate.getFullYear(),
       });

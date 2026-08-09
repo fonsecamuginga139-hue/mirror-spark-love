@@ -25,23 +25,19 @@ export const LANGUAGES: LanguageMeta[] = [
   { code: "es-ES", locale: "es-ES", flag: "🇪🇸", native: "Español", english: "Spanish", short: "es", numberFormat: "1.234,56", dateFormat: "dd/MM/yyyy" },
 ];
 
-export const DEFAULT_LANGUAGE: LanguageCode = "en-US";
+/** MVP: the whole product ships in Portuguese. The catalogue stays so other languages can be re-enabled later. */
+export const DEFAULT_LANGUAGE: LanguageCode = "pt-PT";
 
 export const getLanguageMeta = (code?: string | null): LanguageMeta =>
-  LANGUAGES.find((l) => l.code === code) ?? LANGUAGES[0];
+  LANGUAGES.find((l) => l.code === code) ?? LANGUAGES.find((l) => l.code === DEFAULT_LANGUAGE)!;
 
-/** Normalises any legacy/browser value ("pt", "pt-BR", "de-AT") into a supported code. */
-export function normalizeLanguage(raw?: string | null): LanguageCode {
-  if (!raw) return DEFAULT_LANGUAGE;
-  const v = raw.toLowerCase();
-  const exact = LANGUAGES.find((l) => l.code.toLowerCase() === v);
-  if (exact) return exact.code;
-  const byPrefix = LANGUAGES.find((l) => v.startsWith(l.short));
-  return byPrefix ? byPrefix.code : DEFAULT_LANGUAGE;
+/** Normalises any legacy/browser value into a supported code. MVP always resolves to Portuguese. */
+export function normalizeLanguage(_raw?: string | null): LanguageCode {
+  return DEFAULT_LANGUAGE;
 }
 
-/** English is the default: browser detection only picks another supported language. */
+/** MVP: no browser detection — Portuguese only. */
 export function detectBrowserLanguage(): LanguageCode {
-  if (typeof navigator === "undefined") return DEFAULT_LANGUAGE;
-  return normalizeLanguage(navigator.language);
+  return DEFAULT_LANGUAGE;
 }
+

@@ -193,7 +193,7 @@ const GoalsPage = () => {
                   
                   {goal.deadline && (
                     <p className="text-sm text-muted-foreground mb-3">
-                      Deadline: {new Date(goal.deadline).toLocaleDateString("en-US")}
+                      Deadline: {new Date(goal.deadline).toLocaleDateString("pt-PT")}
                     </p>
                   )}
 

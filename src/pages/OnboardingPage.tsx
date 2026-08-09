@@ -330,8 +330,9 @@ const STEPS = [
   "welcome", "name", "age",
   "goals", "pains", "habits",
   "incomeProfile", "income", "bills", "savings",
-  "inputPref", "categories", "summary", "paywall",
+  "inputPref", "categories", "summary",
 ] as const;
+
 
 const OnboardingPage = () => {
   const navigate = useNavigate();
@@ -394,7 +395,7 @@ const OnboardingPage = () => {
       case "inputPref": return !!state.inputPref;
       case "categories": return state.categories.length >= 3;
       case "summary": return true;
-      case "paywall": return true;
+
       default: return false;
     }
   };
@@ -417,9 +418,13 @@ const OnboardingPage = () => {
           selected_categories: state.categories as any,
           onboarding_completed: true,
           pre_onboarding_completed: true,
-          // Hard paywall: no access until Hotmart webhook activates the account.
-          plan_status: "awaiting_payment" as any,
+          // Trial gratuito de 7 dias: acesso total imediato, sem cartão.
+          plan_status: "trial_active" as any,
           plano: "free" as any,
+          trial_start: new Date().toISOString(),
+          trial_end: new Date(Date.now() + 7 * 86400000).toISOString(),
+          status_assinatura: "ativo" as any,
+
           quiz_answers: {
             ageRange: state.ageRange,
             goals: state.goals,
@@ -487,38 +492,21 @@ const OnboardingPage = () => {
 
       return true;
     } catch (e: any) {
-      toast.error(e.message || "Setup error");
+      toast.error(e.message || "Erro ao concluir a configuração");
       setSubmitting(false);
       return false;
     }
   };
 
-  const handleStartTrial = async () => {
-    const url = selectedPlan === "yearly"
-      ? (yearlyCheckoutUrl || monthlyCheckoutUrl)
-      : monthlyCheckoutUrl;
-    if (!url) {
-      toast.error("Checkout Hotmart não configurado para este plano.");
-      return;
-    }
-
+  /** Fim do onboarding: inicia o trial de 7 dias e entra directamente no app. */
+  const handleFinish = async () => {
     const ok = await persistAndUnlock();
     if (!ok) return;
-    const isAdmin = (profile as any)?.plano === "admin";
-    if (isAdmin) {
-      setSubmitting(false);
-      navigate("/dashboard", { replace: true });
-      return;
-    }
-
-    // Same-tab redirect keeps checkout in the app navigation flow. Do not clear
-    // submitting before leaving, otherwise the onboarding guard can race to /dashboard.
-    openCheckout(url, profile?.email || user?.email);
+    setSubmitting(false);
+    toast.success("Tudo pronto! Tens 7 dias grátis para explorar o Vault.");
+    navigate("/dashboard", { replace: true });
   };
 
-  const handleRestore = async () => {
-    toast.info("Restoring purchase… please sign in with the email used for payment.");
-  };
 
   // ---------- UI ----------
   return (
@@ -734,11 +722,12 @@ const OnboardingPage = () => {
                 <h1 className="text-3xl font-bold">{t.summaryTitle}</h1>
                 <p className="text-muted-foreground px-2">{t.summarySub}</p>
                 <div className="rounded-2xl border border-border bg-card/40 p-4 text-left space-y-2 text-sm">
-                  <Row label="Name" value={state.name} />
-                  <Row label="Currency" value={`${symbol} ${userCurrency}`} />
-                  <Row label="Monthly income" value={`${symbol} ${state.monthlyIncome.toFixed(2)}`} />
-                  <Row label="Savings target" value={`${symbol} ${state.savingsTarget.toFixed(2)}`} />
-                  <Row label="Categories" value={String(state.categories.length)} />
+                  <Row label="Nome" value={state.name} />
+                  <Row label="Moeda" value={`${symbol} ${userCurrency}`} />
+                  <Row label="Renda mensal" value={`${symbol} ${state.monthlyIncome.toFixed(2)}`} />
+                  <Row label="Meta de poupança" value={`${symbol} ${state.savingsTarget.toFixed(2)}`} />
+                  <Row label="Categorias" value={String(state.categories.length)} />
+
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs">
                   <Check className="w-3.5 h-3.5" /> {t.summaryReady}
@@ -746,117 +735,6 @@ const OnboardingPage = () => {
               </div>
             )}
 
-            {current === "paywall" && (() => {
-              const symbol = CURRENCIES.find((c) => c.id === (userCurrency as Currency))?.symbol ?? "$";
-              const monthlyP = 4.99;
-              const yearlyP = 9.99;
-              const savePct = Math.round((1 - yearlyP / (monthlyP * 12)) * 100);
-              const paywallCopy = {
-                en: {
-                  title: "The day you take control of your money is today.",
-                  aida: "You've seen where your money goes. You've felt the leaks. Now decide: keep guessing — or unlock the clarity, control and growth Vault was built to give you.",
-                  choose: "Choose your plan", monthly: "Monthly", yearly: "Yearly",
-                  monthlySub: "Billed monthly", yearlySub: `Just ${symbol}${(yearlyP/12).toFixed(2)}/mo · billed yearly`,
-                  best: "BEST VALUE", save: `Save ${savePct}%`,
-                  cta: `Try for ${symbol}0.00 · 7 days free`,
-                  hint: `Card required · Cancel anytime · ${symbol}0.00 today, ${symbol}${(selectedPlan==="yearly"?yearlyP:monthlyP).toFixed(2)} on day 8`,
-                  perMo: "/mo", perYr: "/yr",
-                },
-                pt: {
-                  title: "O dia de organizar suas finanças é agora.",
-                  aida: "Você já viu para onde o dinheiro vai. Já sentiu os vazamentos. Agora decida: continuar no escuro — ou desbloquear a clareza, o controle e o crescimento que o Vault foi feito para te dar.",
-                  choose: "Escolha seu plano", monthly: "Mensal", yearly: "Anual",
-                  monthlySub: "Cobrança mensal", yearlySub: `Apenas ${symbol}${(yearlyP/12).toFixed(2)}/mês · cobrança anual`,
-                  best: "MELHOR VALOR", save: `Economize ${savePct}%`,
-                  cta: `Teste por ${symbol}0,00 · 7 dias grátis`,
-                  hint: `Cartão obrigatório · Cancele quando quiser · ${symbol}0,00 hoje, ${symbol}${(selectedPlan==="yearly"?yearlyP:monthlyP).toFixed(2)} no 8º dia`,
-                  perMo: "/mês", perYr: "/ano",
-                },
-                es: {
-                  title: "El día de organizar tus finanzas es hoy.",
-                  aida: "Ya viste a dónde va tu dinero. Ya sentiste las fugas. Ahora decide: seguir a ciegas — o desbloquear la claridad, el control y el crecimiento para los que Vault fue creado.",
-                  choose: "Elige tu plan", monthly: "Mensual", yearly: "Anual",
-                  monthlySub: "Facturación mensual", yearlySub: `Solo ${symbol}${(yearlyP/12).toFixed(2)}/mes · facturación anual`,
-                  best: "MEJOR VALOR", save: `Ahorra ${savePct}%`,
-                  cta: `Prueba por ${symbol}0,00 · 7 días gratis`,
-                  hint: `Tarjeta requerida · Cancela cuando quieras · ${symbol}0,00 hoy, ${symbol}${(selectedPlan==="yearly"?yearlyP:monthlyP).toFixed(2)} el día 8`,
-                  perMo: "/mes", perYr: "/año",
-                },
-              }[shortLang];
-              return (
-                <div className="space-y-5 pt-2">
-                  <div className="text-center space-y-3">
-                    <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-[0_0_50px_rgba(34,197,94,0.5)]">
-                      <Crown className="w-8 h-8 text-black" />
-                    </div>
-                    <h1 className="text-2xl font-bold leading-tight px-2">{paywallCopy.title}</h1>
-                    <p className="text-muted-foreground text-sm px-4 leading-relaxed">{paywallCopy.aida}</p>
-                  </div>
-
-                  <div className="rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/10 to-primary/[0.02] p-4 space-y-2.5">
-                    {t.paywallBenefits.map((b) => (
-                      <div key={b} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center mt-0.5 shrink-0">
-                          <Check className="w-3 h-3 text-primary" strokeWidth={4} />
-                        </div>
-                        <p className="text-sm">{b}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="text-xs uppercase tracking-widest text-muted-foreground text-center">{paywallCopy.choose}</p>
-                    {/* Monthly */}
-                    <button
-                      onClick={() => setSelectedPlan("monthly")}
-                      className={`relative w-full text-left rounded-2xl p-4 transition-all border-2 ${
-                        selectedPlan === "monthly"
-                          ? "border-primary bg-primary/10 shadow-[0_0_30px_rgba(34,197,94,0.25)]"
-                          : "border-border bg-card/40"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="font-bold">{paywallCopy.monthly}</p>
-                          <p className="text-xs text-muted-foreground">{paywallCopy.monthlySub}</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-xl font-bold">{symbol}{monthlyP.toFixed(2)}</p>
-                          <p className="text-[10px] text-muted-foreground">{paywallCopy.perMo}</p>
-                        </div>
-                      </div>
-                    </button>
-                    {/* Yearly — Best value */}
-                    <button
-                      onClick={() => setSelectedPlan("yearly")}
-                      className={`relative w-full text-left rounded-2xl p-4 transition-all border-2 ${
-                        selectedPlan === "yearly"
-                          ? "border-primary bg-primary/10 shadow-[0_0_30px_rgba(34,197,94,0.3)]"
-                          : "border-primary/40 bg-card/40"
-                      }`}
-                    >
-                      <span className="absolute -top-2 right-3 text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r from-primary to-[#16a34a] text-black shadow">
-                        {paywallCopy.best}
-                      </span>
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="font-bold">{paywallCopy.yearly}</p>
-                          <p className="text-xs text-muted-foreground">{paywallCopy.yearlySub}</p>
-                          <p className="text-xs text-primary font-semibold mt-0.5">{paywallCopy.save}</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-xl font-bold">{symbol}{yearlyP.toFixed(2)}</p>
-                          <p className="text-[10px] text-muted-foreground">{paywallCopy.perYr}</p>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-
-                  {/* store the localized CTA strings on window for the footer to use */}
-                  <input type="hidden" data-cta={paywallCopy.cta} data-hint={paywallCopy.hint} id="paywall-cta-copy" />
-                </div>
-              );
-            })()}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -864,45 +742,27 @@ const OnboardingPage = () => {
       {/* Footer CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-30 px-5 pb-6 pt-4 bg-gradient-to-t from-background via-background/95 to-transparent">
         <div className="max-w-md mx-auto space-y-2">
-          {current === "paywall" ? (() => {
-            const sym = CURRENCIES.find((c) => c.id === (userCurrency as Currency))?.symbol ?? "$";
-            const priceOnDay8 = selectedPlan === "yearly" ? "9.99" : "4.99";
-            const ctaMap = {
-              en: `Try for ${sym}0.00 · 7 days free`,
-              pt: `Teste por ${sym}0,00 · 7 dias grátis`,
-              es: `Prueba por ${sym}0,00 · 7 días gratis`,
-            } as const;
-            const hintMap = {
-              en: `Card required · Cancel anytime · ${sym}0.00 today, ${sym}${priceOnDay8} on day 8`,
-              pt: `Cartão obrigatório · Cancele quando quiser · ${sym}0,00 hoje, ${sym}${priceOnDay8.replace(".",",")} no 8º dia`,
-              es: `Tarjeta requerida · Cancela cuando quieras · ${sym}0,00 hoy, ${sym}${priceOnDay8.replace(".",",")} el día 8`,
-            } as const;
-            return (
-              <>
-                <motion.button
-                  whileTap={{ scale: 0.97 }}
-                  onClick={handleStartTrial}
-                  disabled={submitting || loadingCheckout}
-                  className="w-full h-14 rounded-2xl font-bold text-base text-black bg-gradient-to-r from-primary to-[#16a34a] shadow-[0_10px_40px_-10px_rgba(34,197,94,0.7)] flex items-center justify-center gap-2 disabled:opacity-60"
-                >
-                  {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (<><Crown className="w-5 h-5" /> {ctaMap[shortLang]}</>)}
-                </motion.button>
-                <p className="text-center text-[11px] text-muted-foreground/80">{hintMap[shortLang]}</p>
-                <button onClick={handleRestore} className="w-full text-center text-xs text-muted-foreground underline underline-offset-2">
-                  {t.paywallRestore}
-                </button>
-              </>
-            );
-          })() : current === "summary" ? (
-            <Button onClick={next} className="w-full h-14 rounded-2xl text-base font-semibold bg-gradient-to-r from-primary to-[#16a34a] text-black shadow-[0_10px_40px_-10px_rgba(34,197,94,0.6)]">
-              {t.next} <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
+          {current === "summary" ? (
+            <>
+              <motion.button
+                whileTap={{ scale: 0.97 }}
+                onClick={handleFinish}
+                disabled={submitting}
+                className="w-full h-14 rounded-2xl font-bold text-base text-black bg-gradient-to-r from-primary to-[#16a34a] shadow-[0_10px_40px_-10px_rgba(34,197,94,0.7)] flex items-center justify-center gap-2 disabled:opacity-60"
+              >
+                {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (<>Começar os 7 dias grátis <ArrowRight className="w-4 h-4" /></>)}
+              </motion.button>
+              <p className="text-center text-[11px] text-muted-foreground/80">
+                Sem cartão · Acesso completo durante 7 dias
+              </p>
+            </>
           ) : (
             <Button onClick={next} disabled={!canContinue()}
               className="w-full h-14 rounded-2xl text-base font-semibold bg-gradient-to-r from-primary to-[#16a34a] text-black shadow-[0_10px_40px_-10px_rgba(34,197,94,0.6)] disabled:opacity-40 disabled:shadow-none">
-              {current === "welcome" ? t.next : t.next} <ArrowRight className="w-4 h-4 ml-2" />
+              {t.next} <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           )}
+
         </div>
       </div>
     </div>

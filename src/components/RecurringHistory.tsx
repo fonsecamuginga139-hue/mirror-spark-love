@@ -102,7 +102,7 @@ const RecurringHistory = ({ recurringId }: RecurringHistoryProps) => {
   // Group by month
   const groupedByMonth: { [key: string]: GeneratedTransaction[] } = {};
   transactions.forEach((t) => {
-    const monthKey = new Date(t.date).toLocaleDateString("en-US", {
+    const monthKey = new Date(t.date).toLocaleDateString("pt-PT", {
       month: "long",
       year: "numeric",
     });
@@ -152,7 +152,7 @@ const RecurringHistory = ({ recurringId }: RecurringHistoryProps) => {
                     </span>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    {new Date(t.date).toLocaleDateString("en-US")}
+                    {new Date(t.date).toLocaleDateString("pt-PT")}
                     {t.card_name && ` • ${t.card_name}`}
                   </p>
                 </div>

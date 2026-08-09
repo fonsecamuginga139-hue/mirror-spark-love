@@ -6,26 +6,29 @@ export interface CurrencyMeta {
   code: string;
   symbol: string;
   name: string;
+  /** Nome em Português, mostrado na interface */
+  namePt: string;
   /** Preferred locale used to format this currency when the user locale is unknown */
   locale: string;
   decimals?: number;
 }
 
 export const CURRENCIES: CurrencyMeta[] = [
-  { code: "USD", symbol: "$", name: "US Dollar", locale: "en-US" },
-  { code: "BRL", symbol: "R$", name: "Brazilian Real", locale: "pt-BR" },
-  { code: "AOA", symbol: "Kz", name: "Angolan Kwanza", locale: "pt-AO" },
-  { code: "EUR", symbol: "€", name: "Euro", locale: "pt-PT" },
-  { code: "GBP", symbol: "£", name: "British Pound", locale: "en-GB" },
+  { code: "BRL", symbol: "R$", name: "Brazilian Real", namePt: "Real brasileiro", locale: "pt-BR" },
+  { code: "USD", symbol: "$", name: "US Dollar", namePt: "Dólar americano", locale: "en-US" },
+  { code: "AOA", symbol: "Kz", name: "Angolan Kwanza", namePt: "Kwanza angolano", locale: "pt-AO" },
+  { code: "EUR", symbol: "€", name: "Euro", namePt: "Euro", locale: "pt-PT" },
+  { code: "GBP", symbol: "£", name: "British Pound", namePt: "Libra esterlina", locale: "en-GB" },
 ];
 
-export const DEFAULT_CURRENCY = "USD";
+export const DEFAULT_CURRENCY = "BRL";
 
 export const getCurrencyMeta = (code?: string | null): CurrencyMeta =>
   CURRENCIES.find((c) => c.code === (code ?? "").toUpperCase()) ?? CURRENCIES[0];
 
 /** Popular picks shown first on the currency selection screen. */
-export const POPULAR_CURRENCIES = ["USD", "BRL", "AOA", "EUR", "GBP"];
+export const POPULAR_CURRENCIES = ["BRL", "USD", "AOA", "EUR", "GBP"];
+
 
 export function formatMoney(amount: number, code: string, locale: string): string {
   const meta = getCurrencyMeta(code);

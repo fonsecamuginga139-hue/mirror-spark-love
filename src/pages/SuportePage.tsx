@@ -116,7 +116,7 @@ const SupportPage = () => {
   };
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleString("en-US", {
+    return new Date(dateStr).toLocaleString("pt-PT", {
       day: "2-digit",
       month: "2-digit",
       hour: "2-digit",

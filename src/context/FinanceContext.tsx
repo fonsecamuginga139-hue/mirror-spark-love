@@ -65,7 +65,7 @@ export const FinanceProvider = ({ children }: { children: ReactNode }) => {
   const currency = "USD";
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("pt-PT", {
       style: "currency",
       currency: currency,
     }).format(amount);

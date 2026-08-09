@@ -35,7 +35,7 @@ const MonthlySummary = ({ transactions }: MonthlySummaryProps) => {
     return sortedKeys.map((key) => {
       const [year, month] = key.split("-");
       const monthDate = new Date(parseInt(year), parseInt(month) - 1, 1);
-      const monthName = monthDate.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+      const monthName = monthDate.toLocaleDateString("pt-PT", { month: "long", year: "numeric" });
       const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
       const { income, expense } = grouped[key];

@@ -110,7 +110,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
       setError("Voice input isn't supported in this browser. Try Chrome or Safari.");
       return;
     }
-    rec.lang = navigator.language || "en-US";
+    rec.lang = "pt-PT";
     rec.continuous = false;
     rec.interimResults = false;
     rec.maxAlternatives = 1;

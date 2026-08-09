@@ -6,7 +6,6 @@ import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import PlanBadge from "@/components/PlanBadge";
 import { toast } from "sonner";
-import LanguageToggle from "@/components/LanguageToggle";
 import { useLanguage } from "@/context/LanguageContext";
 
 const ProfilePage = () => {
@@ -73,10 +72,6 @@ const ProfilePage = () => {
                 {currency === "EUR" ? "Euro (€)" : currency === "BRL" ? "Real (R$)" : currency === "GBP" ? "Pound (£)" : "US Dollar ($)"}
               </span>
             </div>
-          </div>
-          <div className="flex items-center justify-between py-4">
-            <span className="text-foreground">{t("profile.language")}</span>
-            <LanguageToggle />
           </div>
         </div>
 

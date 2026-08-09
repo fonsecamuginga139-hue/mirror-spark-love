@@ -10,7 +10,6 @@ import {
 import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import LandingFooter from "@/components/LandingFooter";
-import LanguageToggle from "@/components/LanguageToggle";
 
 const featureIcons = [Wallet, Target, PieChart, Repeat, TrendingUp, Calendar];
 
@@ -101,7 +100,6 @@ const PreOnboardingPage = () => {
             <span className="text-lg font-bold tracking-wider text-foreground">VAULT</span>
           </div>
           <div className="flex items-center gap-2">
-            <LanguageToggle />
             <button onClick={() => navigate("/auth")} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.signIn")}
             </button>

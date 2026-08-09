@@ -32,7 +32,7 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
     let accumulated = 0;
 
     sorted.forEach((t) => {
-      const dateKey = new Date(t.date).toLocaleDateString("en-US", {
+      const dateKey = new Date(t.date).toLocaleDateString("pt-PT", {
         day: "2-digit",
         month: "2-digit",
       });
@@ -72,7 +72,7 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
 
     for (let i = 2; i >= 0; i--) {
       const targetDate = new Date(now.getFullYear(), now.getMonth() - i, 1);
-      const monthKey = targetDate.toLocaleDateString("en-US", {
+      const monthKey = targetDate.toLocaleDateString("pt-PT", {
         month: "short",
       }).replace(".", "");
 

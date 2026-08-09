@@ -92,7 +92,7 @@ const AdminSupportPage = () => {
   };
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleString("en-US", {
+    return new Date(dateStr).toLocaleString("pt-PT", {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",

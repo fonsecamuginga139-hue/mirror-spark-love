@@ -42,7 +42,7 @@ export const useReportPDF = () => {
     doc.text(`Period: ${data.period}`, pageWidth / 2, yPos, { align: "center" });
     
     yPos += 5;
-    doc.text(`Generated on: ${new Date().toLocaleDateString("en-US")}`, pageWidth / 2, yPos, { align: "center" });
+    doc.text(`Generated on: ${new Date().toLocaleDateString("pt-PT")}`, pageWidth / 2, yPos, { align: "center" });
 
     yPos += 20;
 

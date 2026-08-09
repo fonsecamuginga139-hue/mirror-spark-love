@@ -337,7 +337,7 @@ const FuturasPage = () => {
                     <div>
                       <p className="text-foreground font-medium">{transaction.description}</p>
                       <p className="text-sm text-muted-foreground">
-                        {new Date(transaction.due_date).toLocaleDateString("en-US")}
+                        {new Date(transaction.due_date).toLocaleDateString("pt-PT")}
                         {transaction.card_name && ` • ${transaction.card_name}`}
                         {isToday(transaction.due_date) && (
                           <span className="text-primary ml-2">Today</span>
@@ -391,7 +391,7 @@ const FuturasPage = () => {
                     <div>
                       <p className="text-foreground font-medium line-through">{transaction.description}</p>
                       <p className="text-sm text-muted-foreground">
-                        {new Date(transaction.due_date).toLocaleDateString("en-US")}
+                        {new Date(transaction.due_date).toLocaleDateString("pt-PT")}
                       </p>
                     </div>
                   </div>

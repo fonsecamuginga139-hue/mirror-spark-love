@@ -86,7 +86,7 @@ const HistoricoPage = () => {
     const groups: { [key: string]: TransactionWithDetails[] } = {};
     
     filteredTransactions.forEach((t) => {
-      const dateKey = new Date(t.date).toLocaleDateString("en-US", {
+      const dateKey = new Date(t.date).toLocaleDateString("pt-PT", {
         day: "2-digit",
         month: "long",
         year: "numeric",

@@ -330,8 +330,9 @@ const STEPS = [
   "welcome", "name", "age",
   "goals", "pains", "habits",
   "incomeProfile", "income", "bills", "savings",
-  "inputPref", "categories", "summary", "paywall",
+  "inputPref", "categories", "summary",
 ] as const;
+
 
 const OnboardingPage = () => {
   const navigate = useNavigate();
@@ -394,7 +395,7 @@ const OnboardingPage = () => {
       case "inputPref": return !!state.inputPref;
       case "categories": return state.categories.length >= 3;
       case "summary": return true;
-      case "paywall": return true;
+
       default: return false;
     }
   };
@@ -417,9 +418,13 @@ const OnboardingPage = () => {
           selected_categories: state.categories as any,
           onboarding_completed: true,
           pre_onboarding_completed: true,
-          // Hard paywall: no access until Hotmart webhook activates the account.
-          plan_status: "awaiting_payment" as any,
+          // Trial gratuito de 7 dias: acesso total imediato, sem cartão.
+          plan_status: "trial_active" as any,
           plano: "free" as any,
+          trial_start: new Date().toISOString(),
+          trial_end: new Date(Date.now() + 7 * 86400000).toISOString(),
+          status_assinatura: "ativo" as any,
+
           quiz_answers: {
             ageRange: state.ageRange,
             goals: state.goals,
@@ -487,38 +492,21 @@ const OnboardingPage = () => {
 
       return true;
     } catch (e: any) {
-      toast.error(e.message || "Setup error");
+      toast.error(e.message || "Erro ao concluir a configuração");
       setSubmitting(false);
       return false;
     }
   };
 
-  const handleStartTrial = async () => {
-    const url = selectedPlan === "yearly"
-      ? (yearlyCheckoutUrl || monthlyCheckoutUrl)
-      : monthlyCheckoutUrl;
-    if (!url) {
-      toast.error("Checkout Hotmart não configurado para este plano.");
-      return;
-    }
-
+  /** Fim do onboarding: inicia o trial de 7 dias e entra directamente no app. */
+  const handleFinish = async () => {
     const ok = await persistAndUnlock();
     if (!ok) return;
-    const isAdmin = (profile as any)?.plano === "admin";
-    if (isAdmin) {
-      setSubmitting(false);
-      navigate("/dashboard", { replace: true });
-      return;
-    }
-
-    // Same-tab redirect keeps checkout in the app navigation flow. Do not clear
-    // submitting before leaving, otherwise the onboarding guard can race to /dashboard.
-    openCheckout(url, profile?.email || user?.email);
+    setSubmitting(false);
+    toast.success("Tudo pronto! Tens 7 dias grátis para explorar o Vault.");
+    navigate("/dashboard", { replace: true });
   };
 
-  const handleRestore = async () => {
-    toast.info("Restoring purchase… please sign in with the email used for payment.");
-  };
 
   // ---------- UI ----------
   return (

@@ -30,6 +30,7 @@ import { Route as ListaRouteImport } from './routes/lista'
 import { Route as LocaleSetupRouteImport } from './routes/locale-setup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MetasRouteImport } from './routes/metas'
+import { Route as NovaTransacaoRouteImport } from './routes/nova-transacao'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ParcelasRouteImport } from './routes/parcelas'
 import { Route as PerfilRouteImport } from './routes/perfil'
@@ -165,6 +166,11 @@ const LoginRoute = LoginRouteImport.update({
 const MetasRoute = MetasRouteImport.update({
   id: '/metas',
   path: '/metas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NovaTransacaoRoute = NovaTransacaoRouteImport.update({
+  id: '/nova-transacao',
+  path: '/nova-transacao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -345,6 +351,7 @@ export interface FileRoutesByFullPath {
   '/locale-setup': typeof LocaleSetupRoute
   '/login': typeof LoginRoute
   '/metas': typeof MetasRoute
+  '/nova-transacao': typeof NovaTransacaoRoute
   '/onboarding': typeof OnboardingRoute
   '/parcelas': typeof ParcelasRoute
   '/perfil': typeof PerfilRoute
@@ -399,6 +406,7 @@ export interface FileRoutesByTo {
   '/locale-setup': typeof LocaleSetupRoute
   '/login': typeof LoginRoute
   '/metas': typeof MetasRoute
+  '/nova-transacao': typeof NovaTransacaoRoute
   '/onboarding': typeof OnboardingRoute
   '/parcelas': typeof ParcelasRoute
   '/perfil': typeof PerfilRoute
@@ -454,6 +462,7 @@ export interface FileRoutesById {
   '/locale-setup': typeof LocaleSetupRoute
   '/login': typeof LoginRoute
   '/metas': typeof MetasRoute
+  '/nova-transacao': typeof NovaTransacaoRoute
   '/onboarding': typeof OnboardingRoute
   '/parcelas': typeof ParcelasRoute
   '/perfil': typeof PerfilRoute
@@ -510,6 +519,7 @@ export interface FileRouteTypes {
     | '/locale-setup'
     | '/login'
     | '/metas'
+    | '/nova-transacao'
     | '/onboarding'
     | '/parcelas'
     | '/perfil'
@@ -564,6 +574,7 @@ export interface FileRouteTypes {
     | '/locale-setup'
     | '/login'
     | '/metas'
+    | '/nova-transacao'
     | '/onboarding'
     | '/parcelas'
     | '/perfil'
@@ -618,6 +629,7 @@ export interface FileRouteTypes {
     | '/locale-setup'
     | '/login'
     | '/metas'
+    | '/nova-transacao'
     | '/onboarding'
     | '/parcelas'
     | '/perfil'
@@ -673,6 +685,7 @@ export interface RootRouteChildren {
   LocaleSetupRoute: typeof LocaleSetupRoute
   LoginRoute: typeof LoginRoute
   MetasRoute: typeof MetasRoute
+  NovaTransacaoRoute: typeof NovaTransacaoRoute
   OnboardingRoute: typeof OnboardingRoute
   ParcelasRoute: typeof ParcelasRoute
   PerfilRoute: typeof PerfilRoute
@@ -853,6 +866,13 @@ declare module '@tanstack/react-router' {
       path: '/metas'
       fullPath: '/metas'
       preLoaderRoute: typeof MetasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nova-transacao': {
+      id: '/nova-transacao'
+      path: '/nova-transacao'
+      fullPath: '/nova-transacao'
+      preLoaderRoute: typeof NovaTransacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -1097,6 +1117,7 @@ const rootRouteChildren: RootRouteChildren = {
   LocaleSetupRoute: LocaleSetupRoute,
   LoginRoute: LoginRoute,
   MetasRoute: MetasRoute,
+  NovaTransacaoRoute: NovaTransacaoRoute,
   OnboardingRoute: OnboardingRoute,
   ParcelasRoute: ParcelasRoute,
   PerfilRoute: PerfilRoute,

@@ -51,7 +51,7 @@ const BottomNav = () => {
     <nav className="fixed bottom-0 left-0 right-0 z-40 pb-[env(safe-area-inset-bottom)]">
       <div className="mx-auto max-w-lg px-4 pb-3">
         <div className="relative flex items-center justify-between rounded-full border border-primary/20 bg-card/85 backdrop-blur-xl px-3 py-2 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.7)]">
-          <Item to="/scan" label={t("nav.scan")} icon={Plus} />
+          <Item to="/nova-transacao" label="Nova transação" icon={Plus} />
           <Item to="/lista" label={t("nav.shopping")} icon={ShoppingCart} />
           <Item to="/busca" label={t("nav.search")} icon={Search} />
           <Item to="/parcelas" label={t("nav.installments")} icon={CreditCard} />

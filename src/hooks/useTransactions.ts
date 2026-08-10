@@ -92,7 +92,7 @@ export const useTransactions = () => {
     if (!user) return;
 
     const channel = supabase
-      .channel(`transactions-${user.id}`)
+      .channel(`transactions-${user.id}-${Math.random().toString(36).slice(2)}`)
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "transactions", filter: `user_id=eq.${user.id}` },

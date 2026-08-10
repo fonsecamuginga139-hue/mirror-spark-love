@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/context/AuthContext";
 
 export interface PaymentSettings {
   id: string;
@@ -9,6 +10,8 @@ export interface PaymentSettings {
   trial_checkout_url: string | null;
   hotmart_monthly_url: string | null;
   hotmart_yearly_url: string | null;
+  kambafy_monthly_url: string | null;
+  kambafy_yearly_url: string | null;
   trial_length_days: number;
   processor: string;
   updated_at: string;
@@ -48,17 +51,33 @@ export const usePaymentSettings = () => {
   return query;
 };
 
+/**
+ * Escolhe o processador pela moeda do utilizador:
+ *   Kz (AOA) → Kambafy   |   $ R$ € £ → Hotmart
+ */
 export const useCheckoutUrl = () => {
   const { data, isLoading } = usePaymentSettings();
-  const monthly = data?.hotmart_monthly_url || data?.monthly_checkout_url || "";
-  const yearly = data?.hotmart_yearly_url || data?.yearly_checkout_url || "";
+  const { profile } = useAuth();
+
+  const currency = String(
+    (profile as any)?.currency_code || (profile as any)?.currency || "",
+  ).toUpperCase();
+  const isKwanza = currency === "AOA";
+
+  const monthly = isKwanza
+    ? data?.kambafy_monthly_url || ""
+    : data?.hotmart_monthly_url || data?.monthly_checkout_url || "";
+  const yearly = isKwanza
+    ? data?.kambafy_yearly_url || ""
+    : data?.hotmart_yearly_url || data?.yearly_checkout_url || "";
+
   return {
     checkoutUrl: monthly,
     monthlyCheckoutUrl: monthly,
     yearlyCheckoutUrl: yearly,
     trialCheckoutUrl: data?.trial_checkout_url || "",
     trialLengthDays: data?.trial_length_days ?? 7,
-    processor: data?.processor || "hotmart",
+    processor: isKwanza ? "kambafy" : "hotmart",
     loading: isLoading,
   };
 };

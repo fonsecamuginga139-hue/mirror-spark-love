@@ -30,6 +30,7 @@ import { Route as ListaRouteImport } from './routes/lista'
 import { Route as LocaleSetupRouteImport } from './routes/locale-setup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MetasRouteImport } from './routes/metas'
+import { Route as NovaTransacaoRouteImport } from './routes/nova-transacao'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ParcelasRouteImport } from './routes/parcelas'
 import { Route as PerfilRouteImport } from './routes/perfil'
@@ -60,6 +61,7 @@ import { Route as CategoriaIdRouteImport } from './routes/categoria/$id'
 import { Route as ScanIndexRouteImport } from './routes/scan/index'
 import { Route as ScanHistoryRouteImport } from './routes/scan/history'
 import { Route as ApiPublicHotmartWebhookRouteImport } from './routes/api/public/hotmart-webhook'
+import { Route as ApiPublicKambafyWebhookRouteImport } from './routes/api/public/kambafy-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -164,6 +166,11 @@ const LoginRoute = LoginRouteImport.update({
 const MetasRoute = MetasRouteImport.update({
   id: '/metas',
   path: '/metas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NovaTransacaoRoute = NovaTransacaoRouteImport.update({
+  id: '/nova-transacao',
+  path: '/nova-transacao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingRoute = OnboardingRouteImport.update({
@@ -316,6 +323,11 @@ const ApiPublicHotmartWebhookRoute = ApiPublicHotmartWebhookRouteImport.update({
   path: '/api/public/hotmart-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicKambafyWebhookRoute = ApiPublicKambafyWebhookRouteImport.update({
+  id: '/api/public/kambafy-webhook',
+  path: '/api/public/kambafy-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -339,6 +351,7 @@ export interface FileRoutesByFullPath {
   '/locale-setup': typeof LocaleSetupRoute
   '/login': typeof LoginRoute
   '/metas': typeof MetasRoute
+  '/nova-transacao': typeof NovaTransacaoRoute
   '/onboarding': typeof OnboardingRoute
   '/parcelas': typeof ParcelasRoute
   '/perfil': typeof PerfilRoute
@@ -369,6 +382,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/scan/': typeof ScanIndexRoute
   '/api/public/hotmart-webhook': typeof ApiPublicHotmartWebhookRoute
+  '/api/public/kambafy-webhook': typeof ApiPublicKambafyWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -392,6 +406,7 @@ export interface FileRoutesByTo {
   '/locale-setup': typeof LocaleSetupRoute
   '/login': typeof LoginRoute
   '/metas': typeof MetasRoute
+  '/nova-transacao': typeof NovaTransacaoRoute
   '/onboarding': typeof OnboardingRoute
   '/parcelas': typeof ParcelasRoute
   '/perfil': typeof PerfilRoute
@@ -422,6 +437,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/scan': typeof ScanIndexRoute
   '/api/public/hotmart-webhook': typeof ApiPublicHotmartWebhookRoute
+  '/api/public/kambafy-webhook': typeof ApiPublicKambafyWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -446,6 +462,7 @@ export interface FileRoutesById {
   '/locale-setup': typeof LocaleSetupRoute
   '/login': typeof LoginRoute
   '/metas': typeof MetasRoute
+  '/nova-transacao': typeof NovaTransacaoRoute
   '/onboarding': typeof OnboardingRoute
   '/parcelas': typeof ParcelasRoute
   '/perfil': typeof PerfilRoute
@@ -476,6 +493,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/scan/': typeof ScanIndexRoute
   '/api/public/hotmart-webhook': typeof ApiPublicHotmartWebhookRoute
+  '/api/public/kambafy-webhook': typeof ApiPublicKambafyWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -501,6 +519,7 @@ export interface FileRouteTypes {
     | '/locale-setup'
     | '/login'
     | '/metas'
+    | '/nova-transacao'
     | '/onboarding'
     | '/parcelas'
     | '/perfil'
@@ -531,6 +550,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/scan/'
     | '/api/public/hotmart-webhook'
+    | '/api/public/kambafy-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -554,6 +574,7 @@ export interface FileRouteTypes {
     | '/locale-setup'
     | '/login'
     | '/metas'
+    | '/nova-transacao'
     | '/onboarding'
     | '/parcelas'
     | '/perfil'
@@ -584,6 +605,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/scan'
     | '/api/public/hotmart-webhook'
+    | '/api/public/kambafy-webhook'
   id:
     | '__root__'
     | '/'
@@ -607,6 +629,7 @@ export interface FileRouteTypes {
     | '/locale-setup'
     | '/login'
     | '/metas'
+    | '/nova-transacao'
     | '/onboarding'
     | '/parcelas'
     | '/perfil'
@@ -637,6 +660,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/scan/'
     | '/api/public/hotmart-webhook'
+    | '/api/public/kambafy-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -661,6 +685,7 @@ export interface RootRouteChildren {
   LocaleSetupRoute: typeof LocaleSetupRoute
   LoginRoute: typeof LoginRoute
   MetasRoute: typeof MetasRoute
+  NovaTransacaoRoute: typeof NovaTransacaoRoute
   OnboardingRoute: typeof OnboardingRoute
   ParcelasRoute: typeof ParcelasRoute
   PerfilRoute: typeof PerfilRoute
@@ -691,6 +716,7 @@ export interface RootRouteChildren {
   AdminIndexRoute: typeof AdminIndexRoute
   ScanIndexRoute: typeof ScanIndexRoute
   ApiPublicHotmartWebhookRoute: typeof ApiPublicHotmartWebhookRoute
+  ApiPublicKambafyWebhookRoute: typeof ApiPublicKambafyWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -840,6 +866,13 @@ declare module '@tanstack/react-router' {
       path: '/metas'
       fullPath: '/metas'
       preLoaderRoute: typeof MetasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nova-transacao': {
+      id: '/nova-transacao'
+      path: '/nova-transacao'
+      fullPath: '/nova-transacao'
+      preLoaderRoute: typeof NovaTransacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding': {
@@ -1052,6 +1085,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHotmartWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/kambafy-webhook': {
+      id: '/api/public/kambafy-webhook'
+      path: '/api/public/kambafy-webhook'
+      fullPath: '/api/public/kambafy-webhook'
+      preLoaderRoute: typeof ApiPublicKambafyWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1077,6 +1117,7 @@ const rootRouteChildren: RootRouteChildren = {
   LocaleSetupRoute: LocaleSetupRoute,
   LoginRoute: LoginRoute,
   MetasRoute: MetasRoute,
+  NovaTransacaoRoute: NovaTransacaoRoute,
   OnboardingRoute: OnboardingRoute,
   ParcelasRoute: ParcelasRoute,
   PerfilRoute: PerfilRoute,
@@ -1107,6 +1148,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminIndexRoute: AdminIndexRoute,
   ScanIndexRoute: ScanIndexRoute,
   ApiPublicHotmartWebhookRoute: ApiPublicHotmartWebhookRoute,
+  ApiPublicKambafyWebhookRoute: ApiPublicKambafyWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

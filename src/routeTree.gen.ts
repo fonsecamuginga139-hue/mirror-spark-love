@@ -60,6 +60,7 @@ import { Route as CategoriaIdRouteImport } from './routes/categoria/$id'
 import { Route as ScanIndexRouteImport } from './routes/scan/index'
 import { Route as ScanHistoryRouteImport } from './routes/scan/history'
 import { Route as ApiPublicHotmartWebhookRouteImport } from './routes/api/public/hotmart-webhook'
+import { Route as ApiPublicKambafyWebhookRouteImport } from './routes/api/public/kambafy-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -316,6 +317,11 @@ const ApiPublicHotmartWebhookRoute = ApiPublicHotmartWebhookRouteImport.update({
   path: '/api/public/hotmart-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicKambafyWebhookRoute = ApiPublicKambafyWebhookRouteImport.update({
+  id: '/api/public/kambafy-webhook',
+  path: '/api/public/kambafy-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -369,6 +375,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/scan/': typeof ScanIndexRoute
   '/api/public/hotmart-webhook': typeof ApiPublicHotmartWebhookRoute
+  '/api/public/kambafy-webhook': typeof ApiPublicKambafyWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -422,6 +429,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/scan': typeof ScanIndexRoute
   '/api/public/hotmart-webhook': typeof ApiPublicHotmartWebhookRoute
+  '/api/public/kambafy-webhook': typeof ApiPublicKambafyWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -476,6 +484,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/scan/': typeof ScanIndexRoute
   '/api/public/hotmart-webhook': typeof ApiPublicHotmartWebhookRoute
+  '/api/public/kambafy-webhook': typeof ApiPublicKambafyWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -531,6 +540,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/scan/'
     | '/api/public/hotmart-webhook'
+    | '/api/public/kambafy-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -584,6 +594,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/scan'
     | '/api/public/hotmart-webhook'
+    | '/api/public/kambafy-webhook'
   id:
     | '__root__'
     | '/'
@@ -637,6 +648,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/scan/'
     | '/api/public/hotmart-webhook'
+    | '/api/public/kambafy-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -691,6 +703,7 @@ export interface RootRouteChildren {
   AdminIndexRoute: typeof AdminIndexRoute
   ScanIndexRoute: typeof ScanIndexRoute
   ApiPublicHotmartWebhookRoute: typeof ApiPublicHotmartWebhookRoute
+  ApiPublicKambafyWebhookRoute: typeof ApiPublicKambafyWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1052,6 +1065,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHotmartWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/kambafy-webhook': {
+      id: '/api/public/kambafy-webhook'
+      path: '/api/public/kambafy-webhook'
+      fullPath: '/api/public/kambafy-webhook'
+      preLoaderRoute: typeof ApiPublicKambafyWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1107,17 +1127,8 @@ const rootRouteChildren: RootRouteChildren = {
   AdminIndexRoute: AdminIndexRoute,
   ScanIndexRoute: ScanIndexRoute,
   ApiPublicHotmartWebhookRoute: ApiPublicHotmartWebhookRoute,
+  ApiPublicKambafyWebhookRoute: ApiPublicKambafyWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

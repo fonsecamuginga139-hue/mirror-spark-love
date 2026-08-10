@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/context/AuthContext";
 
 export interface PaymentSettings {
   id: string;
@@ -9,6 +10,8 @@ export interface PaymentSettings {
   trial_checkout_url: string | null;
   hotmart_monthly_url: string | null;
   hotmart_yearly_url: string | null;
+  kambafy_monthly_url: string | null;
+  kambafy_yearly_url: string | null;
   trial_length_days: number;
   processor: string;
   updated_at: string;

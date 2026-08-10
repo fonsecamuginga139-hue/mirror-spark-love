@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useCategories } from "@/hooks/useCategories";
-import { useCurrency } from "@/context/CurrencyContext";
+import { useCurrency } from "@/hooks/useCurrency";
 import { getCategoryIcon } from "@/lib/categoryIcons";
 
 type TxType = "expense" | "income";

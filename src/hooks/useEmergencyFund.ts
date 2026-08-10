@@ -46,7 +46,7 @@ export const useEmergencyFund = () => {
     fetchFund();
     if (!user) return;
     const channel = supabase
-      .channel(`emergency-fund-${user.id}`)
+      .channel(`emergency-fund-${user.id}-${Math.random().toString(36).slice(2)}`)
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "emergency_funds", filter: `user_id=eq.${user.id}` },

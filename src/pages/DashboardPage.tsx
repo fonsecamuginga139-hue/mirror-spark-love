@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Settings2, ChevronsUpDown } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
 import CategoryDonutChart from "@/components/CategoryDonutChart";
+import FlowChart from "@/components/FlowChart";
 import VoiceTransactionModal from "@/components/VoiceTransactionModal";
 import RecurringCharts from "@/components/RecurringCharts";
 import OfflineIndicator from "@/components/OfflineIndicator";
@@ -97,12 +98,12 @@ const DashboardPage = () => {
 
       <div className="relative p-4 max-w-lg mx-auto">
         <SEO
-          title="Dashboard — Vault"
-          description="Your financial dashboard: real-time balance, income, expenses, and insights for the month."
+          title="Painel — Vault"
+          description="O seu painel financeiro: saldo em tempo real, receitas, despesas e análises do mês."
           path="/dashboard"
           noindex
         />
-        <h1 className="sr-only">Financial Dashboard</h1>
+        <h1 className="sr-only">Painel Financeiro</h1>
 
         <div className="flex items-center justify-end mb-6 animate-fade-in">
           <button
@@ -150,6 +151,8 @@ const DashboardPage = () => {
             <ChevronsUpDown size={12} className="absolute right-2 pointer-events-none text-primary/70" />
           </label>
         </div>
+
+        <FlowChart transactions={periodTransactions} />
 
         <div className="mb-4">
           <CategoryDonutChart

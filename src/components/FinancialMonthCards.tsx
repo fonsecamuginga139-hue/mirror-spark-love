@@ -34,7 +34,7 @@ const FinancialMonthCards = () => {
         if (t.type === "income") monthIncome += amt;
         else {
           monthExpense += amt;
-          const key = (t as any).category?.name || "Other";
+          const key = (t as any).category?.name || "Outra";
           categoryTotals.set(key, (categoryTotals.get(key) || 0) + amt);
         }
       } else if (inMonth(d, pm, py)) {
@@ -63,26 +63,26 @@ const FinancialMonthCards = () => {
   const cards = [
     {
       icon: PiggyBank,
-      label: "You saved",
+      label: "Poupou",
       value: formatCurrency(Math.max(0, stats.saved)),
       tone: "text-primary",
     },
     {
       icon: ShoppingBag,
-      label: "Top spending",
+      label: "Maior despesa",
       value: stats.topCategory,
       tone: "text-foreground",
       small: true,
     },
     {
       icon: Target,
-      label: "Goals completed",
+      label: "Objetivos concluídos",
       value: String(stats.completedGoals),
       tone: "text-primary",
     },
     {
       icon: TrendingUp,
-      label: "Balance growth",
+      label: "Crescimento do saldo",
       value: `${stats.growth >= 0 ? "+" : ""}${stats.growth.toFixed(0)}%`,
       tone: stats.growth >= 0 ? "text-primary" : "text-expense",
     },
@@ -91,9 +91,9 @@ const FinancialMonthCards = () => {
   return (
     <div className="mb-6 animate-fade-in-up" style={{ animationDelay: "0.35s" }}>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-foreground">Your Financial Month</h3>
+        <h3 className="text-sm font-semibold text-foreground">O Seu Mês Financeiro</h3>
         <span className="text-[11px] text-muted-foreground uppercase tracking-wider">
-          {new Date().toLocaleString("en", { month: "short", year: "numeric" })}
+          {new Date().toLocaleString("pt-PT", { month: "short", year: "numeric" })}
         </span>
       </div>
       <div className="grid grid-cols-2 gap-3">

@@ -16,7 +16,7 @@ interface CheckoutButtonProps {
  */
 export const openCheckout = (url: string, email?: string) => {
   if (!url) {
-    toast.error("Checkout is not configured yet. Please contact support.");
+    toast.error("O checkout ainda não está configurado. Contacte o suporte.");
     return;
   }
   let finalUrl = url;
@@ -33,7 +33,7 @@ export const CheckoutButton = ({ className, children, variant = "default" }: Che
   return (
     <Button onClick={() => openCheckout(checkoutUrl)} disabled={loading} className={className} variant={variant}>
       {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <ExternalLink className="w-4 h-4 mr-2" />}
-      {children || "Continue to checkout"}
+      {children || "Continuar para o checkout"}
     </Button>
   );
 };

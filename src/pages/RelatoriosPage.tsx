@@ -36,7 +36,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   "Transporte": "#F97316",
   "Moradia": "#8B5CF6",
   "Lazer": "#EC4899",
-  "Subscriptions": "#6366F1",
+  "Subscrições": "#6366F1",
   "Saúde": "#14B8A6",
   "Educação": "#3B82F6",
   "Salário": "#10B981",
@@ -292,11 +292,11 @@ const RelatoriosPage = () => {
   }, [filteredTransactions]);
 
   const periodLabels: Record<PeriodFilter, string> = {
-    today: "Today",
-    month: "This month",
-    year: "This year",
-    custom: "Custom",
-    all: "All time",
+    today: "Hoje",
+    month: "Este mês",
+    year: "Este ano",
+    custom: "Personalizado",
+    all: "Todo o período",
   };
 
   const handlePeriodChange = (newPeriod: PeriodFilter) => {
@@ -325,8 +325,8 @@ const RelatoriosPage = () => {
       });
     } catch (error) {
       toast({
-        title: "Error ao exportar",
-        description: "No foi possível gerar o PDF. Tente novamente.",
+        title: "Erro ao exportar",
+        description: "Não foi possível gerar o PDF. Tente novamente.",
         variant: "destructive",
       });
     } finally {
@@ -344,13 +344,13 @@ const RelatoriosPage = () => {
 
   const selectedCardName = selectedCardId 
     ? cards.find(c => c.id === selectedCardId)?.name 
-    : "All Cards";
+    : "Todos os Cartões";
 
   return (
     <div className="min-h-screen bg-background pb-24">
       <div className="p-4 max-w-lg mx-auto">
         <div className="flex items-center justify-between mb-1">
-          <h1 className="text-2xl font-bold text-foreground">Reports</h1>
+          <h1 className="text-2xl font-bold text-foreground">Relatórios</h1>
           <div className="flex items-center gap-2">
             {transactions.length > 0 && (
               <button
@@ -368,7 +368,7 @@ const RelatoriosPage = () => {
           </div>
         </div>
         <p className="text-muted-foreground mb-4">
-          {selectedCardId ? `Analysis: ${selectedCardName}` : "Detailed analysis of your finances"}
+          {selectedCardId ? `Análise: ${selectedCardName}` : "Análise detalhada das suas finanças"}
         </p>
 
         {/* Card Selector */}
@@ -389,21 +389,21 @@ const RelatoriosPage = () => {
             }`}
           >
             <FileText size={16} />
-            Summary
+            Resumo
           </button>
           <button
             onClick={() => setShowBudgetModal(true)}
             className="flex items-center gap-2 px-4 py-2 bg-secondary text-foreground rounded-full text-sm font-medium hover:bg-muted transition-colors whitespace-nowrap"
           >
             <Target size={16} />
-            Goals
+            Metas
           </button>
           <button
             onClick={() => setShowCategoryModal(true)}
             className="flex items-center gap-2 px-4 py-2 bg-secondary text-foreground rounded-full text-sm font-medium hover:bg-muted transition-colors whitespace-nowrap"
           >
             <Tag size={16} />
-            Categories
+            Categorias
           </button>
           <button
             onClick={() => setShowComparison(!showComparison)}
@@ -412,7 +412,7 @@ const RelatoriosPage = () => {
             }`}
           >
             <ArrowLeftRight size={16} />
-            Compare
+            Comparar
           </button>
         </div>
 
@@ -438,11 +438,11 @@ const RelatoriosPage = () => {
           <div className="finance-card mb-4">
             <div className="flex items-center gap-2 mb-3">
               <Calendar size={18} className="text-primary" />
-              <span className="text-foreground font-medium">Custom Period</span>
+              <span className="text-foreground font-medium">Período Personalizado</span>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs text-muted-foreground mb-1">Start Date</label>
+                <label className="block text-xs text-muted-foreground mb-1">Data de Início</label>
                 <input
                   type="date"
                   value={customStartDate}
@@ -451,7 +451,7 @@ const RelatoriosPage = () => {
                 />
               </div>
               <div>
-                <label className="block text-xs text-muted-foreground mb-1">End Date</label>
+                <label className="block text-xs text-muted-foreground mb-1">Data de Fim</label>
                 <input
                   type="date"
                   value={customEndDate}
@@ -479,7 +479,7 @@ const RelatoriosPage = () => {
                 />
                 <div className="flex-1">
                   <p className={`text-sm font-medium ${alert.exceeded ? "text-destructive" : "text-amber-500"}`}>
-                    {alert.categoryName}: {alert.percentage.toFixed(0)}% of budget
+                    {alert.categoryName}: {alert.percentage.toFixed(0)}% do orçamento
                   </p>
                   <p className="text-xs text-muted-foreground">
                     {formatCurrency(alert.spent)} de {formatCurrency(alert.limit)}
@@ -495,9 +495,9 @@ const RelatoriosPage = () => {
             <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mb-4">
               <BarChart3 size={40} className="text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Not enough data</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-2">Dados insuficientes</h3>
             <p className="text-muted-foreground text-center max-w-xs">
-              {selectedCardId ? "Add transactions to this card" : "Add transactions to see your reports"}
+              {selectedCardId ? "Adicione transações a este cartão" : "Adicione transações para ver os seus relatórios"}
             </p>
           </div>
         ) : (
@@ -505,7 +505,7 @@ const RelatoriosPage = () => {
             {/* Monthly Summary Mode */}
             {showMonthlySummary && (
               <div className="finance-card mb-6">
-                <h3 className="text-lg font-semibold text-foreground mb-4">📊 Monthly Summary</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">📊 Resumo Mensal</h3>
                 <MonthlySummary transactions={cardFilteredTransactions} />
               </div>
             )}
@@ -513,7 +513,7 @@ const RelatoriosPage = () => {
             {/* Month Comparison Mode */}
             {showComparison && (
               <div className="finance-card mb-6">
-                <h3 className="text-lg font-semibold text-foreground mb-4">Last 6 Months Comparison</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">Comparação dos Últimos 6 Meses</h3>
                 <div className="h-[280px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={comparisonDate}>
@@ -546,14 +546,14 @@ const RelatoriosPage = () => {
               <div className="finance-card">
                 <div className="flex items-center gap-2 mb-2">
                   <TrendingUp className="text-income" size={18} />
-                  <span className="text-sm text-muted-foreground">Total Income</span>
+                  <span className="text-sm text-muted-foreground">Receita Total</span>
                 </div>
                 <p className="text-xl font-bold text-income">{formatCurrency(filteredTotalIncome)}</p>
               </div>
               <div className="finance-card">
                 <div className="flex items-center gap-2 mb-2">
                   <TrendingDown className="text-expense" size={18} />
-                  <span className="text-sm text-muted-foreground">Total Expenses</span>
+                  <span className="text-sm text-muted-foreground">Despesa Total</span>
                 </div>
                 <p className="text-xl font-bold text-expense">{formatCurrency(filteredTotalExpense)}</p>
               </div>
@@ -562,7 +562,7 @@ const RelatoriosPage = () => {
             {/* Balance Summary */}
             <div className="finance-card mb-6">
               <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Period Balance</span>
+                <span className="text-muted-foreground">Saldo do Período</span>
                 <span className={`text-2xl font-bold ${filteredTotalIncome - filteredTotalExpense >= 0 ? "text-income" : "text-expense"}`}>
                   {formatCurrency(filteredTotalIncome - filteredTotalExpense)}
                 </span>
@@ -572,7 +572,7 @@ const RelatoriosPage = () => {
             {/* Pie Chart - Expenses by Category */}
             {expensesByCategory.length > 0 && (
               <div className="finance-card mb-6">
-                <h3 className="text-lg font-semibold text-foreground mb-4">🍕 Expenses by Category</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">🍕 Despesas por Categoria</h3>
                 <div className="h-[220px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <RechartsPieChart>
@@ -623,7 +623,7 @@ const RelatoriosPage = () => {
             {/* Stacked Area Chart - Expense Composition Over Time */}
             {stackedAreaDate.length > 1 && Object.keys(categoryColorsForArea).length > 0 && (
               <div className="finance-card mb-6">
-                <h3 className="text-lg font-semibold text-foreground mb-4">Expense Composition</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">Composição das Despesas</h3>
                 <div className="h-[240px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={stackedAreaDate}>
@@ -659,7 +659,7 @@ const RelatoriosPage = () => {
             {/* Line Chart - Evolution */}
             {lineChartDate.length > 1 && (
               <div className="finance-card mb-6">
-                <h3 className="text-lg font-semibold text-foreground mb-4">Income vs Expenses Trend</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">Tendência de Receitas vs Despesas</h3>
                 <div className="h-[240px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={lineChartDate}>
@@ -698,7 +698,7 @@ const RelatoriosPage = () => {
             {/* Bar Chart - Monthly Comparison */}
             {monthlyDate.length > 0 && (
               <div className="finance-card">
-                <h3 className="text-lg font-semibold text-foreground mb-4">Monthly Comparison</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">Comparação Mensal</h3>
                 <div className="h-[240px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={monthlyDate}>
@@ -724,7 +724,7 @@ const RelatoriosPage = () => {
 
             {filteredTransactions.length === 0 && (
               <div className="finance-card text-center py-8">
-                <p className="text-muted-foreground">No transactions found para este período</p>
+                <p className="text-muted-foreground">Nenhuma transação encontrada para este período</p>
               </div>
             )}
           </>

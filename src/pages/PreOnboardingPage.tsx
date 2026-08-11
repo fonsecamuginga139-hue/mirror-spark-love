@@ -29,7 +29,7 @@ const HeroVisual = () => (
     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.25),transparent_70%)] blur-2xl" />
     <FloatingCard className="absolute left-2 right-2 top-4">
       <div className="rounded-2xl border border-primary/20 bg-card/80 backdrop-blur-xl p-5 shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.5)]">
-        <p className="text-xs text-muted-foreground">Total Balance</p>
+        <p className="text-xs text-muted-foreground">Saldo Total</p>
         <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">$12,450.00</p>
         <div className="mt-4 grid grid-cols-7 gap-1 items-end h-10">
           {[35, 55, 42, 70, 50, 80, 95].map((h, i) => (
@@ -44,13 +44,13 @@ const HeroVisual = () => (
           <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
             <TrendingUp className="w-4 h-4 text-primary" />
           </div>
-          <div><p className="text-[10px] text-muted-foreground">Income</p><p className="text-sm font-bold text-primary">+$4,200</p></div>
+          <div><p className="text-[10px] text-muted-foreground">Receita</p><p className="text-sm font-bold text-primary">+$4,200</p></div>
         </div>
       </div>
     </FloatingCard>
     <FloatingCard delay={0.8} className="absolute right-0 top-56">
       <div className="rounded-xl border border-primary/30 bg-card/90 backdrop-blur-xl px-4 py-3 shadow-xl w-[160px]">
-        <div className="flex items-center gap-2 mb-2"><Target className="w-4 h-4 text-primary" /><p className="text-xs font-semibold">Emergency Fund</p></div>
+        <div className="flex items-center gap-2 mb-2"><Target className="w-4 h-4 text-primary" /><p className="text-xs font-semibold">Fundo de Emergência</p></div>
         <div className="h-1.5 bg-muted rounded-full overflow-hidden"><div className="h-full w-[68%] bg-gradient-to-r from-primary to-primary/60" /></div>
         <p className="text-[10px] text-muted-foreground mt-1">68%</p>
       </div>
@@ -86,8 +86,8 @@ const PreOnboardingPage = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden">
       <SEO
-        title="Vault — Take control of your personal finances"
-        description="Vault helps you track spending, manage cards, set goals and automate recurring bills with a premium mobile-first experience."
+        title="Vault — Assuma o controlo das suas finanças pessoais"
+        description="O Vault ajuda-o a monitorizar despesas, gerir cartões, definir metas e automatizar contas recorrentes com uma experiência premium mobile-first."
         path="/pre-onboarding"
       />
       <div className="fixed inset-0 bg-gradient-to-b from-background via-background to-background pointer-events-none" />
@@ -96,7 +96,7 @@ const PreOnboardingPage = () => {
       <header className={`sticky top-0 z-30 transition-all ${scrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/40" : ""}`}>
         <div className="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/vault-logo.png" alt="VAULT financial management logo" className="w-8 h-8 rounded-lg object-cover" />
+            <img src="/vault-logo.png" alt="Logótipo de gestão financeira VAULT" className="w-8 h-8 rounded-lg object-cover" />
             <span className="text-lg font-bold tracking-wider text-foreground">VAULT</span>
           </div>
           <div className="flex items-center gap-2">

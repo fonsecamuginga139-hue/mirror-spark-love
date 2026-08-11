@@ -16,9 +16,9 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     quote: [
-      "I used to think I didn't earn enough.",
-      "The truth is I was spending poorly.",
-      "In 30 days with Vault, I saw exactly where my money was leaking.",
+      "Achava que não ganhava o suficiente.",
+      "A verdade é que gastava mal.",
+      "Em 30 dias com o Vault, vi exatamente onde o meu dinheiro se perdia.",
     ],
     author: "Carlos M.",
     location: "Portugal",
@@ -26,9 +26,9 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: [
-      "I could never control my expenses.",
-      "With Vault, everything becomes clear.",
-      "Now I know how much I can spend without fear.",
+      "Nunca conseguia controlar as minhas despesas.",
+      "Com o Vault, tudo fica claro.",
+      "Agora sei quanto posso gastar sem medo.",
     ],
     author: "Ana P.",
     location: "Brazil",
@@ -36,9 +36,9 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: [
-      "It's not just a pretty app.",
-      "It's a wake-up call.",
-      "Either you control money, or money controls you.",
+      "Não é apenas uma app bonita.",
+      "É um alerta.",
+      "Ou controla o dinheiro, ou o dinheiro controla-o a si.",
     ],
     author: "Ricardo S.",
     location: "Brazil",
@@ -46,9 +46,9 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: [
-      "I thought it was impossible to manage everything on a phone.",
-      "Vault proved me wrong.",
-      "Yesple, fast, and actually works.",
+      "Achava impossível gerir tudo num telemóvel.",
+      "O Vault provou que estava errada.",
+      "Simples, rápido, e realmente funciona.",
     ],
     author: "Joana L.",
     location: "Portugal",
@@ -66,13 +66,13 @@ const TestimonialsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-12 opacity-0 animate-[testimonial-header_0.8s_cubic-bezier(0.25,0.46,0.45,0.94)_forwards]">
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Real people.{" "}
+            Pessoas reais.{" "}
             <span className="bg-gradient-to-r from-primary to-[#4ade80] bg-clip-text text-transparent">
-              Real results.
+              Resultados reais.
             </span>
           </h3>
           <p className="text-lg text-neutral-400 max-w-xl mx-auto">
-            See what happens when you finally take control of your money.
+            Veja o que acontece quando finalmente assume o controlo do seu dinheiro.
           </p>
         </div>
 
@@ -118,7 +118,7 @@ const TestimonialsSection = () => {
                 </div>
                 <div className="flex items-center gap-1.5 text-primary text-sm">
                   <CheckCircle size={14} className="text-primary" />
-                  <span className="text-neutral-400 hidden sm:inline">Verified user</span>
+                  <span className="text-neutral-400 hidden sm:inline">Utilizador verificado</span>
                 </div>
               </div>
 
@@ -138,13 +138,13 @@ const TestimonialsSection = () => {
           style={{ animationDelay: "1.3s" }}
         >
           <p className="text-xl font-semibold text-white mb-6">
-            If they did it, so can you.
+            Se eles conseguiram, você também consegue.
           </p>
           <Link
             to="/register"
             className="inline-block px-10 py-4 bg-gradient-to-r from-primary to-[#4ade80] hover:from-primary/90 hover:to-[#4ade80]/90 text-white font-bold text-lg rounded-2xl transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary/25"
           >
-            Get started
+            Começar agora
           </Link>
         </div>
       </div>

@@ -30,7 +30,7 @@ const CategoriesPage = () => {
     const result = await addCategory(newCategoryName, newCategoryType, newCategoryColor, suggestedIcon);
     
     if (result) {
-      toast.success("Category created!");
+      toast.success("Categoria criada!");
       setNewCategoryName("");
       setIsCreating(false);
     }
@@ -44,7 +44,7 @@ const CategoriesPage = () => {
     if (deleteConfirm.id) {
       const success = await deleteCategory(deleteConfirm.id);
       if (success) {
-        toast.success("Category removed");
+        toast.success("Categoria removida");
       }
     }
     setDeleteConfirm({ isOpen: false, id: null });
@@ -83,7 +83,7 @@ const CategoriesPage = () => {
               )}
             </div>
             <p className="text-xs text-muted-foreground">
-              {category.is_default ? "System default" : isUserDefault ? "Your default category" : "Custom"}
+              {category.is_default ? "Padrão do sistema" : isUserDefault ? "A tua categoria padrão" : "Personalizada"}
             </p>
           </div>
         </div>
@@ -92,7 +92,7 @@ const CategoriesPage = () => {
             <button
               onClick={() => handleSetDefault(category)}
               className="opacity-0 group-hover:opacity-100 p-2 hover:bg-amber-500/20 rounded-lg transition-all"
-              title="Set as default"
+              title="Definir como padrão"
             >
               <Star size={16} className="text-amber-500" />
             </button>
@@ -126,15 +126,15 @@ const CategoriesPage = () => {
             <Tag className="text-primary" size={24} />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">Categories</h1>
-            <p className="text-muted-foreground text-sm">Organize your transactions</p>
+            <h1 className="text-2xl font-bold text-foreground">Categorias</h1>
+            <p className="text-muted-foreground text-sm">Organiza as tuas transações</p>
           </div>
         </div>
 
         {/* Create New Category */}
         {isCreating ? (
           <form onSubmit={handleCreateCategory} className="finance-card mb-6 space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">New Category</h3>
+            <h3 className="text-lg font-semibold text-foreground">Nova Categoria</h3>
             
             {/* Type Selection */}
             <div className="grid grid-cols-2 gap-3">
@@ -171,7 +171,7 @@ const CategoriesPage = () => {
               type="text"
               value={newCategoryName}
               onChange={(e) => setNewCategoryName(e.target.value)}
-              placeholder="Category name..."
+              placeholder="Nome da categoria..."
               className="input-field"
               autoFocus
               required
@@ -179,7 +179,7 @@ const CategoriesPage = () => {
 
             {/* Color Selection */}
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Color</label>
+              <label className="block text-sm font-medium text-foreground mb-2">Cor</label>
               <div className="flex gap-2 flex-wrap">
                 {colorOptions.map((color) => (
                   <button

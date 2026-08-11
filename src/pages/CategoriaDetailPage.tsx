@@ -19,7 +19,7 @@ const CategoriaDetailPage = () => {
   const filtered = useMemo(
     () =>
       transactions.filter(
-        (t) => (t.category_name || "Other").toLowerCase() === categoryName.toLowerCase(),
+        (t) => (t.category_name || "Outros").toLowerCase() === categoryName.toLowerCase(),
       ),
     [transactions, categoryName],
   );
@@ -67,7 +67,7 @@ const CategoriaDetailPage = () => {
   }
 
   return (
-    <div ref={constraints} className="min-h-screen bg-background pb-32 overflow-hidden">
+    <div ref={constraints} className="min-h-screen bg-background pb-32">
       <motion.div
         drag="y"
         dragConstraints={{ top: 0, bottom: 0 }}
@@ -84,7 +84,7 @@ const CategoriaDetailPage = () => {
 
         <div className="flex items-center justify-between mb-5">
           <BackButton to="/dashboard" />
-          <p className="text-xs text-muted-foreground">Swipe down to close</p>
+          <p className="text-xs text-muted-foreground">Deslize para baixo para fechar</p>
         </div>
 
         <div className="finance-card mb-5">
@@ -104,7 +104,7 @@ const CategoriaDetailPage = () => {
 
         {/* Futuristic bar chart */}
         <div className="finance-card mb-5">
-          <h3 className="text-sm font-semibold text-foreground mb-4">Last 12 weeks</h3>
+          <h3 className="text-sm font-semibold text-foreground mb-4">Últimas 12 semanas</h3>
           <div className="flex items-end gap-1.5 h-40">
             {bars.map((b, i) => (
               <motion.div
@@ -123,7 +123,7 @@ const CategoriaDetailPage = () => {
         <div className="space-y-2">
           {filtered.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-10">
-              No transactions in this category.
+              Sem transações nesta categoria.
             </p>
           ) : (
             filtered.map((t) => {
@@ -145,7 +145,7 @@ const CategoriaDetailPage = () => {
                     <div className="min-w-0">
                       <p className="text-foreground font-medium truncate">{label}</p>
                       <p className="text-xs text-muted-foreground">
-                        {new Date(t.date).toLocaleDateString()}
+                        {new Date(t.date).toLocaleDateString("pt-PT")}
                       </p>
                     </div>
                   </div>

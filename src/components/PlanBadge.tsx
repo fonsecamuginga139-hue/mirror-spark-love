@@ -42,7 +42,7 @@ const PlanBadge = ({ className, showLabel = true }: PlanBadgeProps) => {
     >
       {getIcon()}
       {showLabel && (
-        <span>{isActive ? planLabel : "No active plan"}</span>
+        <span>{isActive ? planLabel : "Sem plano ativo"}</span>
       )}
     </div>
   );

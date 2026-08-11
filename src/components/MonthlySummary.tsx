@@ -54,7 +54,7 @@ const MonthlySummary = ({ transactions }: MonthlySummaryProps) => {
   if (monthlySummaries.length === 0) {
     return (
       <div className="finance-card text-center py-8">
-        <p className="text-muted-foreground">No transactions found</p>
+        <p className="text-muted-foreground">Nenhuma transação encontrada</p>
       </div>
     );
   }
@@ -64,8 +64,8 @@ const MonthlySummary = ({ transactions }: MonthlySummaryProps) => {
       {monthlySummaries.map((summary) => {
         // Date for mini donut chart
         const chartDate = [
-          { name: "Income", value: summary.income, color: "#22c55e" },
-          { name: "Expenses", value: summary.expense, color: "#ef4444" },
+          { name: "Receitas", value: summary.income, color: "#22c55e" },
+          { name: "Despesas", value: summary.expense, color: "#ef4444" },
         ].filter(d => d.value > 0);
 
         // If no data, show empty state
@@ -111,13 +111,13 @@ const MonthlySummary = ({ transactions }: MonthlySummaryProps) => {
               </h4>
               <div className="space-y-1">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Income:</span>
+                  <span className="text-sm text-muted-foreground">Receitas:</span>
                   <span className="text-sm font-medium text-income">
                     {formatCurrency(summary.income)}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Expenses:</span>
+                  <span className="text-sm text-muted-foreground">Despesas:</span>
                   <span className="text-sm font-medium text-expense">
                     -{formatCurrency(summary.expense)}
                   </span>

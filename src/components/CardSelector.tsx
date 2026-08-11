@@ -27,7 +27,7 @@ const CardSelector = ({
 
   return (
     <div className="mb-6 animate-fade-in">
-      <p className="text-sm text-muted-foreground mb-3 font-medium">Select a card</p>
+      <p className="text-sm text-muted-foreground mb-3 font-medium">Selecionar um cartão</p>
       
       <div className="grid grid-cols-2 gap-3">
         {/* Consolidated View Option */}
@@ -56,7 +56,7 @@ const CardSelector = ({
               <Wallet size={20} />
             </div>
             <div className="text-left">
-              <p className="font-semibold text-foreground text-sm">All Cards</p>
+              <p className="font-semibold text-foreground text-sm">Todos os Cartões</p>
               <p className={cn(
                 "text-xs font-medium",
                 totalBalance >= 0 ? "text-income" : "text-expense"

@@ -38,7 +38,8 @@ export const useSubscription = () => {
   // No fluxo actual ninguém fica à espera de pagamento antes de usar o app.
   const isAwaitingPayment = false;
 
-  const hasAccess = isAdmin || isActive || isTrialActive;
+  // A aplicação nunca bloqueia o acesso: o estado do plano é informativo.
+  const hasAccess = true;
 
   const getPlanLabel = (): string => {
     if (isAdmin) return "Admin";

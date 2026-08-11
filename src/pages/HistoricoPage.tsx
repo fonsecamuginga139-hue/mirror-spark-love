@@ -117,7 +117,7 @@ const HistoricoPage = () => {
   const confirmDelete = async () => {
     if (deleteConfirm.id) {
       await deleteTransaction(deleteConfirm.id);
-      toast.success("Transaction removed");
+      toast.success("Transação removida");
     }
     setDeleteConfirm({ isOpen: false, id: null });
   };
@@ -157,9 +157,9 @@ const HistoricoPage = () => {
               <History className="text-primary" size={24} />
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-display text-foreground">History</h1>
+              <h1 className="text-2xl font-bold font-display text-foreground">Histórico</h1>
               <p className="text-muted-foreground text-sm">
-                {selectedCardName ? `Transações: ${selectedCardName}` : "All your transactions"}
+                {selectedCardName ? `Transações: ${selectedCardName}` : "Todas as tuas transações"}
               </p>
             </div>
           </div>
@@ -180,7 +180,7 @@ const HistoricoPage = () => {
               type="text"
               value={filters.search}
               onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-              placeholder="Search transactions..."
+              placeholder="Pesquisar transações..."
               className="input-field pl-10"
             />
           </div>
@@ -195,7 +195,7 @@ const HistoricoPage = () => {
             }`}
           >
             <Filter size={16} />
-            Filters
+            Filtros
             {hasActiveFilters && (
               <span className="w-2 h-2 rounded-full bg-primary-foreground animate-pulse" />
             )}
@@ -210,12 +210,12 @@ const HistoricoPage = () => {
           <div className="max-w-lg mx-auto space-y-4">
             {/* Type Filter */}
             <div>
-              <label className="text-sm font-medium text-foreground mb-2 block">Type</label>
+              <label className="text-sm font-medium text-foreground mb-2 block">Tipo</label>
               <div className="flex gap-2">
                 {[
                   { value: "all", label: "Todos" },
-                  { value: "income", label: "Income" },
-                  { value: "expense", label: "Expenses" },
+                  { value: "income", label: "Receita" },
+                  { value: "expense", label: "Despesas" },
                 ].map((option) => (
                   <button
                     key={option.value}
@@ -242,7 +242,7 @@ const HistoricoPage = () => {
                   }`}
                 >
                   <RefreshCw size={14} />
-                  Recurring
+                  Recorrente
                 </button>
               </div>
             </div>
@@ -250,14 +250,14 @@ const HistoricoPage = () => {
             {/* Category Filter */}
             <div>
               <label className="text-sm font-medium text-foreground mb-2 flex items-center gap-1">
-                <Tag size={14} /> Category
+                <Tag size={14} /> Categoria
               </label>
               <select
                 value={filters.categoryId || ""}
                 onChange={(e) => setFilters({ ...filters, categoryId: e.target.value || null })}
                 className="input-field"
               >
-                <option value="">All categories</option>
+                <option value="">Todas as categorias</option>
                 {categories.map((cat) => (
                   <option key={cat.id} value={cat.id}>
                     {cat.name}
@@ -270,7 +270,7 @@ const HistoricoPage = () => {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="text-sm font-medium text-foreground mb-2 flex items-center gap-1">
-                  <Calendar size={14} /> Start Date
+                  <Calendar size={14} /> Data inicial
                 </label>
                 <input
                   type="date"
@@ -280,7 +280,7 @@ const HistoricoPage = () => {
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-foreground mb-2 block">End Date</label>
+                <label className="text-sm font-medium text-foreground mb-2 block">Data final</label>
                 <input
                   type="date"
                   value={filters.endDate}
@@ -297,7 +297,7 @@ const HistoricoPage = () => {
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <X size={14} />
-                Clear filters
+                Limpar filtros
               </button>
             )}
           </div>
@@ -308,15 +308,15 @@ const HistoricoPage = () => {
       <div className="p-4 max-w-lg mx-auto">
         <div className="grid grid-cols-3 gap-3 mb-6">
           <div className="glass-card text-center">
-            <p className="text-xs text-muted-foreground mb-1">Income</p>
+            <p className="text-xs text-muted-foreground mb-1">Receita</p>
             <p className="text-sm font-bold text-income">{formatCurrency(totals.income)}</p>
           </div>
           <div className="glass-card text-center">
-            <p className="text-xs text-muted-foreground mb-1">Expenses</p>
+            <p className="text-xs text-muted-foreground mb-1">Despesas</p>
             <p className="text-sm font-bold text-expense">{formatCurrency(totals.expense)}</p>
           </div>
           <div className="glass-card text-center">
-            <p className="text-xs text-muted-foreground mb-1">Balance</p>
+            <p className="text-xs text-muted-foreground mb-1">Saldo</p>
             <p className={`text-sm font-bold ${totals.balance >= 0 ? "text-income" : "text-expense"}`}>
               {formatCurrency(totals.balance)}
             </p>
@@ -331,8 +331,8 @@ const HistoricoPage = () => {
         {Object.keys(groupedByDate).length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
             <History size={48} className="mb-4 opacity-50" />
-            <p className="font-medium">No transactions found</p>
-            <p className="text-sm text-center mt-2">Adjust filters or add new transactions</p>
+            <p className="font-medium">Nenhuma transação encontrada</p>
+            <p className="text-sm text-center mt-2">Ajusta os filtros ou adiciona novas transações</p>
           </div>
         ) : (
           <div className="space-y-6">
@@ -350,7 +350,7 @@ const HistoricoPage = () => {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
                           <p className="font-medium text-foreground truncate">
-                            {t.description || t.category_name || "No description"}
+                            {t.description || t.category_name || "Sem descrição"}
                           </p>
                           {t.is_auto_generated && (
                             <span className="px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary flex-shrink-0">

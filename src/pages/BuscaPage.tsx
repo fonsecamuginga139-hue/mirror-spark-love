@@ -67,7 +67,7 @@ const BuscaPage = () => {
       <div className="p-4 max-w-lg mx-auto">
         <div className="flex items-center justify-between mb-4">
           <BackButton to="/dashboard" />
-          <h1 className="text-lg font-semibold font-display text-foreground">Search</h1>
+          <h1 className="text-lg font-semibold font-display text-foreground">Pesquisar</h1>
           <div className="w-10" />
         </div>
 
@@ -80,7 +80,7 @@ const BuscaPage = () => {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search description, category, card…"
+            placeholder="Pesquisar descrição, categoria, cartão…"
             className="input-field pl-10"
           />
         </div>
@@ -121,7 +121,7 @@ const BuscaPage = () => {
           <div className="finance-card !p-3">
             <div className="flex items-center gap-2 text-income">
               <TrendingUp size={14} />
-              <span className="text-xs uppercase">In</span>
+              <span className="text-xs uppercase">Entrada</span>
             </div>
             <p className="text-lg font-bold tabular-nums text-foreground mt-1">
               {formatCurrency(totalIn)}
@@ -130,7 +130,7 @@ const BuscaPage = () => {
           <div className="finance-card !p-3">
             <div className="flex items-center gap-2 text-expense">
               <TrendingDown size={14} />
-              <span className="text-xs uppercase">Out</span>
+              <span className="text-xs uppercase">Saída</span>
             </div>
             <p className="text-lg font-bold tabular-nums text-foreground mt-1">
               {formatCurrency(totalOut)}
@@ -142,7 +142,7 @@ const BuscaPage = () => {
         <div className="finance-card mb-4">
           <div className="flex items-center gap-2 mb-3">
             <SlidersHorizontal size={14} className="text-primary" />
-            <h3 className="text-sm font-semibold text-foreground">Net flow</h3>
+            <h3 className="text-sm font-semibold text-foreground">Fluxo líquido</h3>
           </div>
           <div className="flex items-end gap-[2px] h-28">
             {chart.map((c, i) => {
@@ -185,10 +185,10 @@ const BuscaPage = () => {
               >
                 <div className="min-w-0">
                   <p className="text-foreground font-medium truncate">
-                    {t.description || t.category_name || "Transaction"}
+                    {t.description || t.category_name || "Transação"}
                   </p>
                   <p className="text-xs text-muted-foreground truncate">
-                    {t.category_name || "Uncategorized"} · {new Date(t.date).toLocaleDateString()}
+                    {t.category_name || "Sem categoria"} · {new Date(t.date).toLocaleDateString("pt-PT")}
                     {t.card_name ? ` · ${t.card_name}` : ""}
                   </p>
                 </div>

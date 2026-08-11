@@ -116,7 +116,7 @@ const NewTransactionModal = ({ isOpen, onClose, onAdd, cards, defaultCardId, edi
       <div className="bg-card w-full max-w-lg rounded-t-2xl sm:rounded-2xl max-h-[90vh] overflow-y-auto animate-slide-up">
         <div className="flex items-center justify-between p-4 border-b border-border">
           <h2 className="text-xl font-semibold text-foreground">
-            {isEditing ? "Edit Transaction" : "New Transaction"}
+            {isEditing ? "Editar Transação" : "Nova Transação"}
           </h2>
           <button onClick={handleClose} className="p-1 hover:bg-muted rounded-lg"><X size={24} className="text-muted-foreground" /></button>
         </div>
@@ -126,17 +126,17 @@ const NewTransactionModal = ({ isOpen, onClose, onAdd, cards, defaultCardId, edi
             <button type="button" onClick={() => setType("income")}
               className={`p-4 rounded-xl border-2 flex flex-col items-center gap-2 ${type === "income" ? "border-primary bg-primary/10" : "border-border"}`}>
               <TrendingUp className={type === "income" ? "text-primary" : "text-muted-foreground"} />
-              <span className={type === "income" ? "text-primary font-medium" : "text-muted-foreground"}>Income</span>
+              <span className={type === "income" ? "text-primary font-medium" : "text-muted-foreground"}>Receita</span>
             </button>
             <button type="button" onClick={() => setType("expense")}
               className={`p-4 rounded-xl border-2 flex flex-col items-center gap-2 ${type === "expense" ? "border-destructive bg-destructive/10" : "border-border"}`}>
               <TrendingDown className={type === "expense" ? "text-destructive" : "text-muted-foreground"} />
-              <span className={type === "expense" ? "text-destructive font-medium" : "text-muted-foreground"}>Expense</span>
+              <span className={type === "expense" ? "text-destructive font-medium" : "text-muted-foreground"}>Despesa</span>
             </button>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Amount *</label>
+            <label className="block text-sm font-medium text-foreground mb-2">Valor *</label>
             <CurrencyInput
               value={amount}
               onChange={setAmount}
@@ -146,37 +146,37 @@ const NewTransactionModal = ({ isOpen, onClose, onAdd, cards, defaultCardId, edi
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Card *</label>
+            <label className="block text-sm font-medium text-foreground mb-2">Cartão *</label>
             <select value={selectedCard} onChange={(e) => setSelectedCard(e.target.value)} className="input-field" required>
-              <option value="">Select a card</option>
+              <option value="">Selecione um cartão</option>
               {cards.map((card) => <option key={card.id} value={card.id}>{card.name}</option>)}
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Category</label>
+            <label className="block text-sm font-medium text-foreground mb-2">Categoria</label>
             <div className="flex mb-3">
               <button type="button" onClick={() => setCategoryMode("existing")}
                 className={`flex-1 py-2 text-sm font-medium rounded-l-lg ${categoryMode === "existing" ? "bg-muted text-foreground" : "bg-secondary text-muted-foreground"}`}>
-                Existing
+                Existente
               </button>
               <button type="button" onClick={() => setCategoryMode("new")}
                 className={`flex-1 py-2 text-sm font-medium rounded-r-lg ${categoryMode === "new" ? "bg-muted text-foreground" : "bg-secondary text-muted-foreground"}`}>
-                New
+                Nova
               </button>
             </div>
             {categoryMode === "existing" ? (
               <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="input-field">
-                <option value="">Select a category</option>
+                <option value="">Selecione uma categoria</option>
                 {categories.map((cat) => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
               </select>
             ) : (
-              <input type="text" value={newCategoryName} onChange={(e) => setNewCategoryName(e.target.value)} placeholder="New category name" className="input-field" />
+              <input type="text" value={newCategoryName} onChange={(e) => setNewCategoryName(e.target.value)} placeholder="Nome da nova categoria" className="input-field" />
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Date</label>
+            <label className="block text-sm font-medium text-foreground mb-2">Data</label>
             <div className="relative">
               <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
               <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="input-field pl-10" />
@@ -184,14 +184,14 @@ const NewTransactionModal = ({ isOpen, onClose, onAdd, cards, defaultCardId, edi
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Description</label>
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Ex: Rent, groceries..." className="input-field min-h-[80px] resize-none" />
+            <label className="block text-sm font-medium text-foreground mb-2">Descrição</label>
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Ex: Renda, mercearia..." className="input-field min-h-[80px] resize-none" />
           </div>
 
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={handleClose} className="flex-1 py-3 rounded-full border border-border text-foreground font-medium">Cancel</button>
+            <button type="button" onClick={handleClose} className="flex-1 py-3 rounded-full border border-border text-foreground font-medium">Cancelar</button>
             <button type="submit" className="flex-1 btn-primary">
-              {isEditing ? "Save" : "Add"}
+              {isEditing ? "Guardar" : "Adicionar"}
             </button>
           </div>
         </form>

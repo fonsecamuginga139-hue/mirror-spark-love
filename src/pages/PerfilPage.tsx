@@ -69,7 +69,7 @@ const ProfilePage = () => {
             <div className="flex items-center gap-2">
               {currency === "EUR" ? <Euro size={18} className="text-primary" /> : <DollarSign size={18} className="text-primary" />}
               <span className="text-primary font-medium">
-                {currency === "EUR" ? "Euro (€)" : currency === "BRL" ? "Real (R$)" : currency === "GBP" ? "Pound (£)" : "US Dollar ($)"}
+                {currency === "EUR" ? "Euro (€)" : currency === "BRL" ? "Real (R$)" : currency === "GBP" ? "Libra (£)" : "Dólar Americano ($)"}
               </span>
             </div>
           </div>

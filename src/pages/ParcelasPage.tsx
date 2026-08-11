@@ -32,7 +32,7 @@ const ParcelasPage = () => {
     const total = Number(form.total_amount);
     const count = Number(form.installments_count);
     if (!form.description.trim() || !total || !count) {
-      toast.error("Fill all fields");
+      toast.error("Preenche todos os campos");
       return;
     }
     setSaving(true);
@@ -44,11 +44,11 @@ const ParcelasPage = () => {
     });
     setSaving(false);
     if (r) {
-      toast.success("Installment added");
+      toast.success("Parcela adicionada");
       setOpen(false);
       setForm({ description: "", direction: "pay", total_amount: "", installments_count: "12" });
     } else {
-      toast.error("Could not save");
+      toast.error("Não foi possível guardar");
     }
   };
 
@@ -57,10 +57,10 @@ const ParcelasPage = () => {
       <div className="p-4 max-w-lg mx-auto">
         <div className="flex items-center justify-between mb-4">
           <BackButton to="/dashboard" />
-          <h1 className="text-lg font-semibold font-display text-foreground">Installments</h1>
+          <h1 className="text-lg font-semibold font-display text-foreground">Parcelas</h1>
           <button
             onClick={() => setOpen(true)}
-            aria-label="Add installment"
+            aria-label="Adicionar parcela"
             className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_20px_hsl(var(--primary)/0.4)] active:scale-95"
           >
             <Plus size={20} />
@@ -72,7 +72,7 @@ const ParcelasPage = () => {
           <div className="finance-card !p-3">
             <div className="flex items-center gap-2 text-expense">
               <ArrowUpCircle size={14} />
-              <span className="text-xs uppercase">Owed</span>
+              <span className="text-xs uppercase">Em dívida</span>
             </div>
             <p className="text-lg font-bold tabular-nums text-foreground mt-1">
               {formatCurrency(totalToPay)}
@@ -81,7 +81,7 @@ const ParcelasPage = () => {
           <div className="finance-card !p-3">
             <div className="flex items-center gap-2 text-income">
               <ArrowDownCircle size={14} />
-              <span className="text-xs uppercase">Incoming</span>
+              <span className="text-xs uppercase">A receber</span>
             </div>
             <p className="text-lg font-bold tabular-nums text-foreground mt-1">
               {formatCurrency(totalToReceive)}
@@ -129,7 +129,7 @@ const ParcelasPage = () => {
                     </div>
                     <button
                       onClick={() => remove(i.id)}
-                      aria-label="Remove"
+                      aria-label="Remover"
                       className="text-muted-foreground hover:text-destructive p-1"
                     >
                       <Trash2 size={16} />
@@ -211,7 +211,7 @@ const ParcelasPage = () => {
                 <input
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
-                  placeholder="Description (e.g. New phone)"
+                  placeholder="Descrição (ex: Telemóvel novo)"
                   className="input-field"
                 />
                 <div className="grid grid-cols-2 gap-3">
@@ -220,7 +220,7 @@ const ParcelasPage = () => {
                     onChange={(e) => setForm({ ...form, total_amount: e.target.value })}
                     type="number"
                     step="0.01"
-                    placeholder="Total amount"
+                    placeholder="Valor total"
                     className="input-field"
                   />
                   <input
@@ -228,7 +228,7 @@ const ParcelasPage = () => {
                     onChange={(e) => setForm({ ...form, installments_count: e.target.value })}
                     type="number"
                     min={1}
-                    placeholder="Number of installments"
+                    placeholder="Número de parcelas"
                     className="input-field"
                   />
                 </div>
@@ -244,7 +244,7 @@ const ParcelasPage = () => {
                 disabled={saving}
                 className="w-full h-12 mt-5 rounded-full bg-primary text-primary-foreground font-medium shadow-[0_0_20px_hsl(var(--primary)/0.4)] active:scale-[0.98] disabled:opacity-60"
               >
-                {saving ? "Saving…" : "Save installment"}
+                {saving ? "A guardar…" : "Guardar parcela"}
               </button>
             </motion.div>
           </motion.div>

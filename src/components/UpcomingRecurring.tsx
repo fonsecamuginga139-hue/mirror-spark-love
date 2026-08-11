@@ -41,9 +41,9 @@ const UpcomingRecurring = ({ recurringTransactions }: UpcomingRecurringProps) =>
   }
 
   const getDaysText = (days: number) => {
-    if (days === 0) return "Today";
-    if (days === 1) return "Tomorrow";
-    return `${days} days`;
+    if (days === 0) return "Hoje";
+    if (days === 1) return "Amanhã";
+    return `${days} dias`;
   };
 
   return (
@@ -54,14 +54,14 @@ const UpcomingRecurring = ({ recurringTransactions }: UpcomingRecurringProps) =>
             <CalendarClock className="text-primary" size={18} />
           </div>
           <h3 className="text-lg font-semibold font-display text-foreground">
-            Upcoming Recurring
+            Próximas Recorrentes
           </h3>
         </div>
         <Link
           to="/recorrentes"
           className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
         >
-          View all
+          Ver todas
           <ChevronRight size={16} />
         </Link>
       </div>
@@ -90,10 +90,10 @@ const UpcomingRecurring = ({ recurringTransactions }: UpcomingRecurringProps) =>
                 <p className="text-foreground font-medium text-sm">
                   {transaction.description ||
                     transaction.category_name ||
-                    "No description"}
+                    "Sem descrição"}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Day {transaction.day_of_month} • {transaction.card_name}
+                  Dia {transaction.day_of_month} • {transaction.card_name}
                 </p>
               </div>
             </div>

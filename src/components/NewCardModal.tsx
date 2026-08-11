@@ -70,7 +70,7 @@ const NewCardModal = ({ isOpen, onClose, onAdd }: NewCardModalProps) => {
     <div className="fixed inset-0 bg-black/60 flex items-end sm:items-center justify-center z-50">
       <div className="bg-card w-full max-w-lg rounded-t-2xl sm:rounded-2xl max-h-[90vh] overflow-y-auto animate-slide-up">
         <div className="flex items-center justify-between p-4 border-b border-border">
-          <h2 className="text-xl font-semibold text-foreground">New Card</h2>
+          <h2 className="text-xl font-semibold text-foreground">Novo Cartão</h2>
           <button
             onClick={onClose}
             className="p-1 hover:bg-muted rounded-lg transition-colors"
@@ -83,13 +83,13 @@ const NewCardModal = ({ isOpen, onClose, onAdd }: NewCardModalProps) => {
           {/* Name */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Card Name *
+              Nome do Cartão *
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Ex: Chase, Bank of America..."
+              placeholder="Ex: Chase, Millennium BCP..."
               className="input-field"
               required
             />
@@ -98,7 +98,7 @@ const NewCardModal = ({ isOpen, onClose, onAdd }: NewCardModalProps) => {
           {/* Number */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Número do Card (optional)
+              Número do Cartão (opcional)
             </label>
             <input
               type="text"
@@ -112,7 +112,7 @@ const NewCardModal = ({ isOpen, onClose, onAdd }: NewCardModalProps) => {
           {/* Color */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Color
+              Cor
             </label>
             <div className="grid grid-cols-4 gap-3">
               {colors.map((color) => (
@@ -134,11 +134,11 @@ const NewCardModal = ({ isOpen, onClose, onAdd }: NewCardModalProps) => {
           {/* Icon */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Icon
+              Ícone
             </label>
             <input
               type="text"
-              placeholder="Search icon..."
+              placeholder="Pesquisar ícone..."
               className="input-field mb-3"
             />
             <div className="grid grid-cols-6 gap-2">
@@ -169,10 +169,10 @@ const NewCardModal = ({ isOpen, onClose, onAdd }: NewCardModalProps) => {
               onClick={onClose}
               className="flex-1 py-3 rounded-full border border-border text-foreground font-medium hover:bg-muted transition-colors"
             >
-              Cancel
+              Cancelar
             </button>
             <button type="submit" className="flex-1 btn-primary">
-              Create
+              Criar
             </button>
           </div>
         </form>

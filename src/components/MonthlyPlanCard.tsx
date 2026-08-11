@@ -19,10 +19,10 @@ const MonthlyPlanCard = () => {
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-base font-semibold text-foreground flex items-center gap-2">
           <Sparkles size={16} className="text-primary" />
-          Monthly Plan
+          Plano Mensal
         </h3>
         <span className="text-xs text-muted-foreground">
-          {activeBills.length} bill{activeBills.length === 1 ? "" : "s"}
+          {activeBills.length} conta{activeBills.length === 1 ? "" : "s"}
         </span>
       </div>
 
@@ -30,21 +30,21 @@ const MonthlyPlanCard = () => {
         <div className="rounded-xl bg-income/10 border border-income/20 p-3">
           <div className="flex items-center gap-1.5 mb-1">
             <Wallet size={14} className="text-income" />
-            <span className="text-xs text-muted-foreground">Income</span>
+            <span className="text-xs text-muted-foreground">Receita</span>
           </div>
           <p className="text-base font-bold text-income">{formatCurrency(monthlyIncome)}</p>
         </div>
         <div className="rounded-xl bg-expense/10 border border-expense/20 p-3">
           <div className="flex items-center gap-1.5 mb-1">
             <ArrowDownCircle size={14} className="text-expense" />
-            <span className="text-xs text-muted-foreground">Fixed Bills</span>
+            <span className="text-xs text-muted-foreground">Contas Fixas</span>
           </div>
           <p className="text-base font-bold text-expense">{formatCurrency(totalActiveAmount)}</p>
         </div>
       </div>
 
       <div className="rounded-xl bg-primary/10 border border-primary/30 p-3 flex items-center justify-between">
-        <span className="text-sm text-muted-foreground">Available Monthly Balance</span>
+        <span className="text-sm text-muted-foreground">Saldo Mensal Disponível</span>
         <span className={`text-lg font-bold ${available >= 0 ? "text-primary" : "text-destructive"}`}>
           {formatCurrency(available)}
         </span>

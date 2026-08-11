@@ -22,14 +22,14 @@ const CartoesPage = () => {
     });
 
     if (result) {
-      toast.success("Card created successfully!");
+      toast.success("Cartão criado com sucesso!");
       setIsModalOpen(false);
     }
   };
 
   const handleDeleteCard = async (id: string) => {
     await deleteCard(id);
-    toast.success("Card removed");
+    toast.success("Cartão removido");
   };
 
   if (loading) {
@@ -43,8 +43,8 @@ const CartoesPage = () => {
   return (
     <div className="min-h-screen bg-background pb-24">
       <div className="p-4 max-w-lg mx-auto">
-        <h1 className="text-2xl font-bold text-foreground mb-1">Cards</h1>
-        <p className="text-muted-foreground mb-6">Manage your financial cards</p>
+        <h1 className="text-2xl font-bold text-foreground mb-1">Cartões</h1>
+        <p className="text-muted-foreground mb-6">Gere os teus cartões financeiros</p>
 
         <button
           onClick={() => setIsModalOpen(true)}
@@ -59,7 +59,7 @@ const CartoesPage = () => {
             <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mb-4">
               <CreditCard size={40} className="text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">No cards yet</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-2">Ainda sem cartões</h3>
             <p className="text-muted-foreground text-center max-w-xs">
               Create your first card to start managing your finances
             </p>
@@ -91,7 +91,7 @@ const CartoesPage = () => {
 
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-white/80 text-sm mb-1">Balance</p>
+                    <p className="text-white/80 text-sm mb-1">Saldo</p>
                     <p className="text-white text-2xl font-bold">
                       {formatCurrency(getCardBalance(card.id))}
                     </p>

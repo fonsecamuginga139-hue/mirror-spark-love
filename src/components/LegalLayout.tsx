@@ -24,7 +24,7 @@ const LegalLayout = ({ title, description, path, children }: LegalLayoutProps) =
             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back
+            Voltar
           </button>
           <Link to="/" className="text-sm font-semibold tracking-wide text-primary">
             FinanceFLOW
@@ -37,7 +37,7 @@ const LegalLayout = ({ title, description, path, children }: LegalLayoutProps) =
             {title}
           </h1>
           <p className="text-xs text-muted-foreground mb-8">
-            Last updated: June 23, 2026
+            Última atualização: 23 de junho de 2026
           </p>
           <div className="prose prose-invert max-w-none space-y-5 text-[15px] leading-relaxed text-foreground/90 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-2 [&_h2]:text-foreground [&_p]:text-muted-foreground [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-1 [&_li]:text-muted-foreground [&_a]:text-primary [&_a]:underline">
             {children}

@@ -76,7 +76,7 @@ const RecurringHistory = ({ recurringId }: RecurringHistoryProps) => {
 
   const getRecurringName = (recurringTransactionId: string) => {
     const recurring = recurringTransactions.find(r => r.id === recurringTransactionId);
-    return recurring?.description || "Recurring";
+    return recurring?.description || "Recorrente";
   };
 
   if (loading) {
@@ -91,9 +91,9 @@ const RecurringHistory = ({ recurringId }: RecurringHistoryProps) => {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
         <History size={40} className="mb-3 opacity-50" />
-        <p className="font-medium">No generated transactions yet</p>
+        <p className="font-medium">Ainda não há transações geradas</p>
         <p className="text-sm text-center mt-1">
-          Recurring transactions will appear here after they run
+          As transações recorrentes aparecerão aqui depois de serem executadas
         </p>
       </div>
     );
@@ -117,11 +117,11 @@ const RecurringHistory = ({ recurringId }: RecurringHistoryProps) => {
       {/* Stats */}
       <div className="grid grid-cols-2 gap-3">
         <div className="glass-card text-center">
-          <p className="text-xs text-muted-foreground mb-1">Total Generated</p>
+          <p className="text-xs text-muted-foreground mb-1">Total Gerado</p>
           <p className="text-lg font-bold text-foreground">{transactions.length}</p>
         </div>
         <div className="glass-card text-center">
-          <p className="text-xs text-muted-foreground mb-1">Last Month</p>
+          <p className="text-xs text-muted-foreground mb-1">Mês Anterior</p>
           <p className="text-lg font-bold text-foreground">
             {groupedByMonth[Object.keys(groupedByMonth)[0]]?.length || 0}
           </p>
@@ -148,7 +148,7 @@ const RecurringHistory = ({ recurringId }: RecurringHistoryProps) => {
                     </p>
                     <span className="px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary flex-shrink-0">
                       <RefreshCw size={10} className="inline mr-1" />
-                      Auto
+                      Automático
                     </span>
                   </div>
                   <p className="text-xs text-muted-foreground">

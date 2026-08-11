@@ -1,6 +1,13 @@
 import { useMemo } from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
-import { RefreshCw, TrendingUp, TrendingDown } from "lucide-react";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+} from "recharts";
+import { RefreshCw } from "lucide-react";
 import { useCurrency } from "@/hooks/useCurrency";
 import { RecurringTransactionWithDetails } from "@/hooks/useRecurringTransactions";
 
@@ -9,174 +16,146 @@ interface RecurringChartsProps {
   variant?: "dashboard" | "reports";
 }
 
+const MESES = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+
 const RecurringCharts = ({ recurringTransactions, variant = "dashboard" }: RecurringChartsProps) => {
   const { formatCurrency } = useCurrency();
 
-  // Calculate totals for active recurring
-  const { totalRecurringIncome, totalRecurringExpense, monthlyRecurringBalance } = useMemo(() => {
-    const active = recurringTransactions.filter(r => r.is_active);
-    
-    const income = active
-      .filter(r => r.type === "income")
+  const { receitas, despesas, saldo } = useMemo(() => {
+    const activos = recurringTransactions.filter((r) => r.is_active);
+    const income = activos
+      .filter((r) => r.type === "income")
       .reduce((sum, r) => sum + Number(r.amount), 0);
-    
-    const expense = active
-      .filter(r => r.type === "expense")
+    const expense = activos
+      .filter((r) => r.type === "expense")
       .reduce((sum, r) => sum + Number(r.amount), 0);
-    
-    return {
-      totalRecurringIncome: income,
-      totalRecurringExpense: expense,
-      monthlyRecurringBalance: income - expense,
-    };
+    return { receitas: income, despesas: expense, saldo: income - expense };
   }, [recurringTransactions]);
 
-  // Date for simple bar chart (dashboard)
-  const simpleChartDate = useMemo(() => [
-    { name: "Income", value: totalRecurringIncome, color: "hsl(var(--income))" },
-    { name: "Expenses", value: totalRecurringExpense, color: "hsl(var(--expense))" },
-  ], [totalRecurringIncome, totalRecurringExpense]);
+  // Projecção dos próximos 6 meses com base nos recorrentes activos.
+  const projeccao = useMemo(() => {
+    const hoje = new Date();
+    return Array.from({ length: 6 }, (_, i) => {
+      const d = new Date(hoje.getFullYear(), hoje.getMonth() + i, 1);
+      return {
+        mes: MESES[d.getMonth()],
+        receitas,
+        despesas,
+        saldo,
+      };
+    });
+  }, [receitas, despesas, saldo]);
 
-  // Date for comparison chart (reports) - recurring vs non-recurring
-  const hasDate = totalRecurringIncome > 0 || totalRecurringExpense > 0;
+  const temDados = receitas > 0 || despesas > 0;
+  if (!temDados) return null;
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-card/95 backdrop-blur-sm border border-border rounded-lg px-3 py-2 shadow-xl">
-          <p className="text-xs text-muted-foreground mb-1">{label}</p>
-          {payload.map((entry: any, index: number) => (
-            <p key={index} className="text-sm font-semibold" style={{ color: entry.fill || entry.color }}>
-              {formatCurrency(entry.value)}
-            </p>
-          ))}
-        </div>
-      );
-    }
-    return null;
-  };
-
-  if (!hasDate) {
-    return null;
-  }
-
-  // Yesple Dashboard Version
-  if (variant === "dashboard") {
-    const max = Math.max(totalRecurringIncome, totalRecurringExpense, 1);
-    const rows = [
-      { name: "Income", value: totalRecurringIncome, icon: "⬆️", color: "hsl(var(--income))" },
-      { name: "Expenses", value: totalRecurringExpense, icon: "⬇️", color: "hsl(var(--expense))" },
-    ];
+  const Tip = ({ active, payload, label }: any) => {
+    if (!active || !payload?.length) return null;
     return (
-      <div className="finance-card animate-fade-in-up mb-4" style={{ animationDelay: "0.4s" }}>
-        <div className="flex items-center gap-2 mb-5">
-          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-            <RefreshCw className="text-primary" size={16} />
-          </div>
-          <h3 className="text-lg font-semibold font-display text-foreground">Recurring This Month</h3>
-        </div>
-
-        <div className="space-y-4">
-          {rows.map((r) => {
-            const pct = (r.value / max) * 100;
-            const width = Math.max(pct, 8);
-            return (
-              <div key={r.name} className="space-y-1.5">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-foreground font-medium">{r.name}</span>
-                  <span className="text-muted-foreground tabular-nums">{formatCurrency(r.value)}</span>
-                </div>
-                <div className="relative h-8">
-                  <div className="absolute inset-y-0 left-0 right-0 rounded-full bg-primary/5" />
-                  <div
-                    className="absolute inset-y-0 left-0 rounded-full transition-[width] duration-700 ease-out"
-                    style={{
-                      width: `${width}%`,
-                      background: `linear-gradient(90deg, ${r.color} / 0.35 0%, ${r.color} 100%)`,
-                      backgroundImage: `linear-gradient(90deg, color-mix(in oklab, ${r.color} 35%, transparent) 0%, ${r.color} 100%)`,
-                      boxShadow: `0 0 20px ${r.color}`,
-                    }}
-                  />
-                  <div
-                    className="absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-base shadow-lg ring-2 ring-background transition-[left] duration-700 ease-out"
-                    style={{ left: `calc(${width}% - 32px)`, background: r.color }}
-                    aria-hidden
-                  >
-                    <span className="leading-none">{r.icon}</span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="mt-4 pt-3 border-t border-border flex items-center justify-between">
-          <span className="text-sm text-muted-foreground">Balance</span>
-          <span className={`font-bold tabular-nums ${monthlyRecurringBalance >= 0 ? "text-income" : "text-expense"}`}>
-            {formatCurrency(monthlyRecurringBalance)}
-          </span>
-        </div>
+      <div className="rounded-xl border border-border bg-card/95 px-3 py-2 shadow-xl backdrop-blur-sm">
+        <p className="mb-1 text-xs text-muted-foreground">{label}</p>
+        {payload.map((entry: any, i: number) => (
+          <p key={i} className="text-sm font-semibold" style={{ color: entry.stroke }}>
+            {entry.name}: {formatCurrency(entry.value)}
+          </p>
+        ))}
       </div>
     );
-  }
+  };
 
-  // Reports Version - More detailed
+  const max = Math.max(receitas, despesas, 1);
+
   return (
-    <div className="finance-card mb-6">
-      <div className="flex items-center gap-2 mb-4">
-        <RefreshCw className="text-primary" size={20} />
-        <h3 className="text-lg font-semibold text-foreground">Transações Recurring</h3>
+    <section
+      className="rounded-[28px] border border-primary/20 bg-card/60 backdrop-blur-xl p-5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.8)] animate-fade-in-up mb-4"
+      style={{ animationDelay: "0.15s" }}
+    >
+      <header className="mb-4 flex items-center gap-2">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary">
+          <RefreshCw size={15} />
+        </span>
+        <h3 className="text-sm font-semibold text-foreground">Recorrentes deste mês</h3>
+      </header>
+
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { label: "Receitas", value: receitas, cls: "text-income" },
+          { label: "Despesas", value: despesas, cls: "text-expense" },
+          { label: "Saldo", value: saldo, cls: saldo >= 0 ? "text-income" : "text-expense" },
+        ].map((c) => (
+          <div key={c.label} className="min-w-0 rounded-2xl border border-primary/10 bg-background/40 px-3 py-2.5">
+            <p className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{c.label}</p>
+            <p className={`truncate text-sm font-bold tabular-nums ${c.cls}`}>
+              {formatCurrency(Math.abs(c.value))}
+            </p>
+          </div>
+        ))}
       </div>
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-3 gap-3 mb-4">
-        <div className="p-3 rounded-xl bg-income/10 border border-income/20 text-center">
-          <span className="text-xs text-muted-foreground block mb-1">Income</span>
-          <p className="text-lg font-bold text-income">{formatCurrency(totalRecurringIncome)}</p>
-        </div>
-        <div className="p-3 rounded-xl bg-expense/10 border border-expense/20 text-center">
-          <span className="text-xs text-muted-foreground block mb-1">Expenses</span>
-          <p className="text-lg font-bold text-expense">{formatCurrency(totalRecurringExpense)}</p>
-        </div>
-        <div className={`p-3 rounded-xl text-center ${monthlyRecurringBalance >= 0 ? "bg-income/10 border border-income/20" : "bg-expense/10 border border-expense/20"}`}>
-          <span className="text-xs text-muted-foreground block mb-1">Balance</span>
-          <p className={`text-lg font-bold ${monthlyRecurringBalance >= 0 ? "text-income" : "text-expense"}`}>
-            {formatCurrency(monthlyRecurringBalance)}
-          </p>
-        </div>
+      <div className="mt-4 space-y-3">
+        {[
+          { label: "Receitas", value: receitas, color: "hsl(var(--income))" },
+          { label: "Despesas", value: despesas, color: "hsl(var(--expense))" },
+        ].map((r) => (
+          <div key={r.label} className="space-y-1.5">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-medium text-foreground">{r.label}</span>
+              <span className="tabular-nums text-muted-foreground">{formatCurrency(r.value)}</span>
+            </div>
+            <div className="h-2 overflow-hidden rounded-full bg-muted/30">
+              <div
+                className="h-full rounded-full transition-[width] duration-700 ease-out"
+                style={{ width: `${Math.max((r.value / max) * 100, 4)}%`, backgroundColor: r.color }}
+              />
+            </div>
+          </div>
+        ))}
       </div>
 
-      {/* Bar Chart */}
-      <div className="h-[180px]">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={simpleChartDate} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-            <XAxis 
-              dataKey="name" 
-              tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
-              tickLine={false}
-              axisLine={false}
-            />
-            <YAxis 
-              tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10 }}
-              tickLine={false}
-              axisLine={false}
-              tickFormatter={(value) => `${(value / 1000).toFixed(0)}k`}
-            />
-            <Tooltip content={<CustomTooltip />} />
-            <Bar dataKey="value" radius={[8, 8, 0, 0]} maxBarSize={80}>
-              {simpleChartDate.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* Active Count */}
-      <p className="text-xs text-muted-foreground text-center mt-2">
-        {recurringTransactions.filter(r => r.is_active).length} active recurring transactions
-      </p>
-    </div>
+      {variant === "reports" && (
+        <div className="mt-5 h-44">
+          <p className="mb-2 text-xs text-muted-foreground">Projecção dos próximos 6 meses</p>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={projeccao} margin={{ top: 4, right: 4, left: 4, bottom: 0 }}>
+              <defs>
+                <linearGradient id="rc-in" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="hsl(var(--income))" stopOpacity={0.35} />
+                  <stop offset="100%" stopColor="hsl(var(--income))" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="rc-out" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="hsl(var(--expense))" stopOpacity={0.3} />
+                  <stop offset="100%" stopColor="hsl(var(--expense))" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid vertical={false} stroke="hsl(var(--border))" strokeOpacity={0.35} />
+              <XAxis
+                dataKey="mes"
+                tickLine={false}
+                axisLine={false}
+                tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
+              />
+              <Tooltip content={<Tip />} />
+              <Area
+                type="monotone"
+                dataKey="receitas"
+                name="Receitas"
+                stroke="hsl(var(--income))"
+                strokeWidth={2}
+                fill="url(#rc-in)"
+              />
+              <Area
+                type="monotone"
+                dataKey="despesas"
+                name="Despesas"
+                stroke="hsl(var(--expense))"
+                strokeWidth={2}
+                fill="url(#rc-out)"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+    </section>
   );
 };
 

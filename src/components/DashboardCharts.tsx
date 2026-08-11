@@ -271,7 +271,7 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
               {typeof trend !== "string" && trend.direction === "up" 
                 ? "📈 O seu saldo está a crescer!"
                 : typeof trend !== "string" && trend.direction === "down"
-                ? "📉 Warning: balance is falling"
+                ? "📉 Aviso: o saldo está a diminuir"
                 : "Linha a subir = superávit • Linha a descer = alerta"}
             </p>
           </div>

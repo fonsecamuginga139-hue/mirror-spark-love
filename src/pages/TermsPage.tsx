@@ -3,80 +3,82 @@ import LegalLayout from "@/components/LegalLayout";
 const TermsPage = () => {
   return (
     <LegalLayout
-      title="Terms of Service"
-      description="The terms and conditions that govern your use of FinanceFLOW."
+      title="Termos de Serviço"
+      description="Os termos e condições que regem a utilização da FinanceFLOW."
       path="/terms"
     >
       <p>
-        These Terms of Service (&quot;Terms&quot;) govern your access to and use of FinanceFLOW. By creating
-        an account or using the service, you agree to be bound by these Terms.
+        Estes Termos de Serviço (&quot;Termos&quot;) regem o seu acesso e utilização da FinanceFLOW. Ao criar
+        uma conta ou utilizar o serviço, concorda em ficar vinculado a estes Termos.
       </p>
 
-      <h2>1. The Service</h2>
+      <h2>1. O Serviço</h2>
       <p>
-        FinanceFLOW is a personal finance application that allows individual users to track transactions,
-        manage goals, monitor recurring entries, and visualize their financial activity. The service is
-        intended for personal, non-commercial use.
+        A FinanceFLOW é uma aplicação de finanças pessoais que permite aos utilizadores individuais
+        acompanhar transações, gerir metas, monitorizar entradas recorrentes e visualizar a sua atividade
+        financeira. O serviço destina-se a uso pessoal e não comercial.
       </p>
 
-      <h2>2. Accounts</h2>
+      <h2>2. Contas</h2>
       <p>
-        You are responsible for maintaining the confidentiality of your account credentials and for all
-        activity that occurs under your account. You must provide accurate information when registering.
+        É responsável por manter a confidencialidade das credenciais da sua conta e por toda a atividade
+        que ocorre na sua conta. Deve fornecer informação exata ao registar-se.
       </p>
 
-      <h2>3. Subscriptions and Pricing</h2>
+      <h2>3. Subscrições e Preços</h2>
       <ul>
-        <li><strong>Free Trial:</strong> 7 days of full access at no cost.</li>
-        <li><strong>Monthly Flow:</strong> $7/month, billed monthly.</li>
-        <li><strong>Master Annual:</strong> $30/year, billed annually.</li>
+        <li><strong>Teste Gratuito:</strong> 7 dias de acesso total sem custos.</li>
+        <li><strong>Plano Mensal:</strong> 7€/mês, faturado mensalmente.</li>
+        <li><strong>Plano Anual:</strong> 30€/ano, faturado anualmente.</li>
       </ul>
       <p>
-        Subscriptions renew automatically until cancelled. You can cancel at any time from your billing
-        portal or by contacting support.
+        As subscrições renovam-se automaticamente até serem canceladas. Pode cancelar a qualquer momento
+        no seu portal de faturação ou contactando o suporte.
       </p>
 
-      <h2>4. Acceptable Use</h2>
+      <h2>4. Utilização Aceitável</h2>
       <ul>
-        <li>Do not attempt to disrupt, reverse-engineer, or abuse the service.</li>
-        <li>Do not use the service for unlawful or fraudulent activities.</li>
-        <li>Do not attempt to access another user&apos;s account or data.</li>
+        <li>Não tente perturbar, fazer engenharia inversa ou abusar do serviço.</li>
+        <li>Não utilize o serviço para atividades ilegais ou fraudulentas.</li>
+        <li>Não tente aceder à conta ou aos dados de outro utilizador.</li>
       </ul>
 
-      <h2>5. Intellectual Property</h2>
+      <h2>5. Propriedade Intelectual</h2>
       <p>
-        All branding, design, code, and content of FinanceFLOW are owned by FinanceFLOW and protected by
-        applicable intellectual property laws. You retain ownership of the financial data you input.
+        Toda a marca, design, código e conteúdo da FinanceFLOW pertencem à FinanceFLOW e estão protegidos
+        pelas leis de propriedade intelectual aplicáveis. Mantém a propriedade dos dados financeiros que
+        introduz.
       </p>
 
-      <h2>6. Disclaimer</h2>
+      <h2>6. Aviso Legal</h2>
       <p>
-        FinanceFLOW is a personal finance organization tool. It does not provide financial, investment,
-        legal, or tax advice. You are solely responsible for any decisions based on the information
-        displayed in the app.
+        A FinanceFLOW é uma ferramenta de organização de finanças pessoais. Não presta aconselhamento
+        financeiro, de investimento, jurídico ou fiscal. É o único responsável por quaisquer decisões
+        tomadas com base na informação apresentada na app.
       </p>
 
-      <h2>7. Limitation of Liability</h2>
+      <h2>7. Limitação de Responsabilidade</h2>
       <p>
-        To the maximum extent permitted by law, FinanceFLOW shall not be liable for any indirect,
-        incidental, or consequential damages resulting from the use or inability to use the service.
+        Na máxima extensão permitida por lei, a FinanceFLOW não será responsável por quaisquer danos
+        indiretos, incidentais ou consequenciais resultantes da utilização ou incapacidade de utilizar o
+        serviço.
       </p>
 
-      <h2>8. Termination</h2>
+      <h2>8. Rescisão</h2>
       <p>
-        We may suspend or terminate accounts that violate these Terms. You may close your account at any
-        time from your profile settings.
+        Podemos suspender ou encerrar contas que violem estes Termos. Pode encerrar a sua conta a qualquer
+        momento nas definições do seu perfil.
       </p>
 
-      <h2>9. Changes to These Terms</h2>
+      <h2>9. Alterações a Estes Termos</h2>
       <p>
-        We may update these Terms from time to time. Continued use of the service after changes
-        constitutes acceptance of the updated Terms.
+        Podemos atualizar estes Termos periodicamente. A utilização continuada do serviço após alterações
+        constitui aceitação dos Termos atualizados.
       </p>
 
-      <h2>10. Contact</h2>
+      <h2>10. Contacto</h2>
       <p>
-        Questions about these Terms can be sent to{" "}
+        Questões sobre estes Termos podem ser enviadas para{" "}
         <a href="mailto:financeflow.team@gmail.com">financeflow.team@gmail.com</a>.
       </p>
     </LegalLayout>

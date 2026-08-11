@@ -97,7 +97,7 @@ const FuturasPage = () => {
       });
 
       if (result) {
-        toast.success(type === "income" ? "Receivable added!" : "Payable added!");
+        toast.success(type === "income" ? "Recebível adicionado!" : "Pagável adicionado!");
       }
     }
     

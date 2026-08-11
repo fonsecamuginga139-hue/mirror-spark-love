@@ -17,7 +17,7 @@ const SubscriptionGate = ({ children }: SubscriptionGateProps) => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-muted-foreground">Loading...</p>
+          <p className="text-muted-foreground">A carregar...</p>
         </div>
       </div>
     );
@@ -43,10 +43,10 @@ const SubscriptionGate = ({ children }: SubscriptionGateProps) => {
         {/* Title */}
         <div className="space-y-3">
           <h1 className="text-3xl font-bold text-foreground">
-            Premium Access Required
+            Acesso Premium Necessário
           </h1>
           <p className="text-muted-foreground text-lg">
-            To use every Vault feature, you need an active subscription.
+            Para usar todas as funcionalidades do Vault, precisa de uma subscrição ativa.
           </p>
         </div>
 
@@ -54,19 +54,19 @@ const SubscriptionGate = ({ children }: SubscriptionGateProps) => {
         <div className="bg-card/50 border border-border rounded-2xl p-6 space-y-4">
           <div className="flex items-center gap-3 text-left">
             <Crown className="w-5 h-5 text-primary flex-shrink-0" />
-            <span className="text-foreground">Total control of your finances</span>
+            <span className="text-foreground">Controlo total das suas finanças</span>
           </div>
           <div className="flex items-center gap-3 text-left">
             <Sparkles className="w-5 h-5 text-primary flex-shrink-0" />
-            <span className="text-foreground">Detailed reports and charts</span>
+            <span className="text-foreground">Relatórios e gráficos detalhados</span>
           </div>
           <div className="flex items-center gap-3 text-left">
             <Crown className="w-5 h-5 text-primary flex-shrink-0" />
-            <span className="text-foreground">Custom goals and budgets</span>
+            <span className="text-foreground">Metas e orçamentos personalizados</span>
           </div>
           <div className="flex items-center gap-3 text-left">
             <Sparkles className="w-5 h-5 text-primary flex-shrink-0" />
-            <span className="text-foreground">Real-time sync</span>
+            <span className="text-foreground">Sincronização em tempo real</span>
           </div>
         </div>
 
@@ -77,12 +77,12 @@ const SubscriptionGate = ({ children }: SubscriptionGateProps) => {
           className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25"
         >
           <Crown className="w-5 h-5 mr-2" />
-          SUBSCRIBE NOW
+          SUBSCREVER AGORA
         </Button>
 
         {/* Price hint */}
         <p className="text-sm text-muted-foreground">
-          From <span className="text-primary font-semibold">$7/month</span> · Master Annual $30/year
+          A partir de <span className="text-primary font-semibold">7€/mês</span> · Anual 30€/ano
         </p>
       </div>
     </div>

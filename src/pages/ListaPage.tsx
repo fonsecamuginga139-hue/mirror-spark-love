@@ -24,7 +24,7 @@ interface List {
   name: string;
 }
 
-const DEFAULT_LIST = "My Shopping List";
+const DEFAULT_LIST = "A Minha Lista de Compras";
 
 const ListaPage = () => {
   const { user } = useAuth();
@@ -110,7 +110,7 @@ const ListaPage = () => {
       .select()
       .single();
     if (error) {
-      toast.error("Could not add item");
+      toast.error("Não foi possível adicionar o item");
       return;
     }
     setItems((prev) => [data as Item, ...prev]);
@@ -135,7 +135,7 @@ const ListaPage = () => {
     if (checked.length === 0) return;
     setItems((prev) => prev.filter((i) => !i.is_checked));
     await supabase.from("shopping_items").delete().in("id", checked);
-    toast.success("Cleared checked items");
+    toast.success("Itens marcados removidos");
   };
 
   return (
@@ -143,20 +143,20 @@ const ListaPage = () => {
       <div className="p-4 max-w-lg mx-auto">
         <div className="flex items-center justify-between mb-4">
           <BackButton to="/dashboard" />
-          <h1 className="text-lg font-semibold font-display text-foreground">Shopping list</h1>
+          <h1 className="text-lg font-semibold font-display text-foreground">Lista de compras</h1>
           <div className="w-10" />
         </div>
 
         {/* Totals */}
         <div className="finance-card mb-4 flex items-center justify-between">
           <div>
-            <p className="text-xs text-muted-foreground">Estimated total</p>
+            <p className="text-xs text-muted-foreground">Total estimado</p>
             <p className="text-3xl font-bold font-display tabular-nums text-foreground">
               {formatCurrency(total)}
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-muted-foreground">Left to buy</p>
+            <p className="text-xs text-muted-foreground">Falta comprar</p>
             <p className="text-lg font-semibold text-primary tabular-nums">
               {formatCurrency(remaining)}
             </p>
@@ -169,7 +169,7 @@ const ListaPage = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && addItem()}
-            placeholder="Add item…"
+            placeholder="Adicionar item…"
             className="input-field"
           />
           <div className="flex gap-2">
@@ -178,7 +178,7 @@ const ListaPage = () => {
               min={1}
               value={qty}
               onChange={(e) => setQty(Number(e.target.value))}
-              placeholder="Qty"
+              placeholder="Qtd"
               className="input-field w-20"
             />
             <input
@@ -186,12 +186,12 @@ const ListaPage = () => {
               step="0.01"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              placeholder="Unit price (opt)"
+              placeholder="Preço unitário (opc)"
               className="input-field flex-1"
             />
             <button
               onClick={addItem}
-              aria-label="Add"
+              aria-label="Adicionar"
               className="w-12 h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_20px_hsl(var(--primary)/0.3)] active:scale-95"
             >
               <Plus size={22} />
@@ -226,7 +226,7 @@ const ListaPage = () => {
                 >
                   <button
                     onClick={() => toggle(item)}
-                    aria-label={item.is_checked ? "Uncheck" : "Check"}
+                    aria-label={item.is_checked ? "Desmarcar" : "Marcar"}
                     className={`w-9 h-9 rounded-full border flex items-center justify-center transition ${
                       item.is_checked
                         ? "bg-primary border-primary text-primary-foreground"
@@ -257,7 +257,7 @@ const ListaPage = () => {
                   ) : null}
                   <button
                     onClick={() => remove(item.id)}
-                    aria-label="Remove"
+                    aria-label="Remover"
                     className="text-muted-foreground hover:text-destructive p-2"
                   >
                     <Trash2 size={16} />

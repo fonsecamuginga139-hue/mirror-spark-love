@@ -34,7 +34,7 @@ const FinancialMonthCards = () => {
         if (t.type === "income") monthIncome += amt;
         else {
           monthExpense += amt;
-          const key = (t as any).category?.name || "Other";
+          const key = (t as any).category?.name || "Outra";
           categoryTotals.set(key, (categoryTotals.get(key) || 0) + amt);
         }
       } else if (inMonth(d, pm, py)) {

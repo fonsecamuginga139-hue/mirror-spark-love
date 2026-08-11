@@ -47,7 +47,7 @@ const CategoryBarChart = ({ transactions, onSelect }: Props) => {
     const expenses = transactions.filter((t) => t.type === "expense");
     const map = new Map<string, { name: string; value: number; icon: string }>();
     expenses.forEach((t) => {
-      const name = t.category_name || "Other";
+      const name = t.category_name || "Outra";
       const iconRaw = (t as any).category_icon as string | undefined;
       const icon = isEmoji(iconRaw) ? (iconRaw as string) : guessEmoji(name);
       const prev = map.get(name);

@@ -35,8 +35,8 @@ const OtpVerifyPage = () => {
     if (!email) return;
     if (token.length !== OTP_LENGTH) {
       toast({
-        title: "Incomplete code",
-        description: "Please enter the full 8-digit verification code.",
+        title: "Código incompleto",
+        description: "Introduza o código de verificação de 8 dígitos completo.",
         variant: "destructive",
       });
       return;
@@ -45,11 +45,11 @@ const OtpVerifyPage = () => {
     const { error } = await supabase.auth.verifyOtp({ email, token, type: "email" });
     if (error) {
       const msg = error.message?.toLowerCase() ?? "";
-      let description = "Invalid verification code.";
-      if (msg.includes("expired")) description = "This code has expired. Request a new one.";
+      let description = "Código de verificação inválido.";
+      if (msg.includes("expired")) description = "Este código expirou. Solicite um novo.";
       else if (msg.includes("rate") || msg.includes("too many"))
-        description = "Too many attempts. Please try again later.";
-      toast({ title: "Verification failed", description, variant: "destructive" });
+        description = "Demasiadas tentativas. Tente novamente mais tarde.";
+      toast({ title: "Falha na verificação", description, variant: "destructive" });
       setVerifying(false);
       setCode("");
       return;
@@ -59,7 +59,7 @@ const OtpVerifyPage = () => {
       await supabase.auth.updateUser({ password });
     }
 
-    toast({ title: "Verified", description: "Welcome to Vault." });
+    toast({ title: "Verificado", description: "Bem-vindo ao Vault." });
     navigate(isSignup ? "/onboarding" : "/dashboard", { replace: true });
   };
 
@@ -76,11 +76,11 @@ const OtpVerifyPage = () => {
       options: { shouldCreateUser: isSignup },
     });
     if (error) {
-      toast({ title: "Could not resend", description: error.message, variant: "destructive" });
+      toast({ title: "Não foi possível reenviar", description: error.message, variant: "destructive" });
       return;
     }
     setResendIn(30);
-    toast({ title: "Code sent", description: "Check your inbox for the new code." });
+    toast({ title: "Código enviado", description: "Verifique a sua caixa de entrada para o novo código." });
   };
 
   return (
@@ -93,7 +93,7 @@ const OtpVerifyPage = () => {
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="w-5 h-5" />
-          <span>Back</span>
+          <span>Voltar</span>
         </button>
       </div>
 
@@ -104,9 +104,9 @@ const OtpVerifyPage = () => {
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-2xl font-bold">Verify your email</h1>
+            <h1 className="text-2xl font-bold">Verifique o seu email</h1>
             <p className="text-muted-foreground text-sm">
-              Enter the 8-digit verification code sent to
+              Introduza o código de verificação de 8 dígitos enviado para
               <br />
               <span className="text-foreground font-medium">{email}</span>
             </p>
@@ -149,7 +149,7 @@ const OtpVerifyPage = () => {
             disabled={code.length !== OTP_LENGTH || verifying}
             className="w-full h-12 bg-gradient-to-r from-primary to-primary/80 font-semibold"
           >
-            {verifying ? <Loader2 className="w-5 h-5 animate-spin" /> : "Verify Account"}
+            {verifying ? <Loader2 className="w-5 h-5 animate-spin" /> : "Verificar Conta"}
           </Button>
 
           <button
@@ -157,7 +157,7 @@ const OtpVerifyPage = () => {
             disabled={resendIn > 0}
             className="text-sm text-muted-foreground hover:text-foreground disabled:opacity-50"
           >
-            {resendIn > 0 ? `Resend code in ${resendIn}s` : "Resend code"}
+            {resendIn > 0 ? `Reenviar código em ${resendIn}s` : "Reenviar código"}
           </button>
         </div>
       </div>

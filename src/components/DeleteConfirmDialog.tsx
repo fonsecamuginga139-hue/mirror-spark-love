@@ -21,8 +21,8 @@ const DeleteConfirmDialog = ({
   isOpen,
   onClose,
   onConfirm,
-  title = "Confirm Deletion",
-  description = "Are you sure you want to delete this transaction? This action cannot be undone.",
+  title = "Confirmar Eliminação",
+  description = "Tem a certeza de que deseja eliminar esta transação? Esta ação não pode ser desfeita.",
 }: DeleteConfirmDialogProps) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
@@ -35,13 +35,13 @@ const DeleteConfirmDialog = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className="bg-muted text-foreground border-border hover:bg-muted/80">
-            Cancel
+            Cancelar
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
-            Delete
+            Eliminar
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -203,7 +203,7 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
         <Tooltip content={<CustomTooltip />} />
         <Bar 
           dataKey="income" 
-          name="Income" 
+          name="Receitas" 
           fill="hsl(var(--income))" 
           radius={[4, 4, 0, 0]}
           maxBarSize={isFullscreen ? 60 : 40}
@@ -213,7 +213,7 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
         />
         <Bar 
           dataKey="expense" 
-          name="Expenses" 
+          name="Despesas" 
           fill="hsl(var(--expense))" 
           radius={[4, 4, 0, 0]}
           maxBarSize={isFullscreen ? 60 : 40}
@@ -249,14 +249,14 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
                     <TrendingUp className="text-primary" size={16} />
                   )}
                 </div>
-                <h3 className="text-lg font-semibold font-display text-foreground">Cash Flow</h3>
+                <h3 className="text-lg font-semibold font-display text-foreground">Fluxo de Caixa</h3>
               </div>
               <div className="flex items-center gap-2">
                 <TrendIndicator />
                 <button
                   onClick={() => setFullscreenChart("cashflow")}
                   className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                  aria-label="Expand chart"
+                  aria-label="Expandir gráfico"
                 >
                   <Maximize2 size={16} className="text-muted-foreground" />
                 </button>
@@ -269,10 +269,10 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
             
             <p className="text-xs text-muted-foreground mt-2 text-center">
               {typeof trend !== "string" && trend.direction === "up" 
-                ? "📈 Your balance is growing!"
+                ? "📈 O seu saldo está a crescer!"
                 : typeof trend !== "string" && trend.direction === "down"
                 ? "📉 Warning: balance is falling"
-                : "Line going up = surplus • Line going down = alert"}
+                : "Linha a subir = superávit • Linha a descer = alerta"}
             </p>
           </div>
         )}
@@ -287,12 +287,12 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                 <BarChart3 className="text-primary" size={16} />
               </div>
-              <h3 className="text-lg font-semibold font-display text-foreground">Monthly Comparison</h3>
+              <h3 className="text-lg font-semibold font-display text-foreground">Comparação Mensal</h3>
             </div>
             <button
               onClick={() => setFullscreenChart("monthly")}
               className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
-              aria-label="Expand chart"
+              aria-label="Expandir gráfico"
             >
               <Maximize2 size={16} className="text-muted-foreground" />
             </button>
@@ -306,11 +306,11 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
           <div className="flex items-center justify-center gap-6 mt-3">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-sm bg-income" />
-              <span className="text-xs text-muted-foreground">Income</span>
+              <span className="text-xs text-muted-foreground">Receitas</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-sm bg-expense" />
-              <span className="text-xs text-muted-foreground">Expenses</span>
+              <span className="text-xs text-muted-foreground">Despesas</span>
             </div>
           </div>
         </div>
@@ -331,10 +331,10 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
                 </div>
                 <div>
                   <h2 className="text-xl font-bold font-display text-foreground">
-                    {fullscreenChart === "cashflow" ? "Cash Flow" : "Monthly Comparison"}
+                    {fullscreenChart === "cashflow" ? "Fluxo de Caixa" : "Comparação Mensal"}
                   </h2>
                   <p className="text-sm text-muted-foreground">
-                    {fullscreenChart === "cashflow" ? "Last 14 days" : "Last 3 months"}
+                    {fullscreenChart === "cashflow" ? "Últimos 14 dias" : "Últimos 3 meses"}
                   </p>
                 </div>
               </div>
@@ -343,7 +343,7 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
                 <button
                   onClick={() => setFullscreenChart(null)}
                   className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                  aria-label="Close"
+                  aria-label="Fechar"
                 >
                   <X size={20} className="text-muted-foreground" />
                 </button>
@@ -362,11 +362,11 @@ const DashboardCharts = ({ transactions }: DashboardChartsProps) => {
               <div className="flex items-center justify-center gap-8 mt-4 pt-4 border-t border-border">
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 rounded-sm bg-income" />
-                  <span className="text-sm text-muted-foreground">Income</span>
+                  <span className="text-sm text-muted-foreground">Receitas</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 rounded-sm bg-expense" />
-                  <span className="text-sm text-muted-foreground">Expenses</span>
+                  <span className="text-sm text-muted-foreground">Despesas</span>
                 </div>
               </div>
             )}

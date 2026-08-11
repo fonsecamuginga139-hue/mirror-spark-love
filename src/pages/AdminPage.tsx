@@ -66,7 +66,7 @@ const AdminPage = () => {
 
     if (error) {
       console.error("Error fetching logs:", error);
-      toast.error("Error loading logs");
+      toast.error("Erro ao carregar logs");
     } else {
       const fetched = (data || []) as unknown as WebhookLog[];
       if (append) {
@@ -129,7 +129,7 @@ const AdminPage = () => {
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <Shield className="w-5 h-5 text-amber-500 mr-2" />
-          <h1 className="text-xl font-bold text-foreground">Admin Panel</h1>
+          <h1 className="text-xl font-bold text-foreground">Painel de Administração</h1>
         </div>
       </div>
 
@@ -144,16 +144,16 @@ const AdminPage = () => {
             className="finance-card text-left hover:border-primary/50 transition"
           >
             <Settings className="w-5 h-5 text-primary mb-2" />
-            <p className="font-semibold">Payment Settings</p>
-            <p className="text-xs text-muted-foreground">Hotmart checkout URL</p>
+            <p className="font-semibold">Definições de Pagamento</p>
+            <p className="text-xs text-muted-foreground">URL de checkout Hotmart</p>
           </button>
           <button
             onClick={() => navigate("/admin/support")}
             className="finance-card text-left hover:border-primary/50 transition"
           >
             <MessageSquare className="w-5 h-5 text-primary mb-2" />
-            <p className="font-semibold">Support Tickets</p>
-            <p className="text-xs text-muted-foreground">Manage user support</p>
+            <p className="font-semibold">Tickets de Suporte</p>
+            <p className="text-xs text-muted-foreground">Gerir suporte de utilizadores</p>
           </button>
         </div>
 
@@ -162,7 +162,7 @@ const AdminPage = () => {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
               <History className="w-5 h-5 text-primary" />
-              Webhook History
+              Histórico de Webhooks
             </h2>
             <Button variant="ghost" size="sm" onClick={() => fetchLogs()} disabled={loadingLogs}>
               <RefreshCw className={`w-4 h-4 ${loadingLogs ? "animate-spin" : ""}`} />
@@ -175,7 +175,7 @@ const AdminPage = () => {
             </div>
           ) : logs.length === 0 ? (
             <p className="text-center text-muted-foreground py-8">
-              No webhooks logged yet
+              Ainda não há webhooks registados
             </p>
           ) : (
             <>
@@ -183,12 +183,12 @@ const AdminPage = () => {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Date/Time</TableHead>
+                      <TableHead>Data/Hora</TableHead>
                       <TableHead>Email</TableHead>
-                      <TableHead>Event</TableHead>
-                      <TableHead>Plan</TableHead>
-                      <TableHead>Source</TableHead>
-                      <TableHead>Status</TableHead>
+                      <TableHead>Evento</TableHead>
+                      <TableHead>Plano</TableHead>
+                      <TableHead>Origem</TableHead>
+                      <TableHead>Estado</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -236,9 +236,9 @@ const AdminPage = () => {
                 <div className="flex justify-center mt-4">
                   <Button variant="outline" size="sm" onClick={handleLoadMore} disabled={loadingMore}>
                     {loadingMore ? (
-                      <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Loading...</>
+                      <><Loader2 className="w-4 h-4 mr-2 animate-spin" />A carregar...</>
                     ) : (
-                      "Load more"
+                      "Carregar mais"
                     )}
                   </Button>
                 </div>

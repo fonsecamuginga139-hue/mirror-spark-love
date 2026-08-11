@@ -38,12 +38,12 @@ class ErrorBoundary extends Component<Props, State> {
             <div className="mx-auto w-14 h-14 rounded-full bg-destructive/10 flex items-center justify-center">
               <AlertTriangle className="w-7 h-7 text-destructive" />
             </div>
-            <h2 className="text-xl font-bold text-foreground">Something went wrong</h2>
+            <h2 className="text-xl font-bold text-foreground">Ocorreu um erro</h2>
             <p className="text-sm text-muted-foreground">
-              We hit an unexpected error. Please reload to continue.
+              Ocorreu um erro inesperado. Recarregue a página para continuar.
             </p>
             <Button onClick={this.handleReload} className="w-full">
-              Reload
+              Recarregar
             </Button>
           </div>
         </div>

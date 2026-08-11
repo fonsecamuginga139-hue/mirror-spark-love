@@ -74,13 +74,13 @@ const RecurringReminders = ({ recurringTransactions }: RecurringRemindersProps) 
       // Show toast notification
       const daysText =
         transaction.daysUntil === 0
-          ? "today"
+          ? "hoje"
           : transaction.daysUntil === 1
-          ? "tomorrow"
-          : `em ${transaction.daysUntil} days`;
+          ? "amanhã"
+          : `em ${transaction.daysUntil} dias`;
 
       const description =
-        transaction.description || transaction.category_name || "Recurring";
+        transaction.description || transaction.category_name || "Recorrente";
 
       toast(
         <div className="flex items-start gap-3">
@@ -100,7 +100,7 @@ const RecurringReminders = ({ recurringTransactions }: RecurringRemindersProps) 
           </div>
           <div className="flex-1">
             <p className="font-semibold text-foreground">
-              {transaction.type === "income" ? "Income" : "Expense"} {daysText}
+              {transaction.type === "income" ? "Receita" : "Despesa"} {daysText}
             </p>
             <p className="text-sm text-muted-foreground">{description}</p>
             <p
@@ -119,7 +119,7 @@ const RecurringReminders = ({ recurringTransactions }: RecurringRemindersProps) 
 
       // Send push notification if permitted
       if (permission === "granted") {
-        sendNotification(`${transaction.type === "income" ? "Income" : "Expense"} ${daysText}`, {
+        sendNotification(`${transaction.type === "income" ? "Receita" : "Despesa"} ${daysText}`, {
           body: `${description} - ${formatCurrency(Number(transaction.amount))}`,
           tag: `recurring-${transaction.id}`,
         });

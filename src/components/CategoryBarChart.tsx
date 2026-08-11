@@ -67,7 +67,7 @@ const CategoryBarChart = ({ transactions, onSelect }: Props) => {
         <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
           <BarChart3 className="text-primary" size={16} />
         </div>
-        <h3 className="text-lg font-semibold font-display text-foreground">Spending by Category</h3>
+        <h3 className="text-lg font-semibold font-display text-foreground">Gastos por Categoria</h3>
       </div>
 
       <div className="space-y-4">

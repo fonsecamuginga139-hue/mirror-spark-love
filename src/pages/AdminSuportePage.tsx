@@ -67,7 +67,7 @@ const AdminSupportPage = () => {
 
   const handleReply = async () => {
     if (!selectedTicket || !reply.trim()) {
-      toast.error("Write a reply.");
+      toast.error("Escreva uma resposta.");
       return;
     }
 
@@ -82,7 +82,7 @@ const AdminSupportPage = () => {
       .eq("id", selectedTicket.id);
 
     if (error) {
-      toast.error("Error ao enviar resposta.");
+      toast.error("Erro ao enviar resposta.");
     } else {
       toast.success("Resposta enviada!");
       setReply("");
@@ -115,7 +115,7 @@ const AdminSupportPage = () => {
             >
               <ArrowLeft size={20} className="text-foreground" />
             </button>
-            <h1 className="text-2xl font-bold text-foreground">Reply to Support</h1>
+            <h1 className="text-2xl font-bold text-foreground">Responder ao Suporte</h1>
           </div>
           <Button variant="ghost" size="icon" onClick={fetchTickets} disabled={loading}>
             <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
@@ -149,7 +149,7 @@ const AdminSupportPage = () => {
             {selectedTicket.admin_reply && (
               <div className="flex justify-start">
                 <div className="max-w-[85%] bg-muted border border-border rounded-2xl rounded-bl-sm px-3 py-2">
-                  <p className="text-[10px] font-semibold text-primary mb-1">Your previous reply</p>
+                  <p className="text-[10px] font-semibold text-primary mb-1">A sua resposta anterior</p>
                   <p className="text-sm text-foreground whitespace-pre-wrap">{selectedTicket.admin_reply}</p>
                 </div>
               </div>
@@ -158,7 +158,7 @@ const AdminSupportPage = () => {
             {/* Reply input */}
             <div className="space-y-2">
               <Textarea
-                placeholder="Write your reply..."
+                placeholder="Escreva a sua resposta..."
                 value={reply}
                 onChange={(e) => setReply(e.target.value)}
                 rows={3}
@@ -170,7 +170,7 @@ const AdminSupportPage = () => {
                 ) : (
                   <>
                     <Send className="w-4 h-4 mr-2" />
-                    Send Reply
+                    Enviar Resposta
                   </>
                 )}
               </Button>
@@ -209,7 +209,7 @@ const AdminSupportPage = () => {
                         : "bg-destructive/20 text-destructive text-[10px] shrink-0"
                     }
                   >
-                    {ticket.status === "answered" ? "Answered" : "Open"}
+                    {ticket.status === "answered" ? "Respondido" : "Aberto"}
                   </Badge>
                 </div>
                 <p className="text-xs text-muted-foreground line-clamp-2">{ticket.message}</p>

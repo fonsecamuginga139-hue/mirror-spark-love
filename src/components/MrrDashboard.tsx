@@ -59,7 +59,7 @@ const MrrDashboard = () => {
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
           <TrendingUp className="w-5 h-5 text-primary" />
-          MRR Dashboard
+          Painel de MRR
         </h2>
         <Select value={currency} onValueChange={(v) => setCurrency(v as Currency)}>
           <SelectTrigger className="w-[100px]">
@@ -86,7 +86,7 @@ const MrrDashboard = () => {
         <div className="rounded-xl border border-border bg-card p-4">
           <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
             <Users className="w-4 h-4" />
-            Active Subscribers
+            Subscritores Ativos
           </div>
           <p className="text-2xl font-bold text-foreground">
             {stats?.total_active_subscribers ?? 0}
@@ -98,7 +98,7 @@ const MrrDashboard = () => {
       {history.length > 0 && (
         <div>
           <h3 className="text-sm font-medium text-muted-foreground mb-3">
-            Monthly Flow MRR History
+            Histórico Mensal de MRR
           </h3>
           <div className="h-[250px] w-full">
             <ResponsiveContainer width="100%" height="100%">

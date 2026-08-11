@@ -37,24 +37,24 @@ const BudgetGoalModal = ({ isOpen, onClose }: BudgetGoalModalProps) => {
     setIsSubmitting(false);
 
     if (result) {
-      toast.success("Budget goal saved!");
+      toast.success("Objetivo de orçamento guardado!");
       setSelectedCategory("");
       setMonthlyLimit(0);
     } else {
-      toast.error("Error saving goal");
+      toast.error("Erro ao guardar objetivo");
     }
   };
 
   const handleDelete = async (id: string) => {
     const success = await deleteBudgetGoal(id);
     if (success) {
-      toast.success("Goal removed");
+      toast.success("Objetivo removido");
     }
   };
 
   const getCategoryName = (categoryId: string) => {
     const cat = expenseCategories.find(c => c.id === categoryId);
-    return cat?.name || "Category";
+    return cat?.name || "Categoria";
   };
 
   return (
@@ -63,7 +63,7 @@ const BudgetGoalModal = ({ isOpen, onClose }: BudgetGoalModalProps) => {
         <div className="flex items-center justify-between p-4 border-b border-border">
           <div className="flex items-center gap-2">
             <Target className="text-primary" size={22} />
-            <h2 className="text-xl font-semibold text-foreground">Budget Goals</h2>
+            <h2 className="text-xl font-semibold text-foreground">Objetivos de Orçamento</h2>
           </div>
           <button onClick={onClose} className="p-1 hover:bg-muted rounded-lg">
             <X size={24} className="text-muted-foreground" />
@@ -74,7 +74,7 @@ const BudgetGoalModal = ({ isOpen, onClose }: BudgetGoalModalProps) => {
           {/* Existing Goals */}
           {budgetGoals.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-sm font-medium text-muted-foreground mb-3">Active Goals</h3>
+              <h3 className="text-sm font-medium text-muted-foreground mb-3">Objetivos Ativos</h3>
               <div className="space-y-2">
                 {budgetGoals.map((goal) => (
                   <div
@@ -84,7 +84,7 @@ const BudgetGoalModal = ({ isOpen, onClose }: BudgetGoalModalProps) => {
                     <div>
                       <p className="font-medium text-foreground">{getCategoryName(goal.category_id)}</p>
                       <p className="text-sm text-muted-foreground">
-                        Limit: {formatCurrency(Number(goal.monthly_limit))}
+                        Limite: {formatCurrency(Number(goal.monthly_limit))}
                       </p>
                     </div>
                     <button
@@ -101,17 +101,17 @@ const BudgetGoalModal = ({ isOpen, onClose }: BudgetGoalModalProps) => {
 
           {/* Add New Goal Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            <h3 className="text-sm font-medium text-muted-foreground">Add New Goal</h3>
+            <h3 className="text-sm font-medium text-muted-foreground">Adicionar Novo Objetivo</h3>
             
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Category</label>
+              <label className="block text-sm font-medium text-foreground mb-2">Categoria</label>
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="input-field"
                 required
               >
-                <option value="">Select a category</option>
+                <option value="">Selecione uma categoria</option>
                 {expenseCategories.map((cat) => (
                   <option key={cat.id} value={cat.id}>{cat.name}</option>
                 ))}
@@ -119,7 +119,7 @@ const BudgetGoalModal = ({ isOpen, onClose }: BudgetGoalModalProps) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Monthly Limit</label>
+              <label className="block text-sm font-medium text-foreground mb-2">Limite Mensal</label>
               <CurrencyInput
                 value={monthlyLimit}
                 onChange={setMonthlyLimit}
@@ -131,7 +131,7 @@ const BudgetGoalModal = ({ isOpen, onClose }: BudgetGoalModalProps) => {
             <div className="flex items-start gap-2 p-3 bg-amber-500/10 rounded-lg">
               <AlertTriangle size={18} className="text-amber-500 flex-shrink-0 mt-0.5" />
               <p className="text-xs text-amber-500">
-                You'll get visual alerts when spending exceeds 80% of the limit.
+                Vai receber alertas visuais quando os gastos ultrapassarem 80% do limite.
               </p>
             </div>
 
@@ -140,7 +140,7 @@ const BudgetGoalModal = ({ isOpen, onClose }: BudgetGoalModalProps) => {
               disabled={isSubmitting || !selectedCategory || monthlyLimit <= 0}
               className="w-full btn-primary disabled:opacity-50"
             >
-              {isSubmitting ? "Saving..." : "Add Goal"}
+              {isSubmitting ? "A guardar..." : "Adicionar Objetivo"}
             </button>
           </form>
         </div>

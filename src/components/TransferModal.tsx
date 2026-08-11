@@ -32,29 +32,29 @@ const TransferModal = ({ isOpen, onClose, cards, getCardBalance, onTransfer }: T
     }
 
     if (fromCardId === toCardId) {
-      toast.error("Select different cards");
+      toast.error("Selecione cartões diferentes");
       return;
     }
 
     const fromBalance = getCardBalance(fromCardId);
     if (amount > fromBalance) {
-      toast.error("Insufficient balance in source card");
+      toast.error("Saldo insuficiente no cartão de origem");
       return;
     }
 
     setIsSubmitting(true);
-    const success = await onTransfer(fromCardId, toCardId, amount, description || "Transfer between cards");
+    const success = await onTransfer(fromCardId, toCardId, amount, description || "Transferência entre cartões");
     setIsSubmitting(false);
 
     if (success) {
-      toast.success("Transfer completed!");
+      toast.success("Transferência concluída!");
       setFromCardId("");
       setToCardId("");
       setAmount(0);
       setDescription("");
       onClose();
     } else {
-      toast.error("Transfer error");
+      toast.error("Erro na transferência");
     }
   };
 
@@ -67,7 +67,7 @@ const TransferModal = ({ isOpen, onClose, cards, getCardBalance, onTransfer }: T
         <div className="flex items-center justify-between p-4 border-b border-border">
           <div className="flex items-center gap-2">
             <ArrowRightLeft className="text-primary" size={22} />
-            <h2 className="text-xl font-semibold text-foreground">Transfer</h2>
+            <h2 className="text-xl font-semibold text-foreground">Transferência</h2>
           </div>
           <button onClick={onClose} className="p-1 hover:bg-muted rounded-lg">
             <X size={24} className="text-muted-foreground" />
@@ -77,7 +77,7 @@ const TransferModal = ({ isOpen, onClose, cards, getCardBalance, onTransfer }: T
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           {/* From Card */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">From</label>
+            <label className="block text-sm font-medium text-foreground mb-2">De</label>
             <div className="space-y-2">
               {cards.map((card) => (
                 <button
@@ -119,7 +119,7 @@ const TransferModal = ({ isOpen, onClose, cards, getCardBalance, onTransfer }: T
 
           {/* To Card */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">To</label>
+            <label className="block text-sm font-medium text-foreground mb-2">Para</label>
             <div className="space-y-2">
               {cards.map((card) => (
                 <button
@@ -154,7 +154,7 @@ const TransferModal = ({ isOpen, onClose, cards, getCardBalance, onTransfer }: T
 
           {/* Amount */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Amount</label>
+            <label className="block text-sm font-medium text-foreground mb-2">Valor</label>
             <CurrencyInput
               value={amount}
               onChange={setAmount}
@@ -162,19 +162,19 @@ const TransferModal = ({ isOpen, onClose, cards, getCardBalance, onTransfer }: T
             />
             {fromCard && (
               <p className="text-xs text-muted-foreground mt-1">
-                Available balance: {formatCurrency(getCardBalance(fromCard.id))}
+                Saldo disponível: {formatCurrency(getCardBalance(fromCard.id))}
               </p>
             )}
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">Description (opcional)</label>
+            <label className="block text-sm font-medium text-foreground mb-2">Descrição (opcional)</label>
             <input
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Ex: Transfer para poupança"
+              placeholder="Ex: Transferência para poupança"
               className="input-field"
             />
           </div>
@@ -182,7 +182,7 @@ const TransferModal = ({ isOpen, onClose, cards, getCardBalance, onTransfer }: T
           {/* Summary */}
           {fromCard && toCard && amount > 0 && (
             <div className="p-4 rounded-xl bg-muted/30 border border-border">
-              <p className="text-sm text-muted-foreground mb-2">Transfer summary:</p>
+              <p className="text-sm text-muted-foreground mb-2">Resumo da transferência:</p>
               <div className="flex items-center justify-between">
                 <span className="font-medium text-foreground">{fromCard.name}</span>
                 <span className="text-expense font-semibold">-{formatCurrency(amount)}</span>
@@ -201,14 +201,14 @@ const TransferModal = ({ isOpen, onClose, cards, getCardBalance, onTransfer }: T
               onClick={onClose}
               className="flex-1 py-3 rounded-full border border-border text-foreground font-medium"
             >
-              Cancel
+              Cancelar
             </button>
             <button
               type="submit"
               disabled={isSubmitting || !fromCardId || !toCardId || amount <= 0}
               className="flex-1 btn-primary disabled:opacity-50"
             >
-              {isSubmitting ? "Transferring..." : "Transfer"}
+              {isSubmitting ? "A transferir..." : "Transferir"}
             </button>
           </div>
         </form>

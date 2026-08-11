@@ -93,7 +93,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
       setEditTag("debit");
       setPhase("confirm");
     } catch (e: any) {
-      setError(e?.message || "Failed to parse. Please try again.");
+      setError(e?.message || "Falha ao interpretar. Tente novamente.");
       setPhase("listening");
     }
   };
@@ -107,7 +107,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
 
     const rec = getRecognition();
     if (!rec) {
-      setError("Voice input isn't supported in this browser. Try Chrome or Safari.");
+      setError("Entrada por voz não é suportada neste navegador. Tente o Chrome ou o Safari.");
       return;
     }
     rec.lang = "pt-PT";
@@ -124,16 +124,16 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
       if (stoppedRef.current) return;
       setError(
         e?.error === "not-allowed"
-          ? "Microphone access denied."
+          ? "Acesso ao microfone negado."
           : e?.error === "no-speech"
-            ? "I didn't hear anything. Tap the mic and try again."
-            : "Could not capture audio.",
+            ? "Não ouvi nada. Toque no microfone e tente novamente."
+            : "Não foi possível captar áudio.",
       );
     };
     rec.onend = () => { /* nothing */ };
 
     recRef.current = rec;
-    try { rec.start(); } catch { setError("Could not start voice input."); }
+    try { rec.start(); } catch { setError("Não foi possível iniciar a entrada por voz."); }
   };
 
   const finishNow = () => {
@@ -151,7 +151,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
     if (!parsed) return;
     const amount = Number(editAmount);
     if (!isFinite(amount) || amount <= 0) {
-      toast.error("Please enter a valid amount.");
+      toast.error("Introduza um valor válido.");
       return;
     }
 
@@ -160,10 +160,10 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
     // Auto-provision a default wallet so the user never has to create one.
     let cardId: string | undefined = cards[0]?.id;
     if (!cardId) {
-      const newCard = await addCard({ name: "Wallet", number: null, color: "#10B981", icon: "wallet" });
+      const newCard = await addCard({ name: "Carteira", number: null, color: "#10B981", icon: "wallet" });
       cardId = newCard?.id;
       if (!cardId) {
-        toast.error("Could not prepare your wallet. Try again.");
+        toast.error("Não foi possível preparar a sua carteira. Tente novamente.");
         setPhase("confirm");
         return;
       }
@@ -219,10 +219,10 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
     }
 
     if (inserted) {
-      toast.success(`${editType === "income" ? "Income" : "Expense"} added by voice`);
+      toast.success(`${editType === "income" ? "Receita" : "Despesa"} adicionada por voz`);
       handleClose();
     } else {
-      toast.error("Could not save the transaction.");
+      toast.error("Não foi possível guardar a transação.");
       setPhase("confirm");
     }
   };
@@ -262,7 +262,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); handleClose(); }}
-          aria-label="Close"
+          aria-label="Fechar"
           className="absolute top-4 right-4 z-[70] w-12 h-12 rounded-full bg-black/40 backdrop-blur border border-white/15 text-white flex items-center justify-center active:scale-95 transition"
         >
           <X size={22} />
@@ -280,14 +280,14 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                   className="w-full text-center"
                 >
                   <p className="text-xs uppercase tracking-[0.3em] text-primary-foreground/70 mb-4">
-                    Listening
+                    A ouvir
                   </p>
                   <p className="text-2xl sm:text-3xl font-display font-medium text-white leading-snug min-h-[6rem]">
                     {transcript ? (
                       transcript
                     ) : (
                       <span className="text-white/40">
-                        Say something like<br />"I spent 20 on coffee"
+                        Diga algo como<br />"Gastei 20 em café"
                       </span>
                     )}
                   </p>
@@ -304,7 +304,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                   className="flex flex-col items-center gap-4"
                 >
                   <Loader2 className="w-12 h-12 text-white animate-spin" />
-                  <p className="text-white/80">Understanding…</p>
+                  <p className="text-white/80">A interpretar…</p>
                   <p className="text-xs text-white/50 italic max-w-xs text-center">"{transcript}"</p>
                 </motion.div>
               )}
@@ -320,7 +320,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                   <div className="rounded-3xl bg-white/[0.07] backdrop-blur-xl border border-white/15 p-5 space-y-4 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]">
                     {/* What we heard — verbatim */}
                     <div className="rounded-2xl bg-black/30 border border-white/10 p-3">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 mb-1">You said</p>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 mb-1">Disse</p>
                       <p className="text-white/90 text-sm italic">"{parsed.transcript || transcript}"</p>
                     </div>
 
@@ -330,12 +330,12 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                         {parsed.itemEmoji}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Category</p>
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Categoria</p>
                         <p className="text-white font-medium truncate">
                           <span className="mr-1">{parsed.categoryEmoji}</span>
                           {parsed.categoryName}
                           {parsed.isNewCategory && (
-                            <span className="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-primary/25 text-primary align-middle">new</span>
+                            <span className="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-primary/25 text-primary align-middle">nova</span>
                           )}
                         </p>
                       </div>
@@ -351,7 +351,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                             : "bg-white/5 border-white/10 text-white/60"
                         }`}
                       >
-                        <TrendingDown size={16} /> Expense
+                        <TrendingDown size={16} /> Despesa
                       </button>
                       <button
                         type="button"
@@ -362,12 +362,12 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                             : "bg-white/5 border-white/10 text-white/60"
                         }`}
                       >
-                        <TrendingUp size={16} /> Income
+                        <TrendingUp size={16} /> Receita
                       </button>
                     </div>
 
                     <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/50">Amount</label>
+                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/50">Valor</label>
                       <input
                         inputMode="decimal"
                         value={editAmount}
@@ -377,17 +377,17 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                     </div>
 
                     <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/50">Description</label>
+                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/50">Descrição</label>
                       <input
                         value={editDesc}
                         onChange={(e) => setEditDesc(e.target.value)}
-                        placeholder="Add a note…"
+                        placeholder="Adicionar nota…"
                         className="w-full mt-1 bg-white/5 border border-white/10 focus:border-primary/50 rounded-xl px-3 py-2 text-white placeholder:text-white/30 outline-none"
                       />
                     </div>
 
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 mb-2">Tag</p>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 mb-2">Etiqueta</p>
                       <div className="flex gap-2">
                         {(["debit", "credit"] as const).map((t) => (
                           <button
@@ -400,7 +400,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                                 : "bg-white/5 border-white/15 text-white/70"
                             }`}
                           >
-                            {t === "debit" ? "Debit" : "Credit"}
+                            {t === "debit" ? "Débito" : "Crédito"}
                           </button>
                         ))}
                       </div>
@@ -417,7 +417,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                   className="flex flex-col items-center gap-4"
                 >
                   <Loader2 className="w-12 h-12 text-white animate-spin" />
-                  <p className="text-white/80">Saving…</p>
+                  <p className="text-white/80">A guardar…</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -428,7 +428,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
               <>
                 <button
                   onClick={start}
-                  aria-label="Restart"
+                  aria-label="Reiniciar"
                   className="w-14 h-14 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center backdrop-blur"
                 >
                   <RefreshCw size={22} />
@@ -436,7 +436,7 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
 
                 <button
                   onClick={finishNow}
-                  aria-label="Finish"
+                  aria-label="Terminar"
                   className="relative w-24 h-24 rounded-full bg-white text-primary flex items-center justify-center shadow-[0_0_60px_rgba(255,255,255,0.35)] active:scale-95 transition"
                 >
                   <motion.span
@@ -458,13 +458,13 @@ const VoiceTransactionModal = ({ isOpen, onClose }: Props) => {
                   onClick={start}
                   className="flex-1 h-14 rounded-full bg-white/10 border border-white/20 text-white font-medium flex items-center justify-center gap-2 backdrop-blur"
                 >
-                  <Mic size={18} /> Try again
+                  <Mic size={18} /> Tentar novamente
                 </button>
                 <button
                   onClick={confirm}
                   className="flex-1 h-14 rounded-full bg-white text-primary font-semibold flex items-center justify-center gap-2 shadow-[0_0_40px_rgba(255,255,255,0.3)] active:scale-95"
                 >
-                  <Check size={20} strokeWidth={3} /> Confirm
+                  <Check size={20} strokeWidth={3} /> Confirmar
                 </button>
               </div>
             )}

@@ -4,13 +4,13 @@ import LegalLayout from "@/components/LegalLayout";
 const ContactPage = () => {
   return (
     <LegalLayout
-      title="Contact"
-      description="Get in touch with the FinanceFLOW team."
+      title="Contacto"
+      description="Entre em contacto com a equipa FinanceFLOW."
       path="/contact"
     >
       <p>
-        For any question, feedback, or support request, please reach the FinanceFLOW team directly by
-        email. We typically respond within 24–48 hours on business days.
+        Para qualquer questão, feedback ou pedido de suporte, contacte diretamente a equipa FinanceFLOW por
+        email. Normalmente respondemos no prazo de 24–48 horas em dias úteis.
       </p>
 
       <div className="not-prose mt-6 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-transparent p-6 flex items-center gap-4">

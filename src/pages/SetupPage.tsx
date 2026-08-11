@@ -6,10 +6,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 
 const captions = [
-  "Creating your financial profile...",
-  "Analyzing your answers...",
-  "Building your personalized experience...",
-  "Preparing your dashboard...",
+  "A criar o seu perfil financeiro...",
+  "A analisar as suas respostas...",
+  "A construir a sua experiência personalizada...",
+  "A preparar o seu painel...",
 ];
 
 const SetupPage = () => {
@@ -66,7 +66,7 @@ const SetupPage = () => {
         .from("cards")
         .insert({
           user_id: user.id,
-          name: data.cardName || "Main Card",
+          name: data.cardName || "Cartão Principal",
           icon: data.cardIcon || "credit-card",
           color: data.cardColor || "#10B981",
         })
@@ -77,7 +77,7 @@ const SetupPage = () => {
 
       await supabase.from("goals").insert({
         user_id: user.id,
-        name: data.mainGoal || "My first goal",
+        name: data.mainGoal || "Minha primeira meta",
         target_amount: data.savingTarget || 1000,
         current_amount: 0,
         icon: "target",
@@ -91,7 +91,7 @@ const SetupPage = () => {
           card_id: card.id,
           type: "income",
           amount: data.monthlyIncome,
-          description: "Monthly income",
+          description: "Receita mensal",
           day_of_month: 1,
           auto_process: true,
           is_active: true,
@@ -154,7 +154,7 @@ const SetupPage = () => {
 
         {error && (
           <p className="text-sm text-destructive">
-            Something went wrong: {error}. <button onClick={() => navigate("/dashboard")} className="underline">Continue</button>
+            Algo correu mal: {error}. <button onClick={() => navigate("/dashboard")} className="underline">Continuar</button>
           </p>
         )}
       </div>

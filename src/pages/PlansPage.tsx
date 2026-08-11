@@ -13,11 +13,11 @@ import SEO from "@/components/SEO";
 type PlanKey = "monthly" | "yearly";
 
 const benefits = [
-  "Unlimited storage",
-  "Smart organization",
-  "Secure backup",
-  "Instant synchronization",
-  "Future premium features",
+  "Armazenamento ilimitado",
+  "Organização inteligente",
+  "Backup seguro",
+  "Sincronização instantânea",
+  "Funcionalidades premium futuras",
 ];
 
 const PlansPage = () => {
@@ -41,10 +41,10 @@ const PlansPage = () => {
           <div className="w-20 h-20 mx-auto rounded-full bg-primary/20 flex items-center justify-center shadow-[0_0_60px_rgba(34,197,94,0.4)]">
             <Crown className="w-10 h-10 text-primary" />
           </div>
-          <h1 className="text-2xl font-bold">You're already Premium</h1>
-          <p className="text-white/60">Your subscription is active. Enjoy the full VAULT experience.</p>
+          <h1 className="text-2xl font-bold">Já é Premium</h1>
+          <p className="text-white/60">A sua subscrição está ativa. Desfrute da experiência completa do VAULT.</p>
           <Button onClick={() => navigate("/dashboard")} className="w-full h-12 rounded-2xl">
-            Back to Dashboard
+            Voltar ao Painel
           </Button>
         </div>
       </div>
@@ -61,8 +61,8 @@ const PlansPage = () => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden pb-32">
       <SEO
-        title="Vault Premium — Plans and pricing"
-        description="Unlock Vault Premium: unlimited storage, smart organization and instant sync. Choose monthly or save with the yearly plan."
+        title="Vault Premium — Planos e preços"
+        description="Desbloqueie o Vault Premium: armazenamento ilimitado, organização inteligente e sincronização instantânea. Escolha o plano mensal ou poupe com o plano anual."
         path="/plans"
       />
       {/* Ambient green glow */}
@@ -91,17 +91,17 @@ const PlansPage = () => {
         >
           <img
             src="/vault-logo.png"
-            alt="VAULT financial management logo"
+            alt="Logótipo de gestão financeira VAULT"
             className="w-20 h-20 mx-auto rounded-2xl object-cover shadow-[0_0_60px_rgba(34,197,94,0.45)]"
           />
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-[11px] font-medium">
             <Sparkles className="w-3 h-3" /> VAULT Premium
           </div>
           <h1 className="text-3xl font-bold leading-tight">
-            Unlock the Full Potential<br />of VAULT
+            Desbloqueie Todo o Potencial<br />do VAULT
           </h1>
           <p className="text-white/60 text-sm px-4">
-            Organize, protect, and access everything in one place.
+            Organize, proteja e aceda a tudo num só lugar.
           </p>
         </motion.div>
 
@@ -129,28 +129,28 @@ const PlansPage = () => {
           <PlanCard
             active={selected === "monthly"}
             onClick={() => setSelected("monthly")}
-            title="Monthly"
-            subtitle="Billed every month"
+            title="Mensal"
+            subtitle="Faturado mensalmente"
             price={`${symbol}${monthlyPrice.toFixed(2)}`}
-            period="/month"
+            period="/mês"
           />
 
           {/* Yearly — BEST VALUE */}
           <PlanCard
             active={selected === "yearly"}
             onClick={() => setSelected("yearly")}
-            title="Yearly"
-            subtitle={`Just ${symbol}${(yearlyPrice / 12).toFixed(2)} / month`}
+            title="Anual"
+            subtitle={`Apenas ${symbol}${(yearlyPrice / 12).toFixed(2)} / mês`}
             price={`${symbol}${yearlyPrice.toFixed(2)}`}
-            period="/year"
-            badge="BEST VALUE"
-            savingsLabel={`Save ${savings}%`}
+            period="/ano"
+            badge="MELHOR VALOR"
+            savingsLabel={`Poupe ${savings}%`}
             highlighted
           />
         </div>
 
         <p className="text-center text-[11px] text-white/40 mt-6">
-          Secure checkout · Cancel anytime · No hidden fees
+          Checkout seguro · Cancele quando quiser · Sem taxas ocultas
         </p>
       </main>
 
@@ -166,14 +166,14 @@ const PlansPage = () => {
             {submitting ? (
               <Loader2 className="w-5 h-5 animate-spin" />
             ) : (
-              <>Continue · {selected === "yearly" ? `${symbol}${yearlyPrice.toFixed(2)}/yr` : `${symbol}${monthlyPrice.toFixed(2)}/mo`}</>
+              <>Continuar · {selected === "yearly" ? `${symbol}${yearlyPrice.toFixed(2)}/ano` : `${symbol}${monthlyPrice.toFixed(2)}/mês`}</>
             )}
           </motion.button>
           <button
             onClick={() => navigate("/dashboard")}
             className="block w-full text-center text-xs text-white/40 mt-3"
           >
-            Maybe later
+            Talvez mais tarde
           </button>
         </div>
       </div>

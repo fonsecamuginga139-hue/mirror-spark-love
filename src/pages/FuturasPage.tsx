@@ -72,7 +72,7 @@ const FuturasPage = () => {
     e.preventDefault();
     
     if (!selectedCard) {
-      toast.error("Select a card");
+      toast.error("Seleciona um cartão");
       return;
     }
 
@@ -85,7 +85,7 @@ const FuturasPage = () => {
         card_id: selectedCard,
         category_id: selectedCategory || null,
       });
-      toast.success("Bill updated!");
+      toast.success("Fatura atualizada!");
     } else {
       const result = await addFutureTransaction({
         type,
@@ -117,12 +117,12 @@ const FuturasPage = () => {
 
   const handleTogglePaid = async (id: string) => {
     await togglePaid(id);
-    toast.success("Status updated");
+    toast.success("Estado atualizado");
   };
 
   const handleDelete = async (id: string) => {
     await deleteFutureTransaction(id);
-    toast.success("Bill removed");
+    toast.success("Fatura removida");
   };
 
   const isOverdue = (date: string) => {
@@ -146,8 +146,8 @@ const FuturasPage = () => {
   return (
     <div className="min-h-screen bg-background pb-24">
       <div className="p-4 max-w-lg mx-auto">
-        <h1 className="text-2xl font-bold text-foreground mb-1">Upcoming Bills</h1>
-        <p className="text-muted-foreground mb-6">Plan your bills and avoid surprises</p>
+        <h1 className="text-2xl font-bold text-foreground mb-1">Faturas Futuras</h1>
+        <p className="text-muted-foreground mb-6">Planeia as tuas faturas e evita surpresas</p>
 
         {/* Card Selector */}
         <CardSelector
@@ -161,11 +161,11 @@ const FuturasPage = () => {
         {/* Summary */}
         <div className="grid grid-cols-2 gap-4 mb-6">
           <div className="finance-card bg-gradient-to-br from-destructive/10 to-destructive/5 border-destructive/20">
-            <p className="text-muted-foreground text-sm mb-1">To Pay</p>
+            <p className="text-muted-foreground text-sm mb-1">A Pagar</p>
             <p className="text-xl font-bold text-expense">{formatCurrency(totalPending)}</p>
           </div>
           <div className="finance-card bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
-            <p className="text-muted-foreground text-sm mb-1">To Receive</p>
+            <p className="text-muted-foreground text-sm mb-1">A Receber</p>
             <p className="text-xl font-bold text-income">{formatCurrency(totalToReceive)}</p>
           </div>
         </div>
@@ -175,7 +175,7 @@ const FuturasPage = () => {
           <div className="finance-card mb-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-foreground">
-                {isEditing ? "Edit Bill" : "New Upcoming Bill"}
+                {isEditing ? "Editar Fatura" : "Nova Fatura Futura"}
               </h3>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -220,7 +220,7 @@ const FuturasPage = () => {
                   type="text"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Ex: Rent, Internet..."
+                  placeholder="Ex: Renda, Internet..."
                   className="input-field"
                   required
                 />
@@ -246,7 +246,7 @@ const FuturasPage = () => {
                   className="input-field"
                   required
                 >
-                  <option value="">Select a card</option>
+                  <option value="">Selecionar um cartão</option>
                   {cards.map((card) => (
                     <option key={card.id} value={card.id}>
                       {card.name}
@@ -263,7 +263,7 @@ const FuturasPage = () => {
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="input-field"
                 >
-                  <option value="">Select a category</option>
+                  <option value="">Selecionar uma categoria</option>
                   {categories.map((cat) => (
                     <option key={cat.id} value={cat.id}>
                       {cat.name}
@@ -292,7 +292,7 @@ const FuturasPage = () => {
                   Cancel
                 </button>
                 <button type="submit" className="flex-1 btn-primary">
-                  {isEditing ? "Save" : "Add"}
+                  {isEditing ? "Guardar" : "Adicionar"}
                 </button>
               </div>
             </form>
@@ -317,7 +317,7 @@ const FuturasPage = () => {
         {/* Pending Transactions */}
         {filteredPending.length > 0 && (
           <div className="mb-6">
-            <h3 className="text-lg font-semibold text-foreground mb-3">Pending</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-3">Pendentes</h3>
             <div className="space-y-3">
               {filteredPending.map((transaction) => (
                 <div 
@@ -340,10 +340,10 @@ const FuturasPage = () => {
                         {new Date(transaction.due_date).toLocaleDateString("pt-PT")}
                         {transaction.card_name && ` • ${transaction.card_name}`}
                         {isToday(transaction.due_date) && (
-                          <span className="text-primary ml-2">Today</span>
+                          <span className="text-primary ml-2">Hoje</span>
                         )}
                         {isOverdue(transaction.due_date) && (
-                          <span className="text-destructive ml-2">Overdue</span>
+                          <span className="text-destructive ml-2">Atrasada</span>
                         )}
                       </p>
                     </div>
@@ -418,7 +418,7 @@ const FuturasPage = () => {
               <Calendar size={40} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-foreground mb-2">
-              {selectedCardId ? "No bills for this card" : "No upcoming bills"}
+              {selectedCardId ? "Sem faturas para este cartão" : "Sem faturas futuras"}
             </h3>
             <p className="text-muted-foreground text-center max-w-xs">
               Add your upcoming bills so you never miss a due date

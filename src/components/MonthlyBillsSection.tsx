@@ -20,7 +20,7 @@ const MonthlyBillsSection = () => {
 
   const handleAdd = async () => {
     if (!newName.trim()) {
-      toast.error("Enter an expense name");
+      toast.error("Indique um nome para a despesa");
       return;
     }
     const created = await addBill({
@@ -29,7 +29,7 @@ const MonthlyBillsSection = () => {
       currency,
     });
     if (created) {
-      toast.success("Bill added");
+      toast.success("Conta adicionada");
       setNewName("");
       setNewAmount("");
       setIsAdding(false);
@@ -45,16 +45,16 @@ const MonthlyBillsSection = () => {
   const saveEdit = async () => {
     if (!editId) return;
     await updateBill(editId, {
-      name: editName.trim() || "Untitled",
+      name: editName.trim() || "Sem título",
       amount: parseFloat(editAmount) || 0,
     });
     setEditId(null);
-    toast.success("Updated");
+    toast.success("Atualizado");
   };
 
   const handleDelete = async (id: string) => {
     await deleteBill(id);
-    toast.success("Removed");
+    toast.success("Removido");
   };
 
   return (
@@ -62,14 +62,14 @@ const MonthlyBillsSection = () => {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <Receipt size={18} className="text-primary" />
-          <h3 className="text-lg font-semibold text-foreground">Monthly Bills</h3>
+          <h3 className="text-lg font-semibold text-foreground">Contas Mensais</h3>
         </div>
         <span className="text-sm font-semibold text-primary">
           {formatCurrency(totalActiveAmount)}
         </span>
       </div>
       <p className="text-sm text-muted-foreground mb-4">
-        Your recurring fixed expenses. Used to calculate your available monthly balance.
+        As suas despesas fixas recorrentes. Usadas para calcular o seu saldo mensal disponível.
       </p>
 
       {loading ? (
@@ -112,7 +112,7 @@ const MonthlyBillsSection = () => {
                   <div className="flex-1 min-w-0">
                     <p className="text-foreground font-medium truncate">{b.name}</p>
                     <p className="text-xs text-muted-foreground">
-                      {b.active ? "Active" : "Disabled"}
+                      {b.active ? "Ativa" : "Desativada"}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -121,14 +121,14 @@ const MonthlyBillsSection = () => {
                     </p>
                     <button
                       onClick={() => startEdit(b)}
-                      aria-label="Edit"
+                      aria-label="Editar"
                       className="p-1 hover:bg-muted rounded transition-all"
                     >
                       <Pencil size={16} className="text-muted-foreground" />
                     </button>
                     <button
                       onClick={() => toggleActive(b.id)}
-                      aria-label="Toggle active"
+                      aria-label="Ativar/desativar"
                       className="p-1"
                     >
                       {b.active ? (
@@ -139,7 +139,7 @@ const MonthlyBillsSection = () => {
                     </button>
                     <button
                       onClick={() => handleDelete(b.id)}
-                      aria-label="Delete"
+                      aria-label="Eliminar"
                       className="p-1 hover:bg-destructive/20 rounded transition-all"
                     >
                       <Trash2 size={16} className="text-destructive" />
@@ -155,7 +155,7 @@ const MonthlyBillsSection = () => {
               <input
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
-                placeholder="Expense name"
+                placeholder="Nome da despesa"
                 className="input-field flex-1"
               />
               <div className="relative w-28">
@@ -190,7 +190,7 @@ const MonthlyBillsSection = () => {
               onClick={() => setIsAdding(true)}
               className="w-full h-12 rounded-xl border-2 border-dashed border-border hover:border-primary/50 text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center justify-center gap-2"
             >
-              <Plus size={16} /> Add monthly bill
+              <Plus size={16} /> Adicionar conta mensal
             </button>
           )}
         </div>

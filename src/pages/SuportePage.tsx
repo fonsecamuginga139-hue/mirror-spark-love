@@ -104,12 +104,12 @@ const SupportPage = () => {
 
       if (error) throw error;
 
-      toast.success("Message sent. Our team will reply soon.");
+      toast.success("Mensagem enviada. A nossa equipa responderá em breve.");
       setSubject("");
       setMessage("");
       setShowForm(false);
     } catch {
-      toast.error("Error sending message. Please try again.");
+      toast.error("Erro ao enviar mensagem. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -136,7 +136,7 @@ const SupportPage = () => {
             >
               <ArrowLeft size={20} className="text-foreground" />
             </button>
-            <h1 className="text-2xl font-bold text-foreground">Support</h1>
+            <h1 className="text-2xl font-bold text-foreground">Suporte</h1>
           </div>
           <Button
             size="sm"
@@ -144,7 +144,7 @@ const SupportPage = () => {
             className="gap-1"
           >
             <Plus size={16} />
-            New
+            Novo
           </Button>
         </div>
 
@@ -154,12 +154,12 @@ const SupportPage = () => {
             <div className="finance-card space-y-3 border border-primary/20">
               <h3 className="text-sm font-semibold text-primary flex items-center gap-2">
                 <MessageCircle size={16} />
-                New Message
+                Nova Mensagem
               </h3>
               <div>
-                <label className="text-xs font-medium text-muted-foreground mb-1 block">Subject</label>
+                <label className="text-xs font-medium text-muted-foreground mb-1 block">Assunto</label>
                 <Input
-                  placeholder="Ex: Issue adding a transaction"
+                  placeholder="Ex: Problema ao adicionar uma transação"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   maxLength={200}
@@ -167,9 +167,9 @@ const SupportPage = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-muted-foreground mb-1 block">Message</label>
+                <label className="text-xs font-medium text-muted-foreground mb-1 block">Mensagem</label>
                 <Textarea
-                  placeholder="Describe the issue with as much detail as possible..."
+                  placeholder="Descreva o problema com o máximo de detalhe possível..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   maxLength={2000}
@@ -191,7 +191,7 @@ const SupportPage = () => {
                 ) : (
                   <>
                     <Send className="w-4 h-4 mr-2" />
-                    Send Message
+                    Enviar Mensagem
                   </>
                 )}
               </Button>
@@ -203,10 +203,10 @@ const SupportPage = () => {
         <div className="space-y-1 mb-4">
           <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
             <MessageCircle size={18} className="text-primary" />
-            My Conversations
+            Minhas Conversas
           </h2>
           <p className="text-xs text-muted-foreground">
-            Your messages and team replies
+            As suas mensagens e respostas da equipa
           </p>
         </div>
 
@@ -219,7 +219,7 @@ const SupportPage = () => {
             <MessageCircle size={40} className="mx-auto text-muted-foreground mb-3 opacity-40" />
             <p className="text-muted-foreground text-sm">Nenhuma conversa ainda.</p>
             <p className="text-muted-foreground text-xs mt-1">
-              Tap "New" to send a message.
+              Toque em "Novo" para enviar uma mensagem.
             </p>
           </div>
         ) : (
@@ -237,7 +237,7 @@ const SupportPage = () => {
                         : "bg-muted text-muted-foreground text-[10px] shrink-0"
                     }
                   >
-                    {ticket.status === "answered" ? "Answered" : "Pending"}
+                    {ticket.status === "answered" ? "Respondido" : "Pendente"}
                   </Badge>
                 </div>
 
@@ -255,7 +255,7 @@ const SupportPage = () => {
                 {ticket.admin_reply && (
                   <div className="flex justify-start">
                     <div className="max-w-[85%] bg-muted border border-border rounded-2xl rounded-bl-sm px-3 py-2">
-                      <p className="text-[10px] font-semibold text-primary mb-1">Vault Team</p>
+                      <p className="text-[10px] font-semibold text-primary mb-1">Equipa Vault</p>
                       <p className="text-sm text-foreground whitespace-pre-wrap">{ticket.admin_reply}</p>
                       <span className="text-[10px] text-muted-foreground mt-1 block">
                         {formatDate(ticket.updated_at)}

@@ -33,14 +33,14 @@ const GoalsPage = () => {
     });
 
     if (result) {
-      toast.success("Goal created successfully!");
+      toast.success("Meta criada com sucesso!");
       setIsModalOpen(false);
     }
   };
 
   const handleDeleteGoal = async (id: string) => {
     await deleteGoal(id);
-    toast.success("Goal removed");
+    toast.success("Meta removida");
   };
 
   const handleMarkAsCompleted = async (id: string) => {
@@ -49,7 +49,7 @@ const GoalsPage = () => {
     
     setTimeout(() => {
       setCelebratingGoal(null);
-      toast.success("Congratulations! Goal reached! 🎉");
+      toast.success("Parabéns! Meta alcançada! 🎉");
     }, 3000);
   };
 
@@ -58,7 +58,7 @@ const GoalsPage = () => {
     
     const amount = parseFloat(addAmount.replace(",", "."));
     if (isNaN(amount) || amount <= 0) {
-      toast.error("Enter a valid amount");
+      toast.error("Introduz um valor válido");
       return;
     }
 
@@ -79,8 +79,8 @@ const GoalsPage = () => {
   return (
     <div className="min-h-screen bg-background pb-24">
       <div className="p-4 max-w-lg mx-auto">
-        <h1 className="text-2xl font-bold text-foreground mb-1">Goals</h1>
-        <p className="text-muted-foreground mb-6">Set and track your financial goals</p>
+        <h1 className="text-2xl font-bold text-foreground mb-1">Metas</h1>
+        <p className="text-muted-foreground mb-6">Define e acompanha os teus objetivos financeiros</p>
 
         {/* Card Selector */}
         <CardSelector
@@ -105,7 +105,7 @@ const GoalsPage = () => {
               <Target size={40} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-foreground mb-2">
-              {selectedCardId ? "No goals for this card" : "No goals yet"}
+              {selectedCardId ? "Sem metas para este cartão" : "Ainda sem metas"}
             </h3>
             <p className="text-muted-foreground text-center max-w-xs">
               Set financial goals and track your progress

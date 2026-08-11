@@ -79,7 +79,7 @@ const RecurringPage = () => {
         category_id: selectedCategory || null,
         auto_process: autoProcess,
       });
-      toast.success("Recurring updated!");
+      toast.success("Recorrente atualizada!");
     } else {
       const result = await addRecurringTransaction({
         type,
@@ -92,7 +92,7 @@ const RecurringPage = () => {
       });
 
       if (result) {
-        toast.success("Recurring transaction created!");
+        toast.success("Transação recorrente criada!");
       }
     }
     
@@ -114,15 +114,15 @@ const RecurringPage = () => {
   const handleConfirmManual = async (id: string) => {
     const success = await processManualRecurring(id);
     if (success) {
-      toast.success("Transaction confirmed and posted!");
+      toast.success("Transação confirmada e lançada!");
     } else {
-      toast.error("Error confirming transaction");
+      toast.error("Erro ao confirmar transação");
     }
   };
 
   const handleDelete = async (id: string) => {
     await deleteRecurringTransaction(id);
-    toast.success("Recurring removed");
+    toast.success("Recorrente removida");
   };
 
   const categories = type === "income" ? incomeCategories : expenseCategories;
@@ -138,15 +138,15 @@ const RecurringPage = () => {
   return (
     <div className="min-h-screen bg-background pb-24">
       <div className="p-4 max-w-lg mx-auto">
-        <h1 className="text-2xl font-bold text-foreground mb-1">Monthly Bills</h1>
-        <p className="text-muted-foreground mb-6">Manage your recurring monthly expenses and automated transactions</p>
+        <h1 className="text-2xl font-bold text-foreground mb-1">Faturas Mensais</h1>
+        <p className="text-muted-foreground mb-6">Gere as tuas despesas mensais recorrentes e transações automáticas</p>
 
         {/* Monthly Fixed Expenses (new) */}
         <MonthlyBillsSection />
 
         <div className="mb-4">
-          <h2 className="text-lg font-semibold text-foreground">Automated Transactions</h2>
-          <p className="text-sm text-muted-foreground">Recurring income and expenses posted to your cards</p>
+          <h2 className="text-lg font-semibold text-foreground">Transações Automáticas</h2>
+          <p className="text-sm text-muted-foreground">Receitas e despesas recorrentes lançadas nos teus cartões</p>
         </div>
 
         {/* Card Selector */}
@@ -162,7 +162,7 @@ const RecurringPage = () => {
           <div className="finance-card mb-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-foreground">
-                {isEditing ? "Edit Recurring" : "New Recurring"}
+                {isEditing ? "Editar Recorrente" : "Nova Recorrente"}
               </h3>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -170,24 +170,24 @@ const RecurringPage = () => {
                 <button type="button" onClick={() => setType("expense")}
                   className={`p-3 rounded-xl border-2 flex items-center justify-center gap-2 ${type === "expense" ? "border-destructive bg-destructive/10" : "border-border"}`}>
                   <TrendingDown className={type === "expense" ? "text-destructive" : "text-muted-foreground"} size={18} />
-                  <span className={type === "expense" ? "text-destructive" : "text-muted-foreground"}>Expense</span>
+                  <span className={type === "expense" ? "text-destructive" : "text-muted-foreground"}>Despesa</span>
                 </button>
                 <button type="button" onClick={() => setType("income")}
                   className={`p-3 rounded-xl border-2 flex items-center justify-center gap-2 ${type === "income" ? "border-primary bg-primary/10" : "border-border"}`}>
                   <TrendingUp className={type === "income" ? "text-primary" : "text-muted-foreground"} size={18} />
-                  <span className={type === "income" ? "text-primary" : "text-muted-foreground"}>Income</span>
+                  <span className={type === "income" ? "text-primary" : "text-muted-foreground"}>Receita</span>
                 </button>
               </div>
-              <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" className="input-field" required />
+              <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descrição" className="input-field" required />
               <CurrencyInput
                 value={amount}
                 onChange={setAmount}
                 placeholder="0,00"
                 required
               />
-              <input type="number" value={dayOfMonth} onChange={(e) => setDayOfMonth(e.target.value)} placeholder="Day of month (1-31)" className="input-field" min="1" max="31" required />
+              <input type="number" value={dayOfMonth} onChange={(e) => setDayOfMonth(e.target.value)} placeholder="Dia do mês (1-31)" className="input-field" min="1" max="31" required />
               <select value={selectedCard} onChange={(e) => setSelectedCard(e.target.value)} className="input-field" required>
-                <option value="">Select a card</option>
+                <option value="">Selecionar um cartão</option>
                 {cards.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
               <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="input-field">
@@ -205,10 +205,10 @@ const RecurringPage = () => {
                   )}
                   <div>
                     <Label htmlFor="auto-process" className="text-sm font-medium cursor-pointer">
-                      {autoProcess ? "Automatic" : "Manual"}
+                      {autoProcess ? "Automático" : "Manual"}
                     </Label>
                     <p className="text-xs text-muted-foreground">
-                      {autoProcess ? "Posted automatically on day" : "Requires manual confirmation"}
+                      {autoProcess ? "Lançada automaticamente no dia" : "Requer confirmação manual"}
                     </p>
                   </div>
                 </div>
@@ -220,8 +220,8 @@ const RecurringPage = () => {
               </div>
 
               <div className="flex gap-3">
-                <button type="button" onClick={resetForm} className="flex-1 py-3 rounded-full border border-border">Cancel</button>
-                <button type="submit" className="flex-1 btn-primary">{isEditing ? "Save" : "Create"}</button>
+                <button type="button" onClick={resetForm} className="flex-1 py-3 rounded-full border border-border">Cancelar</button>
+                <button type="submit" className="flex-1 btn-primary">{isEditing ? "Guardar" : "Criar"}</button>
               </div>
             </form>
           </div>
@@ -273,7 +273,7 @@ const RecurringPage = () => {
 
         {filteredActive.length > 0 && (
           <div className="mb-6">
-            <h3 className="text-lg font-semibold text-foreground mb-3">Active</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-3">Ativas</h3>
             <div className="space-y-3">
               {filteredActive.map((r) => (
                 <div key={r.id} className="finance-card flex items-center justify-between group">
@@ -281,7 +281,7 @@ const RecurringPage = () => {
                     <div className="flex items-center gap-2">
                       <p className="text-foreground font-medium truncate">{r.description}</p>
                       {r.auto_process ? (
-                        <span title="Automatic"><Zap size={14} className="text-primary flex-shrink-0" /></span>
+                        <span title="Automático"><Zap size={14} className="text-primary flex-shrink-0" /></span>
                       ) : (
                         <span title="Manual"><Clock size={14} className="text-muted-foreground flex-shrink-0" /></span>
                       )}
@@ -310,7 +310,7 @@ const RecurringPage = () => {
 
         {filteredInactive.length > 0 && (
           <div>
-            <h3 className="text-lg font-semibold text-muted-foreground mb-3">Inactive</h3>
+            <h3 className="text-lg font-semibold text-muted-foreground mb-3">Inativas</h3>
             <div className="space-y-3">
               {filteredInactive.map((r) => (
                 <div key={r.id} className="finance-card flex items-center justify-between opacity-60 group">
@@ -337,9 +337,9 @@ const RecurringPage = () => {
           <div className="flex flex-col items-center justify-center py-16">
             <RefreshCw size={40} className="text-primary mb-4" />
             <h3 className="text-xl font-semibold text-foreground mb-2">
-              {selectedCardId ? "No recurring for this card" : "No recurring transactions"}
+              {selectedCardId ? "Sem recorrentes para este cartão" : "Sem transações recorrentes"}
             </h3>
-            <p className="text-muted-foreground text-center">Create transactions that repeat every month</p>
+            <p className="text-muted-foreground text-center">Cria transações que se repetem todos os meses</p>
           </div>
         )}
       </div>

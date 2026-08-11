@@ -49,13 +49,13 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
     setIsSubmitting(false);
 
     if (result) {
-      toast.success("Category created!");
+      toast.success("Categoria criada!");
       setName("");
       setColor(PRESET_COLORS[5]);
       setIcon("tag");
       onClose();
     } else {
-      toast.error("Error creating category");
+      toast.error("Erro ao criar categoria");
     }
   };
 
@@ -63,9 +63,9 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
     if (deleteConfirm.id) {
       const success = await deleteCategory(deleteConfirm.id);
       if (success) {
-        toast.success("Category removed");
+        toast.success("Categoria removida");
       } else {
-        toast.error("Error removing category");
+        toast.error("Erro ao remover categoria");
       }
     }
     setDeleteConfirm({ isOpen: false, id: null });
@@ -82,7 +82,7 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
           <div className="flex items-center justify-between p-4 border-b border-border">
             <div className="flex items-center gap-2">
               <Tag className="text-primary" size={22} />
-              <h2 className="text-xl font-semibold text-foreground">Manage Categories</h2>
+              <h2 className="text-xl font-semibold text-foreground">Gerir Categorias</h2>
             </div>
             <button onClick={onClose} className="p-1 hover:bg-muted rounded-lg">
               <X size={24} className="text-muted-foreground" />
@@ -93,7 +93,7 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
             {/* Existing Custom Categories */}
             {userCategories.length > 0 && (
               <div className="mb-6">
-                <h3 className="text-sm font-medium text-muted-foreground mb-3">Your Categories</h3>
+                <h3 className="text-sm font-medium text-muted-foreground mb-3">As Suas Categorias</h3>
                 <div className="grid grid-cols-2 gap-2">
                   {userCategories.map((cat) => {
                     const CatIcon = getCategoryIcon(cat.icon);
@@ -112,7 +112,7 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
                           <div className="min-w-0">
                             <p className="text-sm text-foreground font-medium truncate">{cat.name}</p>
                             <p className="text-xs text-muted-foreground">
-                              {cat.type === "income" ? "Income" : "Expense"}
+                              {cat.type === "income" ? "Receita" : "Despesa"}
                             </p>
                           </div>
                         </div>
@@ -131,22 +131,22 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
 
             {/* Add New Category Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
-              <h3 className="text-sm font-medium text-muted-foreground">Create New Category</h3>
+              <h3 className="text-sm font-medium text-muted-foreground">Criar Nova Categoria</h3>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Name</label>
+                <label className="block text-sm font-medium text-foreground mb-2">Nome</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => handleNameChange(e.target.value)}
-                  placeholder="Ex: Subscriptions, Pets..."
+                  placeholder="Ex: Assinaturas, Animais..."
                   className="input-field"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Type</label>
+                <label className="block text-sm font-medium text-foreground mb-2">Tipo</label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
@@ -157,7 +157,7 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
                         : "border-border text-muted-foreground"
                     }`}
                   >
-                    Income
+                    Receita
                   </button>
                   <button
                     type="button"
@@ -168,14 +168,14 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
                         : "border-border text-muted-foreground"
                     }`}
                   >
-                    Expense
+                    Despesa
                   </button>
                 </div>
               </div>
 
               {/* Icon Picker */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Icon</label>
+                <label className="block text-sm font-medium text-foreground mb-2">Ícone</label>
                 <button
                   type="button"
                   onClick={() => setShowIconPicker(!showIconPicker)}
@@ -187,7 +187,7 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
                   >
                     <IconComponent size={20} style={{ color }} />
                   </div>
-                  <span className="text-foreground">Change icon</span>
+                  <span className="text-foreground">Alterar ícone</span>
                 </button>
                 
                 {showIconPicker && (
@@ -221,7 +221,7 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   <Palette size={14} className="inline mr-1" />
-                  Color
+                  Cor
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {PRESET_COLORS.map((presetColor) => (
@@ -244,14 +244,14 @@ const NewCategoryModal = ({ isOpen, onClose }: NewCategoryModalProps) => {
                   onClick={onClose}
                   className="flex-1 py-3 rounded-full border border-border text-foreground font-medium"
                 >
-                  Cancel
+                  Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting || !name.trim()}
                   className="flex-1 btn-primary disabled:opacity-50"
                 >
-                  {isSubmitting ? "Creating..." : "Create Category"}
+                  {isSubmitting ? "A criar..." : "Criar Categoria"}
                 </button>
               </div>
             </form>

@@ -20,11 +20,11 @@ interface TransactionFiltersProps {
 }
 
 const periodLabels: Record<TransactionFilterPeriod, string> = {
-  all: "All",
-  today: "Today",
-  week: "Week",
-  month: "Month",
-  custom: "Custom",
+  all: "Todas",
+  today: "Hoje",
+  week: "Semana",
+  month: "Mês",
+  custom: "Personalizado",
 };
 
 const TransactionFilters = ({ categories, filters, onFiltersChange }: TransactionFiltersProps) => {
@@ -63,14 +63,14 @@ const TransactionFilters = ({ categories, filters, onFiltersChange }: Transactio
       <SheetContent side="bottom" className="bg-card border-border rounded-t-3xl h-[80vh]">
         <SheetHeader>
           <SheetTitle className="text-foreground flex items-center justify-between">
-            <span>Filter Transactions</span>
+            <span>Filtrar Transações</span>
             {hasActiveFilters && (
               <button
                 onClick={handleReset}
                 className="text-sm text-primary flex items-center gap-1"
               >
                 <X size={14} />
-                Clear
+                Limpar
               </button>
             )}
           </SheetTitle>
@@ -81,7 +81,7 @@ const TransactionFilters = ({ categories, filters, onFiltersChange }: Transactio
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Calendar size={18} className="text-primary" />
-              <span className="font-medium text-foreground">Period</span>
+              <span className="font-medium text-foreground">Período</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {(Object.keys(periodLabels) as TransactionFilterPeriod[]).map((period) => (
@@ -102,7 +102,7 @@ const TransactionFilters = ({ categories, filters, onFiltersChange }: Transactio
             {localFilters.period === "custom" && (
               <div className="grid grid-cols-2 gap-3 mt-4">
                 <div>
-                  <label className="block text-xs text-muted-foreground mb-1">Start Date</label>
+                  <label className="block text-xs text-muted-foreground mb-1">Data Inicial</label>
                   <input
                     type="date"
                     value={localFilters.startDate}
@@ -111,7 +111,7 @@ const TransactionFilters = ({ categories, filters, onFiltersChange }: Transactio
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-muted-foreground mb-1">End Date</label>
+                  <label className="block text-xs text-muted-foreground mb-1">Data Final</label>
                   <input
                     type="date"
                     value={localFilters.endDate}
@@ -127,7 +127,7 @@ const TransactionFilters = ({ categories, filters, onFiltersChange }: Transactio
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Tag size={18} className="text-primary" />
-              <span className="font-medium text-foreground">Category</span>
+              <span className="font-medium text-foreground">Categoria</span>
             </div>
             <div className="flex flex-wrap gap-2">
               <button
@@ -138,7 +138,7 @@ const TransactionFilters = ({ categories, filters, onFiltersChange }: Transactio
                     : "bg-muted text-muted-foreground hover:bg-muted/80"
                 }`}
               >
-                All
+                Todas
               </button>
               {categories.map((category) => (
                 <button
@@ -167,7 +167,7 @@ const TransactionFilters = ({ categories, filters, onFiltersChange }: Transactio
             onClick={handleApply}
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
           >
-            Apply Filters
+            Aplicar Filtros
           </Button>
         </div>
       </SheetContent>

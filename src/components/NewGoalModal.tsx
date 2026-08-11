@@ -68,7 +68,7 @@ const NewGoalModal = ({ isOpen, onClose, onAdd, cards = [], defaultCardId }: New
     <div className="fixed inset-0 bg-black/60 flex items-end sm:items-center justify-center z-50">
       <div className="bg-card w-full max-w-lg rounded-t-2xl sm:rounded-2xl max-h-[90vh] overflow-y-auto animate-slide-up">
         <div className="flex items-center justify-between p-4 border-b border-border">
-          <h2 className="text-xl font-semibold text-foreground">New Goal</h2>
+          <h2 className="text-xl font-semibold text-foreground">Novo Objetivo</h2>
           <button
             onClick={onClose}
             className="p-1 hover:bg-muted rounded-lg transition-colors"
@@ -81,13 +81,13 @@ const NewGoalModal = ({ isOpen, onClose, onAdd, cards = [], defaultCardId }: New
           {/* Name */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Goal Name *
+              Nome do Objetivo *
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Ex: Vacation, New car..."
+              placeholder="Ex: Férias, Carro novo..."
               className="input-field"
               required
             />
@@ -96,7 +96,7 @@ const NewGoalModal = ({ isOpen, onClose, onAdd, cards = [], defaultCardId }: New
           {/* Target Amount */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Target Amount *
+              Valor Alvo *
             </label>
             <CurrencyInput
               value={targetAmount}
@@ -110,14 +110,14 @@ const NewGoalModal = ({ isOpen, onClose, onAdd, cards = [], defaultCardId }: New
           {cards.length > 0 && (
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
-                Card (optional)
+                Cartão (opcional)
               </label>
               <select
                 value={selectedCardId || ""}
                 onChange={(e) => setSelectedCardId(e.target.value || null)}
                 className="input-field"
               >
-                <option value="">All cards</option>
+                <option value="">Todos os cartões</option>
                 {cards.map((card) => (
                   <option key={card.id} value={card.id}>
                     {card.name}
@@ -125,7 +125,7 @@ const NewGoalModal = ({ isOpen, onClose, onAdd, cards = [], defaultCardId }: New
                 ))}
               </select>
               <p className="text-xs text-muted-foreground mt-1">
-                Link this goal to a specific card
+                Associe este objetivo a um cartão específico
               </p>
             </div>
           )}
@@ -133,7 +133,7 @@ const NewGoalModal = ({ isOpen, onClose, onAdd, cards = [], defaultCardId }: New
           {/* Deadline */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Deadline (optional)
+              Prazo (opcional)
             </label>
             <div className="relative">
               <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
@@ -149,7 +149,7 @@ const NewGoalModal = ({ isOpen, onClose, onAdd, cards = [], defaultCardId }: New
           {/* Color */}
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Color
+              Cor
             </label>
             <div className="flex gap-3">
               {colors.map((color) => (
@@ -173,10 +173,10 @@ const NewGoalModal = ({ isOpen, onClose, onAdd, cards = [], defaultCardId }: New
               onClick={onClose}
               className="flex-1 py-3 rounded-full border border-border text-foreground font-medium hover:bg-muted transition-colors"
             >
-              Cancel
+              Cancelar
             </button>
             <button type="submit" className="flex-1 btn-primary">
-              Create Goal
+              Criar Objetivo
             </button>
           </div>
         </form>

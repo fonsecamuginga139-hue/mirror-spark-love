@@ -67,8 +67,8 @@ const ScanPage = () => {
     } catch (e: any) {
       setCamError(
         e?.name === "NotAllowedError"
-          ? "Camera access denied. Enable it in your browser settings."
-          : "Camera not available on this device.",
+          ? "Acesso à câmara negado. Ative-o nas definições do seu navegador."
+          : "Câmara não disponível neste dispositivo.",
       );
     }
   };
@@ -126,11 +126,11 @@ const ScanPage = () => {
         data: { file_path: path, mime_type: blob.type, file_name: "receipt.jpg" },
       });
       const extracted = (data as any)?.extracted as Extracted | undefined;
-      if (!extracted) throw new Error("Could not read this document.");
+      if (!extracted) throw new Error("Não foi possível ler este documento.");
       setResult(extracted);
       setPhase("result");
     } catch (e: any) {
-      toast.error(e?.message || "Failed to analyze.");
+      toast.error(e?.message || "Falha ao analisar.");
       setPhase("preview");
     }
   };
@@ -138,7 +138,7 @@ const ScanPage = () => {
   const save = async () => {
     if (!result || !user) return;
     if (cards.length === 0) {
-      toast.error("Add a card first.");
+      toast.error("Adicione um cartão primeiro.");
       return;
     }
     setSaving(true);
@@ -154,15 +154,15 @@ const ScanPage = () => {
       category_id: cat?.id ?? null,
       type,
       amount: Number(result.amount) || 0,
-      description: result.merchant || result.description || "Scanned receipt",
+      description: result.merchant || result.description || "Recibo digitalizado",
       date: result.date || new Date().toISOString().slice(0, 10),
     });
     setSaving(false);
     if (ok) {
-      toast.success("Transaction saved from scan");
+      toast.success("Transação guardada a partir da digitalização");
       navigate("/dashboard");
     } else {
-      toast.error("Could not save.");
+      toast.error("Não foi possível guardar.");
     }
   };
 
@@ -171,7 +171,7 @@ const ScanPage = () => {
       <div className="p-4 max-w-lg mx-auto">
         <div className="flex items-center justify-between mb-4">
           <BackButton to="/dashboard" />
-          <h1 className="text-lg font-semibold font-display text-foreground">Scan receipt</h1>
+          <h1 className="text-lg font-semibold font-display text-foreground">Digitalizar recibo</h1>
           <div className="w-10" />
         </div>
 
@@ -210,14 +210,14 @@ const ScanPage = () => {
               <div className="flex items-center justify-around">
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  aria-label="Pick from gallery"
+                  aria-label="Escolher da galeria"
                   className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-foreground"
                 >
                   <ImagePlus size={22} />
                 </button>
                 <button
                   onClick={capture}
-                  aria-label="Capture"
+                  aria-label="Capturar"
                   disabled={!!camError}
                   className="w-20 h-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_40px_hsl(var(--primary)/0.5)] active:scale-95 transition disabled:opacity-40"
                 >
@@ -248,7 +248,7 @@ const ScanPage = () => {
             >
               <img
                 src={preview}
-                alt="Captured"
+                alt="Capturado"
                 className="w-full rounded-3xl border border-primary/20"
               />
               <div className="flex gap-3">
@@ -259,13 +259,13 @@ const ScanPage = () => {
                   }}
                   className="flex-1 h-12 rounded-full border border-border text-foreground flex items-center justify-center gap-2"
                 >
-                  <RotateCcw size={18} /> Retake
+                  <RotateCcw size={18} /> Repetir
                 </button>
                 <button
                   onClick={analyze}
                   className="flex-1 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center gap-2 shadow-[0_0_20px_hsl(var(--primary)/0.4)]"
                 >
-                  <Zap size={18} /> Analyze
+                  <Zap size={18} /> Analisar
                 </button>
               </div>
             </motion.div>
@@ -279,7 +279,7 @@ const ScanPage = () => {
               className="flex flex-col items-center justify-center py-24 gap-4"
             >
               <Loader2 className="w-12 h-12 text-primary animate-spin" />
-              <p className="text-sm text-muted-foreground">Reading your receipt with AI…</p>
+              <p className="text-sm text-muted-foreground">A ler o seu recibo com IA…</p>
             </motion.div>
           )}
 
@@ -300,7 +300,7 @@ const ScanPage = () => {
               <div className="finance-card space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase text-muted-foreground">
-                    {result.type || "expense"}
+                    {result.type === "income" ? "receita" : "despesa"}
                   </span>
                   <span
                     className={`text-2xl font-bold font-display ${
@@ -313,16 +313,16 @@ const ScanPage = () => {
                 </div>
                 <div className="pt-2 border-t border-border text-sm space-y-1">
                   <p>
-                    <span className="text-muted-foreground">Merchant: </span>
+                    <span className="text-muted-foreground">Comerciante: </span>
                     <span className="text-foreground">{result.merchant || "—"}</span>
                   </p>
                   <p>
-                    <span className="text-muted-foreground">Category: </span>
-                    <span className="text-foreground">{result.category || "Other"}</span>
+                    <span className="text-muted-foreground">Categoria: </span>
+                    <span className="text-foreground">{result.category || "Outros"}</span>
                   </p>
                   <p>
-                    <span className="text-muted-foreground">Date: </span>
-                    <span className="text-foreground">{result.date || "today"}</span>
+                    <span className="text-muted-foreground">Data: </span>
+                    <span className="text-foreground">{result.date || "hoje"}</span>
                   </p>
                 </div>
               </div>
@@ -331,7 +331,7 @@ const ScanPage = () => {
                   onClick={() => setPhase("camera")}
                   className="flex-1 h-12 rounded-full border border-border text-foreground"
                 >
-                  Scan another
+                  Digitalizar outro
                 </button>
                 <button
                   disabled={saving}
@@ -342,7 +342,7 @@ const ScanPage = () => {
                     <Loader2 size={18} className="animate-spin" />
                   ) : (
                     <>
-                      <Check size={18} /> Save transaction
+                      <Check size={18} /> Guardar transação
                     </>
                   )}
                 </button>

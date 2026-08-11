@@ -188,7 +188,7 @@ const BuscaPage = () => {
                     {t.description || t.category_name || "Transação"}
                   </p>
                   <p className="text-xs text-muted-foreground truncate">
-                    {t.category_name || "Sem categoria"} · {new Date(t.date).toLocaleDateString()}
+                    {t.category_name || "Sem categoria"} · {new Date(t.date).toLocaleDateString("pt-PT")}
                     {t.card_name ? ` · ${t.card_name}` : ""}
                   </p>
                 </div>

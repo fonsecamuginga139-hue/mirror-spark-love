@@ -67,7 +67,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       try {
         return new Intl.DateTimeFormat(locale, opts ?? { day: "2-digit", month: "short", year: "numeric" }).format(d);
       } catch {
-        return d.toLocaleDateString();
+        return d.toLocaleDateString("pt-PT");
       }
     },
     [locale],

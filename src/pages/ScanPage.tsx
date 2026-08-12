@@ -296,11 +296,18 @@ const ScanPage = () => {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-4"
             >
-              <img
-                src={preview}
-                alt="Capturado"
-                className="w-full rounded-3xl border border-primary/20"
-              />
+              {preview.startsWith("data:application/pdf") ? (
+                <div className="w-full rounded-3xl border border-primary/20 bg-card/60 p-10 text-center text-sm text-muted-foreground">
+                  PDF pronto para análise
+                </div>
+              ) : (
+                <img
+                  src={preview}
+                  alt="Capturado"
+                  className="w-full rounded-3xl border border-primary/20"
+                />
+              )}
+
               <div className="flex gap-3">
                 <button
                   onClick={() => {

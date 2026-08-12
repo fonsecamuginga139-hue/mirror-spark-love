@@ -112,13 +112,15 @@ const NovaTransacaoPage = () => {
       <div className="px-4 py-8 text-center">
         <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Valor</p>
         <p
-          className={`text-5xl font-bold tabular-nums ${
+          className={`font-bold tabular-nums leading-none whitespace-nowrap ${
             amount > 0 ? (type === "income" ? "text-emerald-400" : "text-foreground") : "text-muted-foreground/50"
           }`}
+          style={{ fontSize: amountFontSize }}
         >
           {formatCurrency(amount)}
         </p>
       </div>
+
 
       {/* Descrição */}
       <div className="px-4">

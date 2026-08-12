@@ -22,6 +22,8 @@ type Extracted = {
   description?: string;
   type?: "income" | "expense";
   category?: string;
+  categoryEmoji?: string;
+
 };
 
 const BUCKET = "financial-documents";
@@ -39,6 +41,8 @@ const ScanPage = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+
 
   const [preview, setPreview] = useState<string | null>(null);
   const [phase, setPhase] = useState<"camera" | "preview" | "processing" | "result">("camera");
@@ -54,21 +58,33 @@ const ScanPage = () => {
   const startCam = async () => {
     stopCam();
     setCamError(null);
+    const md = typeof navigator !== "undefined" ? navigator.mediaDevices : undefined;
+    if (!md?.getUserMedia) {
+      setCamError(
+        window.isSecureContext === false
+          ? "A câmara só funciona em HTTPS. Use “Galeria/Foto” para enviar o documento."
+          : "Câmara indisponível aqui. Use “Galeria/Foto” para enviar o documento.",
+      );
+      return;
+    }
     try {
-      const s = await navigator.mediaDevices.getUserMedia({
+      const s = await md.getUserMedia({
         video: { facingMode: { ideal: "environment" } },
         audio: false,
       });
       streamRef.current = s;
       if (videoRef.current) {
         videoRef.current.srcObject = s;
-        await videoRef.current.play();
+        await videoRef.current.play().catch(() => {});
       }
     } catch (e: any) {
+      const name = e?.name;
       setCamError(
-        e?.name === "NotAllowedError"
-          ? "Acesso à câmara negado. Ative-o nas definições do seu navegador."
-          : "Câmara não disponível neste dispositivo.",
+        name === "NotAllowedError" || name === "SecurityError"
+          ? "Acesso à câmara negado. Ative-o nas permissões do navegador."
+          : name === "NotFoundError" || name === "OverconstrainedError"
+            ? "Nenhuma câmara encontrada. Use “Galeria/Foto”."
+            : "Não foi possível abrir a câmara. Use “Galeria/Foto”.",
       );
     }
   };
@@ -78,6 +94,7 @@ const ScanPage = () => {
     return () => stopCam();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
+
 
   const capture = () => {
     const v = videoRef.current;
@@ -115,7 +132,8 @@ const ScanPage = () => {
     setPhase("processing");
     try {
       const blob = dataUriToBlob(preview);
-      const path = `${user.id}/${Date.now()}.jpg`;
+      const isPdf = blob.type === "application/pdf";
+      const path = `${user.id}/${Date.now()}.${isPdf ? "pdf" : "jpg"}`;
       const up = await supabase.storage.from(BUCKET).upload(path, blob, {
         contentType: blob.type,
         upsert: false,
@@ -123,10 +141,18 @@ const ScanPage = () => {
       if (up.error) throw up.error;
 
       const data = await scanReceiptFn({
-        data: { file_path: path, mime_type: blob.type, file_name: "receipt.jpg" },
+        data: {
+          file_path: path,
+          mime_type: blob.type,
+          file_name: isPdf ? "documento.pdf" : "recibo.jpg",
+          categories: categories.map((c) => c.name),
+        },
       });
+
       const extracted = (data as any)?.extracted as Extracted | undefined;
-      if (!extracted) throw new Error("Não foi possível ler este documento.");
+      if (!extracted || !(Number(extracted.amount) > 0)) {
+        throw new Error("Não conseguimos ler o valor deste documento. Tente outra foto.");
+      }
       setResult(extracted);
       setPhase("result");
     } catch (e: any) {
@@ -137,26 +163,31 @@ const ScanPage = () => {
 
   const save = async () => {
     if (!result || !user) return;
-    if (cards.length === 0) {
-      toast.error("Adicione um cartão primeiro.");
-      return;
-    }
     setSaving(true);
     const type: "income" | "expense" = result.type === "income" ? "income" : "expense";
     let cat = categories.find(
       (c) => c.type === type && c.name.toLowerCase() === (result.category || "").toLowerCase(),
     );
     if (!cat && result.category) {
-      cat = (await addCategory(result.category, type, "#10B981", "🧾")) || undefined;
+      cat =
+        (await addCategory(
+          result.category,
+          type,
+          type === "income" ? "#22C55E" : "#EF4444",
+          result.categoryEmoji || "🧾",
+        )) || undefined;
     }
     const ok = await addTransaction({
-      card_id: cards[0].id,
+      card_id: cards[0]?.id ?? null,
       category_id: cat?.id ?? null,
       type,
       amount: Number(result.amount) || 0,
       description: result.merchant || result.description || "Recibo digitalizado",
+      icon: result.categoryEmoji || cat?.icon || "🧾",
+      source: "scan",
+      occurred_on: result.date || new Date().toISOString().slice(0, 10),
       date: result.date || new Date().toISOString().slice(0, 10),
-    });
+    } as any);
     setSaving(false);
     if (ok) {
       toast.success("Transação guardada a partir da digitalização");
@@ -165,6 +196,7 @@ const ScanPage = () => {
       toast.error("Não foi possível guardar.");
     }
   };
+
 
   return (
     <div className="min-h-screen bg-background pb-32">
@@ -201,8 +233,20 @@ const ScanPage = () => {
                   className="pointer-events-none absolute left-6 right-6 h-0.5 bg-primary shadow-[0_0_20px_hsl(var(--primary))]"
                 />
                 {camError && (
-                  <div className="absolute inset-0 flex items-center justify-center p-6 bg-black/70">
-                    <p className="text-center text-sm text-foreground">{camError}</p>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 bg-black/80 text-center">
+                    <p className="text-sm text-foreground">{camError}</p>
+                    <button
+                      onClick={() => cameraInputRef.current?.click()}
+                      className="h-11 px-5 rounded-full bg-primary text-primary-foreground text-sm font-semibold"
+                    >
+                      Tirar foto
+                    </button>
+                    <button
+                      onClick={() => fileInputRef.current?.click()}
+                      className="text-sm underline text-muted-foreground"
+                    >
+                      Enviar da galeria (imagem ou PDF)
+                    </button>
                   </div>
                 )}
               </div>
@@ -211,31 +255,48 @@ const ScanPage = () => {
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   aria-label="Escolher da galeria"
-                  className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-foreground"
+                  className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-foreground active:scale-95 transition"
                 >
                   <ImagePlus size={22} />
                 </button>
                 <button
-                  onClick={capture}
+                  onClick={() => (camError ? cameraInputRef.current?.click() : capture())}
                   aria-label="Capturar"
-                  disabled={!!camError}
-                  className="w-20 h-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_40px_hsl(var(--primary)/0.5)] active:scale-95 transition disabled:opacity-40"
+                  className="w-20 h-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_40px_hsl(var(--primary)/0.5)] active:scale-95 transition"
                 >
                   <Camera size={30} />
                 </button>
                 <div className="w-12 h-12" />
               </div>
 
+              <p className="text-center text-xs text-muted-foreground">
+                Recibos, faturas, extratos ou comprovativos — imagem ou PDF.
+              </p>
+
               <input
                 ref={fileInputRef}
                 type="file"
-                accept="image/*"
+                accept="image/*,application/pdf"
                 className="hidden"
                 onChange={(e) => {
                   const f = e.target.files?.[0];
                   if (f) pickFile(f);
+                  e.target.value = "";
                 }}
               />
+              <input
+                ref={cameraInputRef}
+                type="file"
+                accept="image/*"
+                capture="environment"
+                className="hidden"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) pickFile(f);
+                  e.target.value = "";
+                }}
+              />
+
             </motion.div>
           )}
 
@@ -246,11 +307,18 @@ const ScanPage = () => {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-4"
             >
-              <img
-                src={preview}
-                alt="Capturado"
-                className="w-full rounded-3xl border border-primary/20"
-              />
+              {preview.startsWith("data:application/pdf") ? (
+                <div className="w-full rounded-3xl border border-primary/20 bg-card/60 p-10 text-center text-sm text-muted-foreground">
+                  PDF pronto para análise
+                </div>
+              ) : (
+                <img
+                  src={preview}
+                  alt="Capturado"
+                  className="w-full rounded-3xl border border-primary/20"
+                />
+              )}
+
               <div className="flex gap-3">
                 <button
                   onClick={() => {

@@ -4,21 +4,26 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 const BUCKET = "financial-documents";
 
 const EXPENSE_CATEGORIES = [
-  "Food", "Transportation", "Shopping", "Entertainment", "Bills",
-  "Healthcare", "Education", "Travel", "Investments", "Subscriptions", "Housing", "Other",
+  "Alimentação", "Transporte", "Compras", "Lazer", "Contas",
+  "Saúde", "Educação", "Viagens", "Investimentos", "Assinaturas", "Habitação", "Outros",
 ];
-const INCOME_CATEGORIES = ["Salary", "Freelance", "Business", "Investments", "Refunds", "Other"];
+const INCOME_CATEGORIES = ["Salário", "Freelance", "Negócio", "Investimentos", "Reembolsos", "Outros"];
 
-const SCAN_SYSTEM_PROMPT = `You are an expert OCR financial assistant. Analyze the receipt/invoice/statement and extract the transaction.
-Return ONE JSON object:
-{ "amount": number, "currency": "USD"|"EUR"|"BRL"|string, "date": "YYYY-MM-DD",
-  "merchant": string, "description": string, "type": "expense"|"income", "category": string }
-Rules:
-- Use today if the date is unclear.
-- Category MUST come from these lists:
-  Expense: ${EXPENSE_CATEGORIES.join(", ")}
-  Income: ${INCOME_CATEGORIES.join(", ")}
-- Output ONLY raw JSON, no markdown.`;
+const SCAN_SYSTEM_PROMPT = `És um assistente OCR financeiro. Analisa o recibo/fatura/extrato/comprovativo e extrai a transação.
+Devolve UM objeto JSON:
+{ "amount": number, "currency": "EUR"|"BRL"|"USD"|"AOA"|string, "date": "YYYY-MM-DD",
+  "merchant": string, "description": string, "type": "expense"|"income",
+  "category": string, "categoryEmoji": string }
+Regras:
+- amount é o TOTAL pago (número positivo, sem símbolos).
+- Se a data não for clara, usa a data de hoje.
+- A categoria DEVE vir destas listas (em português):
+  Despesa: ${EXPENSE_CATEGORIES.join(", ")}
+  Receita: ${INCOME_CATEGORIES.join(", ")}
+- Se te forem dadas categorias existentes do utilizador, reutiliza a que melhor encaixa.
+- categoryEmoji: UM emoji da categoria (🍽️ 🚗 🛍️ 💊 🏠 💡 💼 💰 📈 🧾).
+- Responde APENAS com JSON puro, sem markdown.`;
+
 
 const VOICE_SYSTEM_PROMPT = `You are VAULT's financial parser.
 You receive a user's natural-language sentence AND the user's existing PARENT
@@ -83,12 +88,25 @@ async function callGateway(messages: unknown[]) {
 
 export const scanReceipt = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: { file_path: string; mime_type: string; file_name?: string }) => {
-    if (!input?.file_path || !input?.mime_type) {
-      throw new Error("file_path and mime_type required");
-    }
-    return input;
-  })
+  .inputValidator(
+    (input: {
+      file_path: string;
+      mime_type: string;
+      file_name?: string;
+      categories?: string[];
+    }) => {
+      if (!input?.file_path || !input?.mime_type) {
+        throw new Error("file_path and mime_type required");
+      }
+      return {
+        ...input,
+        categories: Array.isArray(input.categories)
+          ? input.categories.filter(Boolean).slice(0, 60)
+          : [],
+      };
+    },
+  )
+
   .handler(async ({ data, context }) => {
     const { userId } = context;
     if (!data.file_path.startsWith(`${userId}/`)) throw new Error("Forbidden");
@@ -129,8 +147,16 @@ export const scanReceipt = createServerFn({ method: "POST" })
     const dataUri = `data:${data.mime_type};base64,${btoa(binary)}`;
 
     const content: unknown[] = [
-      { type: "text", text: "Extract transaction details from this document." },
+      {
+        type: "text",
+        text:
+          `Extrai os dados da transação deste documento. Hoje é ${new Date().toISOString().slice(0, 10)}.` +
+          (data.categories.length
+            ? ` Categorias existentes do utilizador: ${data.categories.join(", ")}.`
+            : ""),
+      },
     ];
+
     if (data.mime_type === "application/pdf") {
       content.push({ type: "file", file: { filename: "receipt.pdf", file_data: dataUri } });
     } else {

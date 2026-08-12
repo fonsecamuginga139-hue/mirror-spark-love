@@ -147,8 +147,16 @@ export const scanReceipt = createServerFn({ method: "POST" })
     const dataUri = `data:${data.mime_type};base64,${btoa(binary)}`;
 
     const content: unknown[] = [
-      { type: "text", text: "Extract transaction details from this document." },
+      {
+        type: "text",
+        text:
+          `Extrai os dados da transação deste documento. Hoje é ${new Date().toISOString().slice(0, 10)}.` +
+          (data.categories.length
+            ? ` Categorias existentes do utilizador: ${data.categories.join(", ")}.`
+            : ""),
+      },
     ];
+
     if (data.mime_type === "application/pdf") {
       content.push({ type: "file", file: { filename: "receipt.pdf", file_data: dataUri } });
     } else {

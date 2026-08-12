@@ -214,8 +214,20 @@ const ScanPage = () => {
                   className="pointer-events-none absolute left-6 right-6 h-0.5 bg-primary shadow-[0_0_20px_hsl(var(--primary))]"
                 />
                 {camError && (
-                  <div className="absolute inset-0 flex items-center justify-center p-6 bg-black/70">
-                    <p className="text-center text-sm text-foreground">{camError}</p>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 bg-black/80 text-center">
+                    <p className="text-sm text-foreground">{camError}</p>
+                    <button
+                      onClick={() => cameraInputRef.current?.click()}
+                      className="h-11 px-5 rounded-full bg-primary text-primary-foreground text-sm font-semibold"
+                    >
+                      Tirar foto
+                    </button>
+                    <button
+                      onClick={() => fileInputRef.current?.click()}
+                      className="text-sm underline text-muted-foreground"
+                    >
+                      Enviar da galeria (imagem ou PDF)
+                    </button>
                   </div>
                 )}
               </div>
@@ -224,31 +236,48 @@ const ScanPage = () => {
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   aria-label="Escolher da galeria"
-                  className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-foreground"
+                  className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center text-foreground active:scale-95 transition"
                 >
                   <ImagePlus size={22} />
                 </button>
                 <button
-                  onClick={capture}
+                  onClick={() => (camError ? cameraInputRef.current?.click() : capture())}
                   aria-label="Capturar"
-                  disabled={!!camError}
-                  className="w-20 h-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_40px_hsl(var(--primary)/0.5)] active:scale-95 transition disabled:opacity-40"
+                  className="w-20 h-20 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_40px_hsl(var(--primary)/0.5)] active:scale-95 transition"
                 >
                   <Camera size={30} />
                 </button>
                 <div className="w-12 h-12" />
               </div>
 
+              <p className="text-center text-xs text-muted-foreground">
+                Recibos, faturas, extratos ou comprovativos — imagem ou PDF.
+              </p>
+
               <input
                 ref={fileInputRef}
                 type="file"
-                accept="image/*"
+                accept="image/*,application/pdf"
                 className="hidden"
                 onChange={(e) => {
                   const f = e.target.files?.[0];
                   if (f) pickFile(f);
+                  e.target.value = "";
                 }}
               />
+              <input
+                ref={cameraInputRef}
+                type="file"
+                accept="image/*"
+                capture="environment"
+                className="hidden"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) pickFile(f);
+                  e.target.value = "";
+                }}
+              />
+
             </motion.div>
           )}
 

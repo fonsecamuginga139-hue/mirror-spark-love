@@ -143,11 +143,14 @@ const ScanPage = () => {
           file_path: path,
           mime_type: blob.type,
           file_name: isPdf ? "documento.pdf" : "recibo.jpg",
+          categories: categories.map((c) => c.name),
         },
       });
 
       const extracted = (data as any)?.extracted as Extracted | undefined;
-      if (!extracted) throw new Error("Não foi possível ler este documento.");
+      if (!extracted || !(Number(extracted.amount) > 0)) {
+        throw new Error("Não conseguimos ler o valor deste documento. Tente outra foto.");
+      }
       setResult(extracted);
       setPhase("result");
     } catch (e: any) {
@@ -158,26 +161,31 @@ const ScanPage = () => {
 
   const save = async () => {
     if (!result || !user) return;
-    if (cards.length === 0) {
-      toast.error("Adicione um cartão primeiro.");
-      return;
-    }
     setSaving(true);
     const type: "income" | "expense" = result.type === "income" ? "income" : "expense";
     let cat = categories.find(
       (c) => c.type === type && c.name.toLowerCase() === (result.category || "").toLowerCase(),
     );
     if (!cat && result.category) {
-      cat = (await addCategory(result.category, type, "#10B981", "🧾")) || undefined;
+      cat =
+        (await addCategory(
+          result.category,
+          type,
+          type === "income" ? "#22C55E" : "#EF4444",
+          result.categoryEmoji || "🧾",
+        )) || undefined;
     }
     const ok = await addTransaction({
-      card_id: cards[0].id,
+      card_id: cards[0]?.id ?? null,
       category_id: cat?.id ?? null,
       type,
       amount: Number(result.amount) || 0,
       description: result.merchant || result.description || "Recibo digitalizado",
+      icon: result.categoryEmoji || cat?.icon || "🧾",
+      source: "scan",
+      occurred_on: result.date || new Date().toISOString().slice(0, 10),
       date: result.date || new Date().toISOString().slice(0, 10),
-    });
+    } as any);
     setSaving(false);
     if (ok) {
       toast.success("Transação guardada a partir da digitalização");
@@ -186,6 +194,7 @@ const ScanPage = () => {
       toast.error("Não foi possível guardar.");
     }
   };
+
 
   return (
     <div className="min-h-screen bg-background pb-32">

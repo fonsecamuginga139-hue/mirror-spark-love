@@ -88,12 +88,25 @@ async function callGateway(messages: unknown[]) {
 
 export const scanReceipt = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: { file_path: string; mime_type: string; file_name?: string }) => {
-    if (!input?.file_path || !input?.mime_type) {
-      throw new Error("file_path and mime_type required");
-    }
-    return input;
-  })
+  .inputValidator(
+    (input: {
+      file_path: string;
+      mime_type: string;
+      file_name?: string;
+      categories?: string[];
+    }) => {
+      if (!input?.file_path || !input?.mime_type) {
+        throw new Error("file_path and mime_type required");
+      }
+      return {
+        ...input,
+        categories: Array.isArray(input.categories)
+          ? input.categories.filter(Boolean).slice(0, 60)
+          : [],
+      };
+    },
+  )
+
   .handler(async ({ data, context }) => {
     const { userId } = context;
     if (!data.file_path.startsWith(`${userId}/`)) throw new Error("Forbidden");

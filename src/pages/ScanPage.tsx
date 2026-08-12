@@ -130,7 +130,8 @@ const ScanPage = () => {
     setPhase("processing");
     try {
       const blob = dataUriToBlob(preview);
-      const path = `${user.id}/${Date.now()}.jpg`;
+      const isPdf = blob.type === "application/pdf";
+      const path = `${user.id}/${Date.now()}.${isPdf ? "pdf" : "jpg"}`;
       const up = await supabase.storage.from(BUCKET).upload(path, blob, {
         contentType: blob.type,
         upsert: false,
@@ -138,8 +139,13 @@ const ScanPage = () => {
       if (up.error) throw up.error;
 
       const data = await scanReceiptFn({
-        data: { file_path: path, mime_type: blob.type, file_name: "receipt.jpg" },
+        data: {
+          file_path: path,
+          mime_type: blob.type,
+          file_name: isPdf ? "documento.pdf" : "recibo.jpg",
+        },
       });
+
       const extracted = (data as any)?.extracted as Extracted | undefined;
       if (!extracted) throw new Error("Não foi possível ler este documento.");
       setResult(extracted);

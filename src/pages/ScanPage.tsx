@@ -22,6 +22,8 @@ type Extracted = {
   description?: string;
   type?: "income" | "expense";
   category?: string;
+  categoryEmoji?: string;
+
 };
 
 const BUCKET = "financial-documents";

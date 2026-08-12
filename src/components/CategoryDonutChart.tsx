@@ -107,7 +107,12 @@ const CategoryDonutChart = ({ transactions, onSelect }: Props) => {
         </p>
       ) : (
         <>
-          <div className="relative h-56">
+          <motion.div
+            className="relative h-56"
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -123,7 +128,10 @@ const CategoryDonutChart = ({ transactions, onSelect }: Props) => {
                   strokeWidth={0}
                   startAngle={90}
                   endAngle={-270}
-                  animationDuration={700}
+                  isAnimationActive
+                  animationBegin={120}
+                  animationDuration={900}
+                  animationEasing="ease-out"
                   activeIndex={activeIndex ?? undefined}
                   activeShape={(props: any) => (
                     <Sector {...props} outerRadius={props.outerRadius + 7} />
@@ -147,18 +155,19 @@ const CategoryDonutChart = ({ transactions, onSelect }: Props) => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.18 }}
-                  className="text-center px-6"
+                  className="text-center w-[122px]"
                 >
                   {active ? (
                     <>
-                      <div className="text-2xl leading-none mb-1">{active.icon}</div>
-                      <p className="text-xs text-muted-foreground truncate max-w-[110px]">
-                        {active.name}
-                      </p>
-                      <p className={`text-lg font-bold tabular-nums ${accent}`}>
+                      <div className="text-xl leading-none mb-0.5">{active.icon}</div>
+                      <p className="text-[11px] text-muted-foreground truncate">{active.name}</p>
+                      <p
+                        className={`font-bold tabular-nums leading-tight break-words ${accent}`}
+                        style={{ fontSize: fitSize(formatCurrency(active.value)) }}
+                      >
                         {formatCurrency(active.value)}
                       </p>
-                      <p className="text-xs text-muted-foreground tabular-nums">
+                      <p className="text-[11px] text-muted-foreground tabular-nums">
                         {active.percent.toFixed(0)}%
                       </p>
                     </>
@@ -167,7 +176,10 @@ const CategoryDonutChart = ({ transactions, onSelect }: Props) => {
                       <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-1">
                         {mode === "expense" ? t("dashboard.expenses") : t("dashboard.income")}
                       </p>
-                      <p className={`text-xl font-bold tabular-nums ${accent}`}>
+                      <p
+                        className={`font-bold tabular-nums leading-tight break-words ${accent}`}
+                        style={{ fontSize: fitSize(formatCurrency(total)) }}
+                      >
                         {formatCurrency(total)}
                       </p>
                     </>
@@ -175,7 +187,8 @@ const CategoryDonutChart = ({ transactions, onSelect }: Props) => {
                 </motion.div>
               </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
+
 
           <ul className="mt-4 space-y-1">
             {slices.map((s, i) => (

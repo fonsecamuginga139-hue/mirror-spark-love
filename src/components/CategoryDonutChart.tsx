@@ -19,6 +19,16 @@ interface Slice {
 const EXPENSE_PALETTE = ["#ef4444", "#f97316", "#f59e0b", "#e11d48", "#fb7185", "#c2410c", "#dc2626"];
 const INCOME_PALETTE = ["#10b981", "#22c55e", "#14b8a6", "#34d399", "#059669", "#4ade80", "#0d9488"];
 
+/** Encolhe o texto do centro para nunca passar por cima do anel. */
+const fitSize = (text: string) => {
+  const n = text.length;
+  if (n <= 9) return "1.25rem";
+  if (n <= 12) return "1.05rem";
+  if (n <= 15) return "0.9rem";
+  if (n <= 18) return "0.78rem";
+  return "0.68rem";
+};
+
 interface Props {
   transactions: TransactionWithDetails[];
   onSelect?: (categoryName: string) => void;

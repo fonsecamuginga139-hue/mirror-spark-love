@@ -39,6 +39,8 @@ const ScanPage = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+
 
   const [preview, setPreview] = useState<string | null>(null);
   const [phase, setPhase] = useState<"camera" | "preview" | "processing" | "result">("camera");

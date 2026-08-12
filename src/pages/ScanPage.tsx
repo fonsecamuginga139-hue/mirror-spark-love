@@ -54,21 +54,33 @@ const ScanPage = () => {
   const startCam = async () => {
     stopCam();
     setCamError(null);
+    const md = typeof navigator !== "undefined" ? navigator.mediaDevices : undefined;
+    if (!md?.getUserMedia) {
+      setCamError(
+        window.isSecureContext === false
+          ? "A câmara só funciona em HTTPS. Use “Galeria/Foto” para enviar o documento."
+          : "Câmara indisponível aqui. Use “Galeria/Foto” para enviar o documento.",
+      );
+      return;
+    }
     try {
-      const s = await navigator.mediaDevices.getUserMedia({
+      const s = await md.getUserMedia({
         video: { facingMode: { ideal: "environment" } },
         audio: false,
       });
       streamRef.current = s;
       if (videoRef.current) {
         videoRef.current.srcObject = s;
-        await videoRef.current.play();
+        await videoRef.current.play().catch(() => {});
       }
     } catch (e: any) {
+      const name = e?.name;
       setCamError(
-        e?.name === "NotAllowedError"
-          ? "Acesso à câmara negado. Ative-o nas definições do seu navegador."
-          : "Câmara não disponível neste dispositivo.",
+        name === "NotAllowedError" || name === "SecurityError"
+          ? "Acesso à câmara negado. Ative-o nas permissões do navegador."
+          : name === "NotFoundError" || name === "OverconstrainedError"
+            ? "Nenhuma câmara encontrada. Use “Galeria/Foto”."
+            : "Não foi possível abrir a câmara. Use “Galeria/Foto”.",
       );
     }
   };
@@ -78,6 +90,7 @@ const ScanPage = () => {
     return () => stopCam();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
+
 
   const capture = () => {
     const v = videoRef.current;

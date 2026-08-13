@@ -338,7 +338,6 @@ const OnboardingPage = () => {
   const { language } = useLanguage();
   const shortLang = (getLanguageMeta(language).short as ShortLang);
   const { currency: userCurrency } = useCurrency();
-  const { monthlyCheckoutUrl, yearlyCheckoutUrl, loading: loadingCheckout } = useCheckoutUrl();
 
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -500,7 +499,7 @@ const OnboardingPage = () => {
     const ok = await persistAndUnlock();
     if (!ok) return;
     setSubmitting(false);
-    toast.success("Tudo pronto! Tens 7 dias grátis para explorar o Vault.");
+    toast.success("Tudo pronto! Bem-vindo ao Vault.");
     navigate("/dashboard", { replace: true });
   };
 
@@ -747,7 +746,7 @@ const OnboardingPage = () => {
                 disabled={submitting}
                 className="w-full h-14 rounded-2xl font-bold text-base text-black bg-gradient-to-r from-primary to-[#16a34a] shadow-[0_10px_40px_-10px_rgba(34,197,94,0.7)] flex items-center justify-center gap-2 disabled:opacity-60"
               >
-                {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (<>Começar os 7 dias grátis <ArrowRight className="w-4 h-4" /></>)}
+                {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (<>Entrar no Vault <ArrowRight className="w-4 h-4" /></>)}
               </motion.button>
               <p className="text-center text-[11px] text-muted-foreground/80">
                 Sem cartão · Acesso completo durante 7 dias

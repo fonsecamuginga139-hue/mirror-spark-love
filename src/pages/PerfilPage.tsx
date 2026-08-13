@@ -10,7 +10,7 @@ import { useLanguage } from "@/context/LanguageContext";
 const ProfilePage = () => {
   const navigate = useNavigate();
   const { profile, signOut } = useAuth();
-  const { isAdmin, isActive, planLabel, planPrice } = useSubscription();
+  const { isAdmin } = useSubscription();
   const { currency } = useCurrency();
   const { t } = useLanguage();
 

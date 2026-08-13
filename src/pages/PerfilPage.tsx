@@ -35,30 +35,17 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Plan Info — read-only. Users subscribe only from the onboarding paywall. */}
-        <div className="finance-card mb-6">
-          <div className="flex items-center gap-3 mb-4">
-            <Crown className="w-5 h-5 text-primary" />
-            <span className="font-semibold text-foreground">{t("profile.subscription")}</span>
-          </div>
-
-          <div className="flex items-center justify-between py-3 border-b border-border">
-            <span className="text-muted-foreground">{t("profile.currentPlan")}</span>
-            <span className="text-primary font-medium">{planLabel}</span>
-          </div>
-
-          <div className="flex items-center justify-between py-3 border-b border-border">
-            <span className="text-muted-foreground">{t("profile.price")}</span>
-            <span className="text-foreground">{planPrice}</span>
-          </div>
-
-          <div className="flex items-center justify-between py-3">
-            <span className="text-muted-foreground">{t("profile.status")}</span>
-            <span className={`font-medium ${isActive ? "text-green-500" : "text-yellow-500"}`}>
-              {isActive ? t("profile.active") : t("profile.inactive")}
-            </span>
+        {/* Acesso — a app é totalmente gratuita e aberta. */}
+        <div className="finance-card mb-6 flex items-center gap-3">
+          <Crown className="w-5 h-5 text-primary" />
+          <div>
+            <p className="font-semibold text-foreground">Acesso completo</p>
+            <p className="text-xs text-muted-foreground">
+              Todas as funcionalidades estão disponíveis, sem custos.
+            </p>
           </div>
         </div>
+
 
         {/* Currency + Language */}
         <div className="finance-card mb-6">

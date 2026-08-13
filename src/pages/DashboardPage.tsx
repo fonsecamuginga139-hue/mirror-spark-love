@@ -8,7 +8,6 @@ import RecurringCharts from "@/components/RecurringCharts";
 import OfflineIndicator from "@/components/OfflineIndicator";
 import InstallPrompt from "@/components/InstallPrompt";
 import RecurringReminders from "@/components/RecurringReminders";
-import TrialBanner from "@/components/TrialBanner";
 import SEO from "@/components/SEO";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useCurrency } from "@/hooks/useCurrency";
@@ -94,7 +93,6 @@ const DashboardPage = () => {
         <div className="absolute top-1/2 -left-40 w-60 h-60 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
-      <TrialBanner />
 
       <div className="relative p-4 max-w-lg mx-auto">
         <SEO

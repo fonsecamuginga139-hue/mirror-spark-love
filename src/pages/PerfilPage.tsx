@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import BottomNav from "@/components/BottomNav";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
-import PlanBadge from "@/components/PlanBadge";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -34,7 +33,6 @@ const ProfilePage = () => {
             <h2 className="text-xl font-semibold text-foreground">{profile?.name || t("common.user")}</h2>
             <p className="text-muted-foreground">{profile?.email}</p>
           </div>
-          <PlanBadge showLabel={false} />
         </div>
 
         {/* Plan Info — read-only. Users subscribe only from the onboarding paywall. */}

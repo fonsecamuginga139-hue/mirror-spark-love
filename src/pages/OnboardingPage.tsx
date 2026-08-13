@@ -16,7 +16,6 @@ type ShortLang = "en" | "pt" | "es";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useCheckoutUrl } from "@/hooks/usePaymentSettings";
-import { openCheckout } from "@/components/CheckoutRedirect";
 
 type Currency = "USD" | "EUR" | "BRL" | "GBP";
 

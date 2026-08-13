@@ -60,7 +60,7 @@ const CategoryDonutChart = ({ transactions, onSelect }: Props) => {
         buckets.set(key, {
           id: key,
           name,
-          icon: tx.category_icon || tx.icon || (mode === "expense" ? "💸" : "💰"),
+          icon: pickIcon(tx.category_icon, tx.icon, mode === "expense" ? "💸" : "💰"),
           color: tx.category_color || palette[buckets.size % palette.length],
           value: amount,
           percent: 0,

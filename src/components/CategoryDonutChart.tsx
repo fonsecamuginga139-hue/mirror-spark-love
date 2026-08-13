@@ -29,6 +29,11 @@ const fitSize = (text: string) => {
   return "0.68rem";
 };
 
+/** Só usa ícones que sejam emoji (nomes tipo "tag" não são mostrados). */
+const isEmoji = (v?: string | null) => !!v && /\p{Extended_Pictographic}/u.test(v);
+const pickIcon = (...candidates: (string | null | undefined)[]) =>
+  candidates.find((c) => isEmoji(c)) || candidates[candidates.length - 1] || "💠";
+
 interface Props {
   transactions: TransactionWithDetails[];
   onSelect?: (categoryName: string) => void;

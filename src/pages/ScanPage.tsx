@@ -161,41 +161,84 @@ const ScanPage = () => {
     }
   };
 
+  /** Normaliza a data lida (YYYY-MM-DD, DD/MM/YYYY, DD-MM-YY...) para YYYY-MM-DD. */
+  const normalizeDate = (raw?: string) => {
+    const today = new Date().toISOString().slice(0, 10);
+    if (!raw) return today;
+    const s = raw.trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+    const m = /^(\d{1,2})[/.-](\d{1,2})[/.-](\d{2,4})$/.exec(s);
+    if (m) {
+      const d = m[1].padStart(2, "0");
+      const mo = m[2].padStart(2, "0");
+      const y = m[3].length === 2 ? `20${m[3]}` : m[3];
+      const iso = `${y}-${mo}-${d}`;
+      if (!Number.isNaN(new Date(iso).getTime())) return iso;
+    }
+    const parsed = new Date(s);
+    return Number.isNaN(parsed.getTime()) ? today : parsed.toISOString().slice(0, 10);
+  };
+
+  const norm = (v: string) =>
+    v
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim()
+      .toLowerCase();
+
+  const isEmoji = (v?: string | null) => !!v && /\p{Extended_Pictographic}/u.test(v);
+
   const save = async () => {
     if (!result || !user) return;
     setSaving(true);
     const type: "income" | "expense" = result.type === "income" ? "income" : "expense";
-    let cat = categories.find(
-      (c) => c.type === type && c.name.toLowerCase() === (result.category || "").toLowerCase(),
-    );
+    const wanted = norm(result.category || "");
+    let cat = categories.find((c) => c.type === type && norm(c.name) === wanted);
+    if (!cat && wanted) cat = categories.find((c) => norm(c.name) === wanted);
+    const emoji = isEmoji(result.categoryEmoji) ? result.categoryEmoji! : "🧾";
+
     if (!cat && result.category) {
       cat =
         (await addCategory(
           result.category,
           type,
           type === "income" ? "#22C55E" : "#EF4444",
-          result.categoryEmoji || "🧾",
+          emoji,
         )) || undefined;
     }
-    const ok = await addTransaction({
-      card_id: cards[0]?.id ?? null,
+    // Garante que a categoria existente mostra um emoji no gráfico de pizza
+    if (cat && !isEmoji(cat.icon)) {
+      await updateCategory(cat.id, { icon: emoji });
+    }
+
+    const occurred = normalizeDate(result.date);
+    const saved = await addTransaction({
       category_id: cat?.id ?? null,
       type,
       amount: Number(result.amount) || 0,
       description: result.merchant || result.description || "Recibo digitalizado",
-      icon: result.categoryEmoji || cat?.icon || "🧾",
+      icon: isEmoji(cat?.icon) ? cat!.icon : emoji,
       source: "scan",
-      occurred_on: result.date || new Date().toISOString().slice(0, 10),
-      date: result.date || new Date().toISOString().slice(0, 10),
-    } as any);
+      occurred_on: occurred,
+      date: occurred,
+    });
     setSaving(false);
-    if (ok) {
-      toast.success("Transação guardada a partir da digitalização");
+    if (saved) {
+      const now = new Date();
+      const d = new Date(occurred);
+      const sameMonth = d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+      toast.success(
+        sameMonth
+          ? "Transação criada a partir da digitalização"
+          : `Transação criada em ${d.toLocaleDateString("pt-PT")} — veja em “Sempre”.`,
+      );
+      await refetchCategories();
       navigate("/dashboard");
     } else {
       toast.error("Não foi possível guardar.");
     }
   };
+
 
 
   return (

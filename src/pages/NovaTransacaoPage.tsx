@@ -25,18 +25,34 @@ const NovaTransacaoPage = () => {
   /** Os dígitos são sempre centavos — evita teclado nativo e valores inválidos. */
   const amount = useMemo(() => Number(digits || "0") / 100, [digits]);
 
+  /** O valor nunca deve sair do ecrã: encolhe conforme cresce. */
+  const amountFontSize = useMemo(() => {
+    const n = formatCurrency(amount).length;
+    if (n <= 10) return "3rem";
+    if (n <= 13) return "2.5rem";
+    if (n <= 16) return "2rem";
+    if (n <= 19) return "1.6rem";
+    return "1.3rem";
+  }, [amount, formatCurrency]);
+
   const visibleCategories = useMemo(
     () => categories.filter((c) => !c.type || c.type === type),
     [categories, type],
   );
 
   const press = (key: string) => {
+    if (navigator.vibrate) navigator.vibrate(8);
     if (key === "del") {
       setDigits((d) => d.slice(0, -1));
       return;
     }
-    setDigits((d) => (d + key).replace(/^0+(?=\d)/, "").slice(0, 11));
+    // Máximo 9 dígitos (até 9 999 999,99) — evita números "quebrados" no ecrã.
+    setDigits((d) => {
+      const next = (d + key).replace(/^0+(?=\d)/, "");
+      return next.length > 9 ? d : next;
+    });
   };
+
 
   const handleSave = async () => {
     if (amount <= 0) {

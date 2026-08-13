@@ -129,7 +129,6 @@ const PreOnboardingPage = () => {
             <Button onClick={scrollToFeatures} variant="outline" size="lg" className="w-full h-12 rounded-2xl border-border/60 bg-card/40">
               {t("landing.howItWorks")}
             </Button>
-            <p className="text-center text-xs text-muted-foreground pt-1">{t("landing.trialHint")}</p>
           </div>
         </section>
 

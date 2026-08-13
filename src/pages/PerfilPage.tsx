@@ -4,14 +4,13 @@ import { useNavigate } from "react-router-dom";
 import BottomNav from "@/components/BottomNav";
 import { useAuth } from "@/context/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
-import PlanBadge from "@/components/PlanBadge";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const { profile, signOut } = useAuth();
-  const { isAdmin, isActive, planLabel, planPrice } = useSubscription();
+  const { isAdmin } = useSubscription();
   const { currency } = useCurrency();
   const { t } = useLanguage();
 
@@ -34,33 +33,19 @@ const ProfilePage = () => {
             <h2 className="text-xl font-semibold text-foreground">{profile?.name || t("common.user")}</h2>
             <p className="text-muted-foreground">{profile?.email}</p>
           </div>
-          <PlanBadge showLabel={false} />
         </div>
 
-        {/* Plan Info — read-only. Users subscribe only from the onboarding paywall. */}
-        <div className="finance-card mb-6">
-          <div className="flex items-center gap-3 mb-4">
-            <Crown className="w-5 h-5 text-primary" />
-            <span className="font-semibold text-foreground">{t("profile.subscription")}</span>
-          </div>
-
-          <div className="flex items-center justify-between py-3 border-b border-border">
-            <span className="text-muted-foreground">{t("profile.currentPlan")}</span>
-            <span className="text-primary font-medium">{planLabel}</span>
-          </div>
-
-          <div className="flex items-center justify-between py-3 border-b border-border">
-            <span className="text-muted-foreground">{t("profile.price")}</span>
-            <span className="text-foreground">{planPrice}</span>
-          </div>
-
-          <div className="flex items-center justify-between py-3">
-            <span className="text-muted-foreground">{t("profile.status")}</span>
-            <span className={`font-medium ${isActive ? "text-green-500" : "text-yellow-500"}`}>
-              {isActive ? t("profile.active") : t("profile.inactive")}
-            </span>
+        {/* Acesso — a app é totalmente gratuita e aberta. */}
+        <div className="finance-card mb-6 flex items-center gap-3">
+          <Crown className="w-5 h-5 text-primary" />
+          <div>
+            <p className="font-semibold text-foreground">Acesso completo</p>
+            <p className="text-xs text-muted-foreground">
+              Todas as funcionalidades estão disponíveis, sem custos.
+            </p>
           </div>
         </div>
+
 
         {/* Currency + Language */}
         <div className="finance-card mb-6">

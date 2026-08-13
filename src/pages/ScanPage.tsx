@@ -33,7 +33,7 @@ const ScanPage = () => {
   const { user } = useAuth();
   const scanReceiptFn = useServerFn(scanReceipt);
   const { cards } = useCards();
-  const { categories, addCategory } = useCategories();
+  const { categories, addCategory, updateCategory, refetch: refetchCategories } = useCategories();
   const { addTransaction } = useTransactions();
   const { formatCurrency } = useCurrency();
 

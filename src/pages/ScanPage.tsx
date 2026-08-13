@@ -9,7 +9,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useServerFn } from "@tanstack/react-start";
 import { scanReceipt } from "@/lib/ai.functions";
 import { useAuth } from "@/context/AuthContext";
-import { useCards } from "@/hooks/useCards";
 import { useCategories } from "@/hooks/useCategories";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useCurrency } from "@/hooks/useCurrency";
@@ -32,7 +31,6 @@ const ScanPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const scanReceiptFn = useServerFn(scanReceipt);
-  const { cards } = useCards();
   const { categories, addCategory, updateCategory, refetch: refetchCategories } = useCategories();
   const { addTransaction } = useTransactions();
   const { formatCurrency } = useCurrency();

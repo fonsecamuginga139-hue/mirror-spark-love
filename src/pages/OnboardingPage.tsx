@@ -417,12 +417,11 @@ const OnboardingPage = () => {
           selected_categories: state.categories as any,
           onboarding_completed: true,
           pre_onboarding_completed: true,
-          // Trial gratuito de 7 dias: acesso total imediato, sem cartão.
-          plan_status: "trial_active" as any,
+          // Acesso total e gratuito, sem trial nem cobranças.
+          plan_status: "active" as any,
           plano: "free" as any,
-          trial_start: new Date().toISOString(),
-          trial_end: new Date(Date.now() + 7 * 86400000).toISOString(),
           status_assinatura: "ativo" as any,
+
 
           quiz_answers: {
             ageRange: state.ageRange,

@@ -34,7 +34,6 @@ import { Route as NovaTransacaoRouteImport } from './routes/nova-transacao'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ParcelasRouteImport } from './routes/parcelas'
 import { Route as PerfilRouteImport } from './routes/perfil'
-import { Route as PlansRouteImport } from './routes/plans'
 import { Route as PreOnboardingRouteImport } from './routes/pre-onboarding'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
@@ -47,7 +46,6 @@ import { Route as SelectCurrencyRouteImport } from './routes/select-currency'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as SignupRouteImport } from './routes/signup'
-import { Route as SubscribeRouteImport } from './routes/subscribe'
 import { Route as SupportRouteImport } from './routes/support'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
@@ -188,11 +186,6 @@ const PerfilRoute = PerfilRouteImport.update({
   path: '/perfil',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PlansRoute = PlansRouteImport.update({
-  id: '/plans',
-  path: '/plans',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PreOnboardingRoute = PreOnboardingRouteImport.update({
   id: '/pre-onboarding',
   path: '/pre-onboarding',
@@ -251,11 +244,6 @@ const SetupRoute = SetupRouteImport.update({
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SubscribeRoute = SubscribeRouteImport.update({
-  id: '/subscribe',
-  path: '/subscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SupportRoute = SupportRouteImport.update({
@@ -355,7 +343,6 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/parcelas': typeof ParcelasRoute
   '/perfil': typeof PerfilRoute
-  '/plans': typeof PlansRoute
   '/pre-onboarding': typeof PreOnboardingRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -368,7 +355,6 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/setup': typeof SetupRoute
   '/signup': typeof SignupRoute
-  '/subscribe': typeof SubscribeRoute
   '/support': typeof SupportRoute
   '/terms': typeof TermsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
@@ -410,7 +396,6 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/parcelas': typeof ParcelasRoute
   '/perfil': typeof PerfilRoute
-  '/plans': typeof PlansRoute
   '/pre-onboarding': typeof PreOnboardingRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -423,7 +408,6 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/setup': typeof SetupRoute
   '/signup': typeof SignupRoute
-  '/subscribe': typeof SubscribeRoute
   '/support': typeof SupportRoute
   '/terms': typeof TermsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
@@ -466,7 +450,6 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/parcelas': typeof ParcelasRoute
   '/perfil': typeof PerfilRoute
-  '/plans': typeof PlansRoute
   '/pre-onboarding': typeof PreOnboardingRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -479,7 +462,6 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/setup': typeof SetupRoute
   '/signup': typeof SignupRoute
-  '/subscribe': typeof SubscribeRoute
   '/support': typeof SupportRoute
   '/terms': typeof TermsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
@@ -523,7 +505,6 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/parcelas'
     | '/perfil'
-    | '/plans'
     | '/pre-onboarding'
     | '/privacy'
     | '/privacy-policy'
@@ -536,7 +517,6 @@ export interface FileRouteTypes {
     | '/settings'
     | '/setup'
     | '/signup'
-    | '/subscribe'
     | '/support'
     | '/terms'
     | '/terms-of-service'
@@ -578,7 +558,6 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/parcelas'
     | '/perfil'
-    | '/plans'
     | '/pre-onboarding'
     | '/privacy'
     | '/privacy-policy'
@@ -591,7 +570,6 @@ export interface FileRouteTypes {
     | '/settings'
     | '/setup'
     | '/signup'
-    | '/subscribe'
     | '/support'
     | '/terms'
     | '/terms-of-service'
@@ -633,7 +611,6 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/parcelas'
     | '/perfil'
-    | '/plans'
     | '/pre-onboarding'
     | '/privacy'
     | '/privacy-policy'
@@ -646,7 +623,6 @@ export interface FileRouteTypes {
     | '/settings'
     | '/setup'
     | '/signup'
-    | '/subscribe'
     | '/support'
     | '/terms'
     | '/terms-of-service'
@@ -689,7 +665,6 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   ParcelasRoute: typeof ParcelasRoute
   PerfilRoute: typeof PerfilRoute
-  PlansRoute: typeof PlansRoute
   PreOnboardingRoute: typeof PreOnboardingRoute
   PrivacyRoute: typeof PrivacyRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
@@ -702,7 +677,6 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   SetupRoute: typeof SetupRoute
   SignupRoute: typeof SignupRoute
-  SubscribeRoute: typeof SubscribeRoute
   SupportRoute: typeof SupportRoute
   TermsRoute: typeof TermsRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
@@ -896,13 +870,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PerfilRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/plans': {
-      id: '/plans'
-      path: '/plans'
-      fullPath: '/plans'
-      preLoaderRoute: typeof PlansRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/pre-onboarding': {
       id: '/pre-onboarding'
       path: '/pre-onboarding'
@@ -985,13 +952,6 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/subscribe': {
-      id: '/subscribe'
-      path: '/subscribe'
-      fullPath: '/subscribe'
-      preLoaderRoute: typeof SubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/support': {
@@ -1121,7 +1081,6 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   ParcelasRoute: ParcelasRoute,
   PerfilRoute: PerfilRoute,
-  PlansRoute: PlansRoute,
   PreOnboardingRoute: PreOnboardingRoute,
   PrivacyRoute: PrivacyRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
@@ -1134,7 +1093,6 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   SetupRoute: SetupRoute,
   SignupRoute: SignupRoute,
-  SubscribeRoute: SubscribeRoute,
   SupportRoute: SupportRoute,
   TermsRoute: TermsRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
